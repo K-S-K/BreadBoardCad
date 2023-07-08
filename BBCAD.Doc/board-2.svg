@@ -1,0 +1,219 @@
+<svg version="1.1" width="280" height="180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="Green" />
+  <polyline points="40,160 40,120" style="fill:none;stroke:rgb(255,255,255);stroke-width:6" data-type="wire" data-id="90D0CBCA-4583-41A9-B1FA-F82E626121C6" />
+  <polyline points="60,160 60,120" style="fill:none;stroke:rgb(255,255,255);stroke-width:6" data-type="wire" data-id="E9029080-37D1-4B5D-B819-FD3B9FFDE283" />
+  <polyline points="80,160 120,160 120,100 240,100 240,40" style="fill:none;stroke:rgb(255,255,255);stroke-width:6" data-type="wire" data-id="DF120DE3-2549-41E1-B176-3602EE607E06" />
+  <polyline points="120,20 60,20 60,40 60,20 20,20 20,80 220,80 220,40" style="fill:none;stroke:rgb(255,255,255);stroke-width:6" data-type="wire" data-id="58E7807C-AF41-4032-BD30-6293C7045369" />
+  <polyline points="40,40 40,60 160,60 160,20 260,20 260,40" style="fill:none;stroke:rgb(255,255,255);stroke-width:6" data-type="wire" data-id="4EB22FC7-59C4-4758-B2CA-D91F37E9D859" />
+  <polyline points="80,40 140,40 140,20" style="fill:none;stroke:rgb(255,255,255);stroke-width:6" data-type="wire" data-id="DF6977B2-B596-46E6-A600-9C747820C912" />
+  <polyline points="160,160 160,140 200,140" style="fill:none;stroke:rgb(255,255,255);stroke-width:6" data-type="wire" data-id="2FA66421-145B-40BD-BC3F-0D5DD2EFF136" />
+  <polyline points="180,160 220,160 220,120 260,120" style="fill:none;stroke:rgb(255,255,255);stroke-width:6" data-type="wire" data-id="858ABEAA-7B42-45E7-8BDE-E879FB6536EC" />
+  <circle cx="20" cy="20" r="5" fill="Yellow" data-type="point" data-id="B4069811-4884-4F03-953C-2A2A34E98EF1" />
+  <circle cx="20" cy="20" r="3" fill="Black" />
+  <circle cx="20" cy="40" r="5" fill="Yellow" data-type="point" data-id="14210714-7487-4539-8911-7D211A8F2F88" />
+  <circle cx="20" cy="40" r="3" fill="Black" />
+  <circle cx="20" cy="60" r="5" fill="Yellow" data-type="point" data-id="A809F0B0-D4DE-4A5A-B7FE-36A6A0A2BD3A" />
+  <circle cx="20" cy="60" r="3" fill="Black" />
+  <circle cx="20" cy="80" r="5" fill="Yellow" data-type="point" data-id="D1ED6915-DA62-443C-AA03-75A35DE27D50" />
+  <circle cx="20" cy="80" r="3" fill="Black" />
+  <circle cx="20" cy="100" r="5" fill="Yellow" data-type="point" data-id="BCBFB38B-4DFC-4EBC-8AE4-FF8360A3CAEE" />
+  <circle cx="20" cy="100" r="3" fill="Black" />
+  <circle cx="20" cy="120" r="5" fill="Yellow" data-type="point" data-id="0A82CAA3-E129-4000-B09A-064378CF734E" />
+  <circle cx="20" cy="120" r="3" fill="Black" />
+  <circle cx="20" cy="140" r="5" fill="Yellow" data-type="point" data-id="3E3E7D43-8D74-45B4-B59E-ED34E5430874" />
+  <circle cx="20" cy="140" r="3" fill="Black" />
+  <circle cx="20" cy="160" r="5" fill="Yellow" data-type="point" data-id="03C67401-193D-47D3-B032-CAC41EC79ED9" />
+  <circle cx="20" cy="160" r="3" fill="Black" />
+  <circle cx="40" cy="20" r="5" fill="Yellow" data-type="point" data-id="85D06565-EC1D-407F-917E-54A86F97C136" />
+  <circle cx="40" cy="20" r="3" fill="Black" />
+  <circle cx="40" cy="40" r="5" fill="Yellow" data-type="point" data-id="4C3C21D8-9E92-4835-92F9-D2F7CBC4D1EF" />
+  <circle cx="40" cy="40" r="3" fill="Black" />
+  <circle cx="40" cy="60" r="5" fill="Yellow" data-type="point" data-id="0FD8D823-7052-45E5-A910-62E4ED22F7ED" />
+  <circle cx="40" cy="60" r="3" fill="Black" />
+  <circle cx="40" cy="80" r="5" fill="Yellow" data-type="point" data-id="3532170E-09C8-4F2F-AC5E-BAD33E2DAA31" />
+  <circle cx="40" cy="80" r="3" fill="Black" />
+  <circle cx="40" cy="100" r="5" fill="Yellow" data-type="point" data-id="367AD5A8-E70B-478F-889F-50BDC9191FC9" />
+  <circle cx="40" cy="100" r="3" fill="Black" />
+  <circle cx="40" cy="120" r="5" fill="Yellow" data-type="point" data-id="3998505A-0F99-4361-B8C0-ED92603372D5" />
+  <circle cx="40" cy="120" r="3" fill="Black" />
+  <circle cx="40" cy="140" r="5" fill="Yellow" data-type="point" data-id="EFCE5135-9F0C-41E4-8793-09AFB5D13F07" />
+  <circle cx="40" cy="140" r="3" fill="Black" />
+  <circle cx="40" cy="160" r="5" fill="Yellow" data-type="point" data-id="B129CFF4-3E83-412D-8EEE-DB93D38D6ED6" />
+  <circle cx="40" cy="160" r="3" fill="Black" />
+  <circle cx="60" cy="20" r="5" fill="Yellow" data-type="point" data-id="D378A3DE-BC59-4E20-A834-8D0335BAC8BA" />
+  <circle cx="60" cy="20" r="3" fill="Black" />
+  <circle cx="60" cy="40" r="5" fill="Yellow" data-type="point" data-id="DAAFD04F-8E56-429A-A951-EC0286DB9F0E" />
+  <circle cx="60" cy="40" r="3" fill="Black" />
+  <circle cx="60" cy="60" r="5" fill="Yellow" data-type="point" data-id="6B59DF7F-E9B5-4BB1-AE14-C06FEE3E77C4" />
+  <circle cx="60" cy="60" r="3" fill="Black" />
+  <circle cx="60" cy="80" r="5" fill="Yellow" data-type="point" data-id="1475459B-0BA8-44D2-A8EE-04BD6A784A3B" />
+  <circle cx="60" cy="80" r="3" fill="Black" />
+  <circle cx="60" cy="100" r="5" fill="Yellow" data-type="point" data-id="512506CC-F9EF-4073-87D3-7E6AA25A243F" />
+  <circle cx="60" cy="100" r="3" fill="Black" />
+  <circle cx="60" cy="120" r="5" fill="Yellow" data-type="point" data-id="276187AE-4A7C-4CDF-BD25-8C043113F0E0" />
+  <circle cx="60" cy="120" r="3" fill="Black" />
+  <circle cx="60" cy="140" r="5" fill="Yellow" data-type="point" data-id="1B8A4AD7-9115-446F-A784-468218C4F44E" />
+  <circle cx="60" cy="140" r="3" fill="Black" />
+  <circle cx="60" cy="160" r="5" fill="Yellow" data-type="point" data-id="4CB808A8-132D-4123-9BF6-CE0948ADE94B" />
+  <circle cx="60" cy="160" r="3" fill="Black" />
+  <circle cx="80" cy="20" r="5" fill="Yellow" data-type="point" data-id="CAA0203E-8AF7-4C84-83D1-4F69893D2BE9" />
+  <circle cx="80" cy="20" r="3" fill="Black" />
+  <circle cx="80" cy="40" r="5" fill="Yellow" data-type="point" data-id="941B7E47-3339-4AD3-BAA9-F2E37CB716BF" />
+  <circle cx="80" cy="40" r="3" fill="Black" />
+  <circle cx="80" cy="60" r="5" fill="Yellow" data-type="point" data-id="8AACF4E9-6037-4455-9B6E-194414068ABD" />
+  <circle cx="80" cy="60" r="3" fill="Black" />
+  <circle cx="80" cy="80" r="5" fill="Yellow" data-type="point" data-id="F1D4D481-E4CE-4E90-9EF4-8DFABDF88EA7" />
+  <circle cx="80" cy="80" r="3" fill="Black" />
+  <circle cx="80" cy="100" r="5" fill="Yellow" data-type="point" data-id="4CFCE404-BA11-4B53-83B1-F4657476FF97" />
+  <circle cx="80" cy="100" r="3" fill="Black" />
+  <circle cx="80" cy="120" r="5" fill="Yellow" data-type="point" data-id="8EA6E4EC-4156-4430-A13A-E1683F9686B2" />
+  <circle cx="80" cy="120" r="3" fill="Black" />
+  <circle cx="80" cy="140" r="5" fill="Yellow" data-type="point" data-id="98546F2E-B7BE-4AD9-B246-FDC5ADC45265" />
+  <circle cx="80" cy="140" r="3" fill="Black" />
+  <circle cx="80" cy="160" r="5" fill="Yellow" data-type="point" data-id="3DFE67C9-B606-4791-9375-1AB19AB4801F" />
+  <circle cx="80" cy="160" r="3" fill="Black" />
+  <circle cx="100" cy="20" r="5" fill="Yellow" data-type="point" data-id="B1E9009B-234F-4242-9241-B1E3E6CAA1F2" />
+  <circle cx="100" cy="20" r="3" fill="Black" />
+  <circle cx="100" cy="40" r="5" fill="Yellow" data-type="point" data-id="0E9FA660-C299-449A-9DCB-A15C7C0814DE" />
+  <circle cx="100" cy="40" r="3" fill="Black" />
+  <circle cx="100" cy="60" r="5" fill="Yellow" data-type="point" data-id="07FBB2F9-65CA-484B-B35F-7CB5657CA78C" />
+  <circle cx="100" cy="60" r="3" fill="Black" />
+  <circle cx="100" cy="80" r="5" fill="Yellow" data-type="point" data-id="3A6402A0-8962-4C4A-A41A-F280C52F422C" />
+  <circle cx="100" cy="80" r="3" fill="Black" />
+  <circle cx="100" cy="100" r="5" fill="Yellow" data-type="point" data-id="4DC6B035-23D2-4C55-A57C-89A07D132FCA" />
+  <circle cx="100" cy="100" r="3" fill="Black" />
+  <circle cx="100" cy="120" r="5" fill="Yellow" data-type="point" data-id="0BD27EAD-336E-4F5F-934F-44479FBD0B11" />
+  <circle cx="100" cy="120" r="3" fill="Black" />
+  <circle cx="100" cy="140" r="5" fill="Yellow" data-type="point" data-id="D9DB905B-68A1-408A-958B-5323B928BEB0" />
+  <circle cx="100" cy="140" r="3" fill="Black" />
+  <circle cx="100" cy="160" r="5" fill="Yellow" data-type="point" data-id="69A6D674-3D77-4A6F-89B7-6F367165C32F" />
+  <circle cx="100" cy="160" r="3" fill="Black" />
+  <circle cx="120" cy="20" r="5" fill="Yellow" data-type="point" data-id="17E5FB8D-4B4F-459D-AE24-8294504BCE41" />
+  <circle cx="120" cy="20" r="3" fill="Black" />
+  <circle cx="120" cy="40" r="5" fill="Yellow" data-type="point" data-id="96A0F078-1C6F-42AF-93E7-EFC2C06A81AD" />
+  <circle cx="120" cy="40" r="3" fill="Black" />
+  <circle cx="120" cy="60" r="5" fill="Yellow" data-type="point" data-id="00E2E7E4-8E2C-407A-95E8-39FC5DCD3915" />
+  <circle cx="120" cy="60" r="3" fill="Black" />
+  <circle cx="120" cy="80" r="5" fill="Yellow" data-type="point" data-id="ED53D343-72D0-4382-A26C-60042F86FC8F" />
+  <circle cx="120" cy="80" r="3" fill="Black" />
+  <circle cx="120" cy="100" r="5" fill="Yellow" data-type="point" data-id="DA46FDA2-3895-42A7-B3DF-E1626267097E" />
+  <circle cx="120" cy="100" r="3" fill="Black" />
+  <circle cx="120" cy="120" r="5" fill="Yellow" data-type="point" data-id="DEB428C6-9B75-437C-8251-1C710D3AA0FE" />
+  <circle cx="120" cy="120" r="3" fill="Black" />
+  <circle cx="120" cy="140" r="5" fill="Yellow" data-type="point" data-id="D6976710-3CD5-4BAB-93C6-B32672924412" />
+  <circle cx="120" cy="140" r="3" fill="Black" />
+  <circle cx="120" cy="160" r="5" fill="Yellow" data-type="point" data-id="CF995A6A-40AE-4CEE-8F07-76377AF51071" />
+  <circle cx="120" cy="160" r="3" fill="Black" />
+  <circle cx="140" cy="20" r="5" fill="Yellow" data-type="point" data-id="22EDB2C0-B09F-4D98-B3D4-61B334838999" />
+  <circle cx="140" cy="20" r="3" fill="Black" />
+  <circle cx="140" cy="40" r="5" fill="Yellow" data-type="point" data-id="6B829C8B-3F99-4DDA-A5A7-264B35ADD322" />
+  <circle cx="140" cy="40" r="3" fill="Black" />
+  <circle cx="140" cy="60" r="5" fill="Yellow" data-type="point" data-id="4CF4EF84-22D9-4959-9D6F-2457C507288C" />
+  <circle cx="140" cy="60" r="3" fill="Black" />
+  <circle cx="140" cy="80" r="5" fill="Yellow" data-type="point" data-id="07FE5F4D-F200-40B8-858D-619B9D9086F2" />
+  <circle cx="140" cy="80" r="3" fill="Black" />
+  <circle cx="140" cy="100" r="5" fill="Yellow" data-type="point" data-id="6CFCD06A-10A2-489D-8EEB-DC2082440485" />
+  <circle cx="140" cy="100" r="3" fill="Black" />
+  <circle cx="140" cy="120" r="5" fill="Yellow" data-type="point" data-id="F48F5BD1-AD6E-4171-9EC6-F9FD75D64089" />
+  <circle cx="140" cy="120" r="3" fill="Black" />
+  <circle cx="140" cy="140" r="5" fill="Yellow" data-type="point" data-id="84A644EF-984E-416E-9CEB-DDA16ED3E9F0" />
+  <circle cx="140" cy="140" r="3" fill="Black" />
+  <circle cx="140" cy="160" r="5" fill="Yellow" data-type="point" data-id="C3904CBA-B6B3-45DF-B1C7-36851EFA7A8F" />
+  <circle cx="140" cy="160" r="3" fill="Black" />
+  <circle cx="160" cy="20" r="5" fill="Yellow" data-type="point" data-id="C82D6BD9-2405-4DFD-B016-243CB537FD1D" />
+  <circle cx="160" cy="20" r="3" fill="Black" />
+  <circle cx="160" cy="40" r="5" fill="Yellow" data-type="point" data-id="B4DD6284-737F-4A4C-BDDE-B0499978DA09" />
+  <circle cx="160" cy="40" r="3" fill="Black" />
+  <circle cx="160" cy="60" r="5" fill="Yellow" data-type="point" data-id="3C57D705-7EF9-49A7-93CF-0D8443EB154E" />
+  <circle cx="160" cy="60" r="3" fill="Black" />
+  <circle cx="160" cy="80" r="5" fill="Yellow" data-type="point" data-id="EE9C04B7-071F-4463-A3CD-0A4DA21FAD37" />
+  <circle cx="160" cy="80" r="3" fill="Black" />
+  <circle cx="160" cy="100" r="5" fill="Yellow" data-type="point" data-id="EE6931B4-17C3-46F0-A132-FAAB1767FFF5" />
+  <circle cx="160" cy="100" r="3" fill="Black" />
+  <circle cx="160" cy="120" r="5" fill="Yellow" data-type="point" data-id="18E33AA2-5351-4BE4-A1EB-042AEEDF00A1" />
+  <circle cx="160" cy="120" r="3" fill="Black" />
+  <circle cx="160" cy="140" r="5" fill="Yellow" data-type="point" data-id="48C05579-44C0-4960-89C9-105F77EC2AB2" />
+  <circle cx="160" cy="140" r="3" fill="Black" />
+  <circle cx="160" cy="160" r="5" fill="Yellow" data-type="point" data-id="69FD73F7-6F2C-4C11-9410-AE76FD63B0F9" />
+  <circle cx="160" cy="160" r="3" fill="Black" />
+  <circle cx="180" cy="20" r="5" fill="Yellow" data-type="point" data-id="AC33BB2C-777F-440F-9E22-0D2BD13A5EFB" />
+  <circle cx="180" cy="20" r="3" fill="Black" />
+  <circle cx="180" cy="40" r="5" fill="Yellow" data-type="point" data-id="B0697BBC-7FF2-4B85-AB2B-09B645D72D16" />
+  <circle cx="180" cy="40" r="3" fill="Black" />
+  <circle cx="180" cy="60" r="5" fill="Yellow" data-type="point" data-id="C529E908-4B26-4134-AB04-F67AAD0A24B0" />
+  <circle cx="180" cy="60" r="3" fill="Black" />
+  <circle cx="180" cy="80" r="5" fill="Yellow" data-type="point" data-id="0797D413-12DD-4198-8152-71DAE7485F78" />
+  <circle cx="180" cy="80" r="3" fill="Black" />
+  <circle cx="180" cy="100" r="5" fill="Yellow" data-type="point" data-id="ED5FB439-58EB-44D4-8FBC-ECBD183F7489" />
+  <circle cx="180" cy="100" r="3" fill="Black" />
+  <circle cx="180" cy="120" r="5" fill="Yellow" data-type="point" data-id="507CD07E-AF7B-47A8-ADC7-C5E2DCC368E3" />
+  <circle cx="180" cy="120" r="3" fill="Black" />
+  <circle cx="180" cy="140" r="5" fill="Yellow" data-type="point" data-id="D3CB1A87-7286-48EA-A11C-A93677A01560" />
+  <circle cx="180" cy="140" r="3" fill="Black" />
+  <circle cx="180" cy="160" r="5" fill="Yellow" data-type="point" data-id="EDB8904C-DDAD-4571-8CE8-FFA47E19C4A7" />
+  <circle cx="180" cy="160" r="3" fill="Black" />
+  <circle cx="200" cy="20" r="5" fill="Yellow" data-type="point" data-id="A8BF5254-A1BD-4E76-B4AA-389042683BA7" />
+  <circle cx="200" cy="20" r="3" fill="Black" />
+  <circle cx="200" cy="40" r="5" fill="Yellow" data-type="point" data-id="7504740B-6102-4DB7-838E-1ABE090129CF" />
+  <circle cx="200" cy="40" r="3" fill="Black" />
+  <circle cx="200" cy="60" r="5" fill="Yellow" data-type="point" data-id="99959A09-2601-4DB5-ADAE-9BC6BB08B089" />
+  <circle cx="200" cy="60" r="3" fill="Black" />
+  <circle cx="200" cy="80" r="5" fill="Yellow" data-type="point" data-id="5F1E3A6A-36FF-4E23-B8F5-D23C96AB027A" />
+  <circle cx="200" cy="80" r="3" fill="Black" />
+  <circle cx="200" cy="100" r="5" fill="Yellow" data-type="point" data-id="12090DDD-5E0B-4C99-B4FB-6F37B01E4CA2" />
+  <circle cx="200" cy="100" r="3" fill="Black" />
+  <circle cx="200" cy="120" r="5" fill="Yellow" data-type="point" data-id="FD6AEFEF-F306-4639-9A0B-645F95B4BC9C" />
+  <circle cx="200" cy="120" r="3" fill="Black" />
+  <circle cx="200" cy="140" r="5" fill="Yellow" data-type="point" data-id="30762E0C-295B-4D1A-901B-2F2AC02E7166" />
+  <circle cx="200" cy="140" r="3" fill="Black" />
+  <circle cx="200" cy="160" r="5" fill="Yellow" data-type="point" data-id="4F965D3F-57B3-4A57-A7C9-5F597AE00DA8" />
+  <circle cx="200" cy="160" r="3" fill="Black" />
+  <circle cx="220" cy="20" r="5" fill="Yellow" data-type="point" data-id="1AD21BB3-C40B-4024-AD64-D5C3C9787658" />
+  <circle cx="220" cy="20" r="3" fill="Black" />
+  <circle cx="220" cy="40" r="5" fill="Yellow" data-type="point" data-id="0B5B0E6B-B3DA-49F8-A93F-4F822300EA91" />
+  <circle cx="220" cy="40" r="3" fill="Black" />
+  <circle cx="220" cy="60" r="5" fill="Yellow" data-type="point" data-id="444C5956-7322-45FB-A842-B2691DCBB105" />
+  <circle cx="220" cy="60" r="3" fill="Black" />
+  <circle cx="220" cy="80" r="5" fill="Yellow" data-type="point" data-id="3D15FF53-EE66-492F-BDEB-BEFAEF8E8973" />
+  <circle cx="220" cy="80" r="3" fill="Black" />
+  <circle cx="220" cy="100" r="5" fill="Yellow" data-type="point" data-id="7F7395E9-6ABB-4380-8EAD-6B6B519B08F6" />
+  <circle cx="220" cy="100" r="3" fill="Black" />
+  <circle cx="220" cy="120" r="5" fill="Yellow" data-type="point" data-id="256239BE-7348-4CB3-B19E-E5EDEC6C6A43" />
+  <circle cx="220" cy="120" r="3" fill="Black" />
+  <circle cx="220" cy="140" r="5" fill="Yellow" data-type="point" data-id="7EE0D33C-E297-4FC3-902A-4DDB56B4E036" />
+  <circle cx="220" cy="140" r="3" fill="Black" />
+  <circle cx="220" cy="160" r="5" fill="Yellow" data-type="point" data-id="E5D1C95D-CB60-4CDE-B11D-F392885E9B4D" />
+  <circle cx="220" cy="160" r="3" fill="Black" />
+  <circle cx="240" cy="20" r="5" fill="Yellow" data-type="point" data-id="1AE35BCD-99E5-48AF-BC23-F83C3C152D98" />
+  <circle cx="240" cy="20" r="3" fill="Black" />
+  <circle cx="240" cy="40" r="5" fill="Yellow" data-type="point" data-id="D04C3137-30B3-4475-943F-D09A937A513F" />
+  <circle cx="240" cy="40" r="3" fill="Black" />
+  <circle cx="240" cy="60" r="5" fill="Yellow" data-type="point" data-id="5F836DB2-2E1A-42F4-96B7-3D69F003AF8B" />
+  <circle cx="240" cy="60" r="3" fill="Black" />
+  <circle cx="240" cy="80" r="5" fill="Yellow" data-type="point" data-id="4EED7FB3-70C8-4656-9204-ADC0EBC5BF10" />
+  <circle cx="240" cy="80" r="3" fill="Black" />
+  <circle cx="240" cy="100" r="5" fill="Yellow" data-type="point" data-id="5E900FAF-7777-4F03-A8FD-5168002C5FBD" />
+  <circle cx="240" cy="100" r="3" fill="Black" />
+  <circle cx="240" cy="120" r="5" fill="Yellow" data-type="point" data-id="4AF3FBED-AEB6-4481-9FEC-D9A80848F9DF" />
+  <circle cx="240" cy="120" r="3" fill="Black" />
+  <circle cx="240" cy="140" r="5" fill="Yellow" data-type="point" data-id="DBF03A8F-BDD0-4D45-A488-8BF95C6DACFF" />
+  <circle cx="240" cy="140" r="3" fill="Black" />
+  <circle cx="240" cy="160" r="5" fill="Yellow" data-type="point" data-id="53FBA9CB-C718-4945-BEF9-D169768577DD" />
+  <circle cx="240" cy="160" r="3" fill="Black" />
+  <circle cx="260" cy="20" r="5" fill="Yellow" data-type="point" data-id="8B3634FE-A696-45B0-B5DC-B62561CB1FCF" />
+  <circle cx="260" cy="20" r="3" fill="Black" />
+  <circle cx="260" cy="40" r="5" fill="Yellow" data-type="point" data-id="D4741B55-0629-4778-B885-BE6B90EF7950" />
+  <circle cx="260" cy="40" r="3" fill="Black" />
+  <circle cx="260" cy="60" r="5" fill="Yellow" data-type="point" data-id="8D1575AB-47D1-498B-9C83-A71E260A3B08" />
+  <circle cx="260" cy="60" r="3" fill="Black" />
+  <circle cx="260" cy="80" r="5" fill="Yellow" data-type="point" data-id="DBF6A5B6-AACE-4705-B501-709BA625FA63" />
+  <circle cx="260" cy="80" r="3" fill="Black" />
+  <circle cx="260" cy="100" r="5" fill="Yellow" data-type="point" data-id="02E33AA4-5617-4142-9169-826834F9307C" />
+  <circle cx="260" cy="100" r="3" fill="Black" />
+  <circle cx="260" cy="120" r="5" fill="Yellow" data-type="point" data-id="94B84331-6B1D-44BD-962C-961979B15A27" />
+  <circle cx="260" cy="120" r="3" fill="Black" />
+  <circle cx="260" cy="140" r="5" fill="Yellow" data-type="point" data-id="065E9AD6-03C1-4E76-B805-9728E9F5EC0B" />
+  <circle cx="260" cy="140" r="3" fill="Black" />
+  <circle cx="260" cy="160" r="5" fill="Yellow" data-type="point" data-id="43F61A3D-5056-4052-8A03-C985DA7AC8C2" />
+  <circle cx="260" cy="160" r="3" fill="Black" />
+</svg>

@@ -1,0 +1,420 @@
+<svg version="1.1"
+     width="280" height="180"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <rect width="100%" height="100%" fill="green" />
+
+  <text x="20" y="10" font-size="8" text-anchor="middle"  fill="white">1</text>
+  <text x="20" y="175" font-size="8" text-anchor="middle" fill="white">1</text>
+
+  <text x="40" y="10" font-size="8" text-anchor="middle"  fill="white">2</text>
+  <text x="40" y="175" font-size="8" text-anchor="middle" fill="white">2</text>
+
+  <text x="60" y="10" font-size="8" text-anchor="middle"  fill="white">3</text>
+  <text x="60" y="175" font-size="8" text-anchor="middle" fill="white">3</text>
+
+  <text x="80" y="10" font-size="8" text-anchor="middle"  fill="white">4</text>
+  <text x="80" y="175" font-size="8" text-anchor="middle" fill="white">4</text>
+
+  <text x="100" y="10" font-size="8" text-anchor="middle"  fill="white">5</text>
+  <text x="100" y="175" font-size="8" text-anchor="middle" fill="white">5</text>
+
+  <text x="120" y="10" font-size="8" text-anchor="middle"  fill="white">6</text>
+  <text x="120" y="175" font-size="8" text-anchor="middle" fill="white">6</text>
+
+  <text x="140" y="10" font-size="8" text-anchor="middle"  fill="white">7</text>
+  <text x="140" y="175" font-size="8" text-anchor="middle" fill="white">7</text>
+
+  <text x="160" y="10" font-size="8" text-anchor="middle"  fill="white">8</text>
+  <text x="160" y="175" font-size="8" text-anchor="middle" fill="white">8</text>
+
+  <text x="180" y="10" font-size="8" text-anchor="middle"  fill="white">9</text>
+  <text x="180" y="175" font-size="8" text-anchor="middle" fill="white">9</text>
+
+  <text x="200" y="10" font-size="8" text-anchor="middle"  fill="white">10</text>
+  <text x="200" y="175" font-size="8" text-anchor="middle" fill="white">10</text>
+
+  <text x="220" y="10" font-size="8" text-anchor="middle"  fill="white">11</text>
+  <text x="220" y="175" font-size="8" text-anchor="middle" fill="white">11</text>
+
+  <text x="240" y="10" font-size="8" text-anchor="middle"  fill="white">12</text>
+  <text x="240" y="175" font-size="8" text-anchor="middle" fill="white">12</text>
+
+  <text x="260" y="10" font-size="8" text-anchor="middle"  fill="white">13</text>
+  <text x="260" y="175" font-size="8" text-anchor="middle" fill="white">13</text>
+
+
+  <text x="8"   y="23" font-size="8" text-anchor="middle"  fill="white">1</text>
+  <text x="272" y="23" font-size="8" text-anchor="middle"  fill="white">1</text>
+
+  <text x="8"   y="43" font-size="8" text-anchor="middle"  fill="white">2</text>
+  <text x="272" y="43" font-size="8" text-anchor="middle"  fill="white">2</text>
+
+  <text x="8"   y="63" font-size="8" text-anchor="middle"  fill="white">3</text>
+  <text x="272" y="63" font-size="8" text-anchor="middle"  fill="white">3</text>
+
+  <text x="8"   y="83" font-size="8" text-anchor="middle"  fill="white">4</text>
+  <text x="272" y="83" font-size="8" text-anchor="middle"  fill="white">4</text>
+
+  <text x="8"   y="103" font-size="8" text-anchor="middle"  fill="white">5</text>
+  <text x="272" y="103" font-size="8" text-anchor="middle"  fill="white">5</text>
+
+  <text x="8"   y="123" font-size="8" text-anchor="middle"  fill="white">6</text>
+  <text x="272" y="123" font-size="8" text-anchor="middle"  fill="white">6</text>
+
+  <text x="8"   y="143" font-size="8" text-anchor="middle"  fill="white">7</text>
+  <text x="272" y="143" font-size="8" text-anchor="middle"  fill="white">7</text>
+
+  <text x="8"   y="163" font-size="8" text-anchor="middle"  fill="white">8</text>
+  <text x="272" y="163" font-size="8" text-anchor="middle"  fill="white">8</text>
+
+
+
+  <line x1="40" y1="160" x2="40" y2="120" style="stroke:rgb(255,255,255);stroke-width:6" />
+
+  <line x1="60" y1="160" x2="60" y2="120" style="stroke:rgb(255,255,255);stroke-width:6" />
+
+  <polyline points="80,160 120,160 120,100 240,100 240,40"
+    style="fill:none;stroke:rgb(255,255,255);stroke-width:6" />
+
+  <polyline points="120,20 60,20 60,40 60,20 20,20 20,80 220,80 220,40"
+    style="fill:none;stroke:rgb(255,255,255);stroke-width:6" />
+
+  <polyline points="40,40 40,60 160,60 160,20 260,20 260,40"
+    style="fill:none;stroke:rgb(255,255,255);stroke-width:6" />
+
+  <polyline points="80,40 140,40 140,20"
+    style="fill:none;stroke:rgb(255,255,255);stroke-width:6" />
+
+  <polyline points="160,160 160,140 200,140"
+    style="fill:none;stroke:rgb(255,255,255);stroke-width:6" />
+
+  <polyline points="180,160 220,160 220,120 260,120"
+    style="fill:none;stroke:rgb(255,255,255);stroke-width:6" />
+
+
+  <circle cx="20" cy="20" r="5" fill="blue"  data-type="point" data-id="54654568346"/>
+  <circle cx="20" cy="20" r="3" fill="black" />
+
+  <circle cx="20" cy="40" r="5" fill="yellow" />
+  <circle cx="20" cy="40" r="3" fill="black" />
+
+  <circle cx="20" cy="60" r="5" fill="yellow" />
+  <circle cx="20" cy="60" r="3" fill="black" />
+
+  <circle cx="20" cy="80" r="5" fill="yellow" />
+  <circle cx="20" cy="80" r="3" fill="black" />
+  
+  <circle cx="20" cy="100" r="5" fill="yellow" />
+  <circle cx="20" cy="100" r="3" fill="black" />
+  
+  <circle cx="20" cy="120" r="5" fill="yellow" />
+  <circle cx="20" cy="120" r="3" fill="black" />
+  
+  <circle cx="20" cy="140" r="5" fill="yellow" />
+  <circle cx="20" cy="140" r="3" fill="black" />
+  
+  <circle cx="20" cy="160" r="5" fill="yellow" />
+  <circle cx="20" cy="160" r="3" fill="black" />
+
+
+  <circle cx="40" cy="20" r="5" fill="yellow" />
+  <circle cx="40" cy="20" r="3" fill="black" />
+
+  <circle cx="40" cy="40" r="5" fill="yellow" />
+  <circle cx="40" cy="40" r="3" fill="black" />
+
+  <circle cx="40" cy="60" r="5" fill="yellow" />
+  <circle cx="40" cy="60" r="3" fill="black" />
+
+  <circle cx="40" cy="80" r="5" fill="yellow" />
+  <circle cx="40" cy="80" r="3" fill="black" />
+  
+  <circle cx="40" cy="100" r="5" fill="yellow" />
+  <circle cx="40" cy="100" r="3" fill="black" />
+  
+  <circle cx="40" cy="120" r="5" fill="yellow" />
+  <circle cx="40" cy="120" r="3" fill="black" />
+  
+  <circle cx="40" cy="140" r="5" fill="yellow" />
+  <circle cx="40" cy="140" r="3" fill="black" />
+  
+  <circle cx="40" cy="160" r="5" fill="yellow" />
+  <circle cx="40" cy="160" r="3" fill="black" />
+
+  <circle cx="60" cy="20" r="5" fill="yellow" />
+  <circle cx="60" cy="20" r="3" fill="black" />
+
+  <circle cx="60" cy="40" r="5" fill="yellow" />
+  <circle cx="60" cy="40" r="3" fill="black" />
+
+  <circle cx="60" cy="60" r="5" fill="yellow" />
+  <circle cx="60" cy="60" r="3" fill="black" />
+
+  <circle cx="60" cy="80" r="5" fill="yellow" />
+  <circle cx="60" cy="80" r="3" fill="black" />
+  
+  <circle cx="60" cy="100" r="5" fill="yellow" />
+  <circle cx="60" cy="100" r="3" fill="black" />
+  
+  <circle cx="60" cy="120" r="5" fill="yellow" />
+  <circle cx="60" cy="120" r="3" fill="black" />
+  
+  <circle cx="60" cy="140" r="5" fill="yellow" />
+  <circle cx="60" cy="140" r="3" fill="black" />
+  
+  <circle cx="60" cy="160" r="5" fill="yellow" />
+  <circle cx="60" cy="160" r="3" fill="black" />
+  
+
+
+  <circle cx="80" cy="20" r="5" fill="yellow" />
+  <circle cx="80" cy="20" r="3" fill="black" />
+
+  <circle cx="80" cy="40" r="5" fill="yellow" />
+  <circle cx="80" cy="40" r="3" fill="black" />
+
+  <circle cx="80" cy="60" r="5" fill="yellow" />
+  <circle cx="80" cy="60" r="3" fill="black" />
+
+  <circle cx="80" cy="80" r="5" fill="yellow" />
+  <circle cx="80" cy="80" r="3" fill="black" />
+  
+  <circle cx="80" cy="100" r="5" fill="yellow" />
+  <circle cx="80" cy="100" r="3" fill="black" />
+  
+  <circle cx="80" cy="120" r="5" fill="yellow" />
+  <circle cx="80" cy="120" r="3" fill="black" />
+  
+  <circle cx="80" cy="140" r="5" fill="yellow" />
+  <circle cx="80" cy="140" r="3" fill="black" />
+  
+  <circle cx="80" cy="160" r="5" fill="yellow" />
+  <circle cx="80" cy="160" r="3" fill="black" />
+
+
+  <circle cx="100" cy="20" r="5" fill="yellow" />
+  <circle cx="100" cy="20" r="3" fill="black" />
+
+  <circle cx="100" cy="40" r="5" fill="yellow" />
+  <circle cx="100" cy="40" r="3" fill="black" />
+
+  <circle cx="100" cy="60" r="5" fill="yellow" />
+  <circle cx="100" cy="60" r="3" fill="black" />
+
+  <circle cx="100" cy="80" r="5" fill="yellow" />
+  <circle cx="100" cy="80" r="3" fill="black" />
+  
+  <circle cx="100" cy="100" r="5" fill="yellow" />
+  <circle cx="100" cy="100" r="3" fill="black" />
+  
+  <circle cx="100" cy="120" r="5" fill="yellow" />
+  <circle cx="100" cy="120" r="3" fill="black" />
+  
+  <circle cx="100" cy="140" r="5" fill="yellow" />
+  <circle cx="100" cy="140" r="3" fill="black" />
+  
+  <circle cx="100" cy="160" r="5" fill="yellow" />
+  <circle cx="100" cy="160" r="3" fill="black" />
+
+
+  <circle cx="120" cy="20" r="5" fill="yellow" />
+  <circle cx="120" cy="20" r="3" fill="black" />
+
+  <circle cx="120" cy="40" r="5" fill="yellow" />
+  <circle cx="120" cy="40" r="3" fill="black" />
+
+  <circle cx="120" cy="60" r="5" fill="yellow" />
+  <circle cx="120" cy="60" r="3" fill="black" />
+
+  <circle cx="120" cy="80" r="5" fill="yellow" />
+  <circle cx="120" cy="80" r="3" fill="black" />
+  
+  <circle cx="120" cy="100" r="5" fill="yellow" />
+  <circle cx="120" cy="100" r="3" fill="black" />
+  
+  <circle cx="120" cy="120" r="5" fill="yellow" />
+  <circle cx="120" cy="120" r="3" fill="black" />
+  
+  <circle cx="120" cy="140" r="5" fill="yellow" />
+  <circle cx="120" cy="140" r="3" fill="black" />
+  
+  <circle cx="120" cy="160" r="5" fill="yellow" />
+  <circle cx="120" cy="160" r="3" fill="black" />
+
+
+  <circle cx="140" cy="20" r="5" fill="yellow" />
+  <circle cx="140" cy="20" r="3" fill="black" />
+
+  <circle cx="140" cy="40" r="5" fill="yellow" />
+  <circle cx="140" cy="40" r="3" fill="black" />
+
+  <circle cx="140" cy="60" r="5" fill="yellow" />
+  <circle cx="140" cy="60" r="3" fill="black" />
+
+  <circle cx="140" cy="80" r="5" fill="yellow" />
+  <circle cx="140" cy="80" r="3" fill="black" />
+  
+  <circle cx="140" cy="100" r="5" fill="yellow" />
+  <circle cx="140" cy="100" r="3" fill="black" />
+  
+  <circle cx="140" cy="120" r="5" fill="yellow" />
+  <circle cx="140" cy="120" r="3" fill="black" />
+  
+  <circle cx="140" cy="140" r="5" fill="yellow" />
+  <circle cx="140" cy="140" r="3" fill="black" />
+  
+  <circle cx="140" cy="160" r="5" fill="yellow" />
+  <circle cx="140" cy="160" r="3" fill="black" />
+  
+  <circle cx="160" cy="20" r="5" fill="yellow" />
+  <circle cx="160" cy="20" r="3" fill="black" />
+
+  <circle cx="160" cy="40" r="5" fill="yellow" />
+  <circle cx="160" cy="40" r="3" fill="black" />
+
+  <circle cx="160" cy="60" r="5" fill="yellow" />
+  <circle cx="160" cy="60" r="3" fill="black" />
+
+  <circle cx="160" cy="80" r="5" fill="yellow" />
+  <circle cx="160" cy="80" r="3" fill="black" />
+  
+  <circle cx="160" cy="100" r="5" fill="yellow" />
+  <circle cx="160" cy="100" r="3" fill="black" />
+  
+  <circle cx="160" cy="120" r="5" fill="yellow" />
+  <circle cx="160" cy="120" r="3" fill="black" />
+  
+  <circle cx="160" cy="140" r="5" fill="yellow" />
+  <circle cx="160" cy="140" r="3" fill="black" />
+  
+  <circle cx="160" cy="160" r="5" fill="yellow" />
+  <circle cx="160" cy="160" r="3" fill="black" />
+
+  <circle cx="180" cy="20" r="5" fill="yellow" />
+  <circle cx="180" cy="20" r="3" fill="black" />
+
+  <circle cx="180" cy="40" r="5" fill="yellow" />
+  <circle cx="180" cy="40" r="3" fill="black" />
+
+  <circle cx="180" cy="60" r="5" fill="yellow" />
+  <circle cx="180" cy="60" r="3" fill="black" />
+
+  <circle cx="180" cy="80" r="5" fill="yellow" />
+  <circle cx="180" cy="80" r="3" fill="black" />
+  
+  <circle cx="180" cy="100" r="5" fill="yellow" />
+  <circle cx="180" cy="100" r="3" fill="black" />
+  
+  <circle cx="180" cy="120" r="5" fill="yellow" />
+  <circle cx="180" cy="120" r="3" fill="black" />
+  
+  <circle cx="180" cy="140" r="5" fill="yellow" />
+  <circle cx="180" cy="140" r="3" fill="black" />
+  
+  <circle cx="180" cy="160" r="5" fill="yellow" />
+  <circle cx="180" cy="160" r="3" fill="black" />
+
+
+  <circle cx="200" cy="20" r="5" fill="yellow" />
+  <circle cx="200" cy="20" r="3" fill="black" />
+
+  <circle cx="200" cy="40" r="5" fill="yellow" />
+  <circle cx="200" cy="40" r="3" fill="black" />
+
+  <circle cx="200" cy="60" r="5" fill="yellow" />
+  <circle cx="200" cy="60" r="3" fill="black" />
+
+  <circle cx="200" cy="80" r="5" fill="yellow" />
+  <circle cx="200" cy="80" r="3" fill="black" />
+  
+  <circle cx="200" cy="100" r="5" fill="yellow" />
+  <circle cx="200" cy="100" r="3" fill="black" />
+  
+  <circle cx="200" cy="120" r="5" fill="yellow" />
+  <circle cx="200" cy="120" r="3" fill="black" />
+  
+  <circle cx="200" cy="140" r="5" fill="yellow" />
+  <circle cx="200" cy="140" r="3" fill="black" />
+  
+  <circle cx="200" cy="160" r="5" fill="yellow" />
+  <circle cx="200" cy="160" r="3" fill="black" />
+
+
+  <circle cx="220" cy="20" r="5" fill="yellow" />
+  <circle cx="220" cy="20" r="3" fill="black" />
+
+  <circle cx="220" cy="40" r="5" fill="yellow" />
+  <circle cx="220" cy="40" r="3" fill="black" />
+
+  <circle cx="220" cy="60" r="5" fill="yellow" />
+  <circle cx="220" cy="60" r="3" fill="black" />
+
+  <circle cx="220" cy="80" r="5" fill="yellow" />
+  <circle cx="220" cy="80" r="3" fill="black" />
+  
+  <circle cx="220" cy="100" r="5" fill="yellow" />
+  <circle cx="220" cy="100" r="3" fill="black" />
+  
+  <circle cx="220" cy="120" r="5" fill="yellow" />
+  <circle cx="220" cy="120" r="3" fill="black" />
+  
+  <circle cx="220" cy="140" r="5" fill="yellow" />
+  <circle cx="220" cy="140" r="3" fill="black" />
+  
+  <circle cx="220" cy="160" r="5" fill="yellow" />
+  <circle cx="220" cy="160" r="3" fill="black" />
+
+
+  <circle cx="240" cy="20" r="5" fill="yellow" />
+  <circle cx="240" cy="20" r="3" fill="black" />
+
+  <circle cx="240" cy="40" r="5" fill="yellow" />
+  <circle cx="240" cy="40" r="3" fill="black" />
+
+  <circle cx="240" cy="60" r="5" fill="yellow" />
+  <circle cx="240" cy="60" r="3" fill="black" />
+
+  <circle cx="240" cy="80" r="5" fill="yellow" />
+  <circle cx="240" cy="80" r="3" fill="black" />
+  
+  <circle cx="240" cy="100" r="5" fill="yellow" />
+  <circle cx="240" cy="100" r="3" fill="black" />
+  
+  <circle cx="240" cy="120" r="5" fill="yellow" />
+  <circle cx="240" cy="120" r="3" fill="black" />
+  
+  <circle cx="240" cy="140" r="5" fill="yellow" />
+  <circle cx="240" cy="140" r="3" fill="black" />
+  
+  <circle cx="240" cy="160" r="5" fill="yellow" />
+  <circle cx="240" cy="160" r="3" fill="black" />
+
+  <circle cx="260" cy="20" r="5" fill="yellow" />
+  <circle cx="260" cy="20" r="3" fill="black" />
+
+  <circle cx="260" cy="40" r="5" fill="yellow" />
+  <circle cx="260" cy="40" r="3" fill="black" />
+
+  <circle cx="260" cy="60" r="5" fill="yellow" />
+  <circle cx="260" cy="60" r="3" fill="black" />
+
+  <circle cx="260" cy="80" r="5" fill="yellow" />
+  <circle cx="260" cy="80" r="3" fill="black" />
+  
+  <circle cx="260" cy="100" r="5" fill="yellow" />
+  <circle cx="260" cy="100" r="3" fill="black" />
+  
+  <circle cx="260" cy="120" r="5" fill="yellow" />
+  <circle cx="260" cy="120" r="3" fill="black" />
+  
+  <circle cx="260" cy="140" r="5" fill="yellow" />
+  <circle cx="260" cy="140" r="3" fill="black" />
+  
+  <circle cx="260" cy="160" r="5" fill="yellow" />
+  <circle cx="260" cy="160" r="3" fill="black" />
+
+
+  
+
+</svg> 
