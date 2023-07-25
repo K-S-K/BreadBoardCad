@@ -11,7 +11,7 @@ namespace BBCAD.API
             var builder = WebApplication.CreateBuilder(args);
             var app = builder.Build();
 
-            app.MapGet("/", () => "Bread Board CAD V.0.0.1");
+            app.MapGet("/", () => $"Bread Board CAD V.0.0.1 on .Net v.{Environment.Version}");
 
             app.Map("/demo-board", CreateDemoBoard);
 
