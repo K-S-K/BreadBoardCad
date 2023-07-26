@@ -74,9 +74,9 @@ jobs:
       # Creating deployment via CodeDeploy
       - name: Creating AWS Deployment
         run: |
-          aws deploy create-deployment 
-          --application-name ${{ matrix.app-name }} 
-          --deployment-config-name CodeDeployDefault.AllAtOnce 
-          --deployment-group-name ${{ matrix.deploy-group }} 
-          --file-exists-behavior OVERWRITE 
+          aws deploy create-deployment \
+          --application-name ${{ matrix.app-name }} \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --deployment-group-name ${{ matrix.deploy-group }} \
+          --file-exists-behavior OVERWRITE \
           --s3-location bucket=${{ matrix.s3-bucket }},key=${{ matrix.s3-filename }}.zip,bundleType=zip
