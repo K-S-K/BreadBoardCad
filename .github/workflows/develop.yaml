@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        app-name: ['projectBBCAD']
+        app-name: ['project-bbcad']
         s3-bucket: ['project-bbcad-codedeploy-deployments']
         s3-filename: ['develop-aws-codedeploy-${{ github.sha }}']
         deploy-group: ['develop']
@@ -63,11 +63,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
       # Deploy push to S3
-      #--application-name ${{ matrix.app-name }}
       - name: AWS Deploy push
         run: |
           aws deploy push \
-          --application-name 'projectBBCAD' \
+          --application-name ${{ matrix.app-name }} \
           --description "Revision of the ${{ matrix.app-name }}-${{ github.sha }}" \
           --ignore-hidden-files \
           --s3-location s3://${{ matrix.s3-bucket }}/${{ matrix.s3-filename }}.zip \
