@@ -66,7 +66,8 @@ jobs:
       - name: AWS Deploy push
         run: |
           aws deploy push 
-          --application-name ${{ matrix.app-name }} 
+          #--application-name ${{ matrix.app-name }}
+          --application-name 'projectBBCAD'
           --description "Revision of the ${{ matrix.app-name }}-${{ github.sha }}" 
           --ignore-hidden-files 
           --s3-location s3://${{ matrix.s3-bucket }}/${{ matrix.s3-filename }}.zip 
