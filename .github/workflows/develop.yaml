@@ -63,14 +63,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
       # Deploy push to S3
+      #--application-name ${{ matrix.app-name }}
       - name: AWS Deploy push
         run: |
-          aws deploy push 
-          #--application-name ${{ matrix.app-name }}
-          --application-name 'projectBBCAD'
-          --description "Revision of the ${{ matrix.app-name }}-${{ github.sha }}" 
-          --ignore-hidden-files 
-          --s3-location s3://${{ matrix.s3-bucket }}/${{ matrix.s3-filename }}.zip 
+          aws deploy push \
+          --application-name 'projectBBCAD' \
+          --description "Revision of the ${{ matrix.app-name }}-${{ github.sha }}" \
+          --ignore-hidden-files \
+          --s3-location s3://${{ matrix.s3-bucket }}/${{ matrix.s3-filename }}.zip \
           --source ./bin/app
       # Creating deployment via CodeDeploy
       - name: Creating AWS Deployment
