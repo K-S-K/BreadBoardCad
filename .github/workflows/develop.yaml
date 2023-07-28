@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release --runtime linux-arm64 --no-restore
   
   deploy:
     name: CD part
@@ -39,7 +39,7 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build BreadBoardCad.sln --configuration Release --no-restore -o ./bin/app
+        run: dotnet build BreadBoardCad.sln --configuration Release --runtime linux-arm64 --no-restore -o ./bin/app
       # copying appspec file
       - name: Copying appspec.yml
         run: cp appspec.yml ./bin/app
