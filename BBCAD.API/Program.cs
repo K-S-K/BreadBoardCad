@@ -19,11 +19,16 @@ namespace BBCAD.API
 
             // return;
 
-            var builder = WebApplication.CreateBuilder();
+            WebApplicationOptions options = new()
+            {
+                WebRootPath = directoryName
+            };
+
+            var builder = WebApplication.CreateBuilder(options);
+
             var app = builder.Build();
 
-            // app.UsePathBase();
-            app.UsePathBase(PathString.Empty);
+            // app.UsePathBase(PathString.Empty);
 
             app.MapGet("/", () => programName);
 
