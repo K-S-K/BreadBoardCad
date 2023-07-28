@@ -9,19 +9,21 @@ namespace BBCAD.API
         public static void Main(string[] args)
         {
             var programName = $"Bread Board CAD V.0.0.1 on .Net v.{Environment.Version}";
+            var directoryName = Directory.GetCurrentDirectory();
             Console.WriteLine(programName);
             Console.WriteLine();
             Console.WriteLine($"args[{args.Count()}]: {string.Join(" ", args.ToList())}");
             Console.WriteLine();
-            Console.WriteLine($"at {Directory.GetCurrentDirectory()}");
+            Console.WriteLine($"at {directoryName}");
             Console.WriteLine();
 
-            return;
+            // return;
 
             var builder = WebApplication.CreateBuilder();
             var app = builder.Build();
 
             // app.UsePathBase();
+            app.UsePathBase(PathString.Empty);
 
             app.MapGet("/", () => programName);
 
