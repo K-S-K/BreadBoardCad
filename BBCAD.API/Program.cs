@@ -12,14 +12,14 @@ namespace BBCAD.API
             Console.WriteLine(programName);
             Console.WriteLine();
 
-            var builder = WebApplication.CreateBuilder(args);
-            var app = builder.Build();
-
-            app.MapGet("/", () => programName);
-
-            app.Map("/demo-board", CreateDemoBoard);
-
-            app.Run();
+          //  var builder = WebApplication.CreateBuilder(args);
+          //  var app = builder.Build();
+          //
+          //  app.MapGet("/", () => programName);
+          //
+          //  app.Map("/demo-board", CreateDemoBoard);
+          //
+          //  app.Run();
         }
 
         private static IResult CreateDemoBoard(HttpContext context)
