@@ -13,9 +13,15 @@ namespace BBCAD.API
             Console.WriteLine();
             Console.WriteLine($"args[{args.Count()}]: {string.Join(" ", args.ToList())}");
             Console.WriteLine();
+            Console.WriteLine($"at {Directory.GetCurrentDirectory()}");
+            Console.WriteLine();
+
+            return;
 
             var builder = WebApplication.CreateBuilder();
             var app = builder.Build();
+
+            // app.UsePathBase();
 
             app.MapGet("/", () => programName);
 
