@@ -11,8 +11,9 @@ namespace BBCAD.API
             var programName = $"Bread Board CAD V.0.0.1 on .Net v.{Environment.Version}";
             Console.WriteLine(programName);
             Console.WriteLine();
+            Console.WriteLine($"args[{args.Count()}]: {string.Join(" ", args.ToList())}");
 
-          var builder = WebApplication.CreateBuilder();
+            var builder = WebApplication.CreateBuilder();
           //  var app = builder.Build();
           //
           //  app.MapGet("/", () => programName);
