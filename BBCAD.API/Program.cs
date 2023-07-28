@@ -1,4 +1,5 @@
 using BBCAD.Itself;
+using System.Diagnostics;
 using System.Text;
 
 namespace BBCAD.API
@@ -7,10 +8,14 @@ namespace BBCAD.API
     {
         public static void Main(string[] args)
         {
+            var programName = $"Bread Board CAD V.0.0.1 on .Net v.{Environment.Version}";
+            Console.WriteLine(programName);
+            Console.WriteLine();
+
             var builder = WebApplication.CreateBuilder(args);
             var app = builder.Build();
 
-            app.MapGet("/", () => $"Bread Board CAD V.0.0.1 on .Net v.{Environment.Version}");
+            app.MapGet("/", () => programName);
 
             app.Map("/demo-board", CreateDemoBoard);
 
