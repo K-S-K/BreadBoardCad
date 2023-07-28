@@ -14,7 +14,7 @@ namespace BBCAD.API
 
             app.Map("/demo-board", CreateDemoBoard);
 
-            app.UsePathBase("http://*:4800;https://*:4801");
+            // app.UsePathBase("http://*:4800;https://*:4801");
 
             app.Run();
         }
