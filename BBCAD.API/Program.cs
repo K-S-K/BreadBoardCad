@@ -1,5 +1,4 @@
 using BBCAD.Itself;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text;
 
 namespace BBCAD.API
@@ -13,7 +12,7 @@ namespace BBCAD.API
 
             app.MapGet("/", () => $"Bread Board CAD V.0.0.1 on .Net v.{Environment.Version}");
 
-            app.Map("/demo-board", CreateDemoBoard);
+          //  app.Map("/demo-board", CreateDemoBoard);
 
             app.Run();
         }
