@@ -13,7 +13,7 @@ namespace BBCAD.API
             Console.WriteLine();
             Console.WriteLine($"args[{args.Count()}]: {string.Join(" ", args.ToList())}");
 
-            var builder = WebApplication.CreateBuilder();
+          //  var builder = WebApplication.CreateBuilder();
           //  var app = builder.Build();
           //
           //  app.MapGet("/", () => programName);
