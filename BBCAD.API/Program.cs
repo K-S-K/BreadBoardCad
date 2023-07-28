@@ -12,7 +12,9 @@ namespace BBCAD.API
 
             app.MapGet("/", () => $"Bread Board CAD V.0.0.1 on .Net v.{Environment.Version}");
 
-          //  app.Map("/demo-board", CreateDemoBoard);
+            app.Map("/demo-board", CreateDemoBoard);
+
+            app.UsePathBase("http://*:4800;https://*:4801");
 
             app.Run();
         }
