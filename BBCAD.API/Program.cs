@@ -5,29 +5,34 @@ namespace BBCAD.API
 {
     public class Program
     {
+        private const string programName = "Bread Board CAD V.0.0.1";
+
         public static void Main(string[] args)
         {
-            var programName = $"Bread Board CAD V.0.0.1 on .Net v.{Environment.Version}";
             var directoryName = Directory.GetCurrentDirectory();
             Console.WriteLine(programName);
             Console.WriteLine();
-            Console.WriteLine($"args[{args.Count()}]: {string.Join(" ", args.ToList())}");
+            Console.WriteLine($"args[{args.Length}]: {string.Join(" ", args.ToList())}");
             Console.WriteLine();
             Console.WriteLine($"at {directoryName}");
             Console.WriteLine();
 
-            // return;
-
             WebApplicationOptions options = new()
             {
+                Args = args,
                 WebRootPath = directoryName
             };
 
-            var builder = WebApplication.CreateBuilder(options);
+            var app = WebApplication.CreateBuilder(options).Build();
 
-            var app = builder.Build();
+            CreateMapping(app);
 
-            app.MapGet("/", () => programName);
+            app.Run();
+        }
+
+        private static void CreateMapping(WebApplication app)
+        {
+            app.MapGet("/", () => $"{programName} on .Net v.{Environment.Version}, Os: {Environment.OSVersion}, PID: {Environment.ProcessId}");
 
             app.MapGet("/favicon.ico", async context =>
             {
@@ -41,12 +46,8 @@ namespace BBCAD.API
                 await context.Response.WriteAsync(TestPage);
             });
 
-
             app.Map("/demo-board", CreateDemoBoard);
-
-            app.Run();
         }
-
 
         private static IResult CreateDemoBoard(HttpContext context)
         {
@@ -86,11 +87,27 @@ namespace BBCAD.API
             {
                 StringBuilder sb = new();
 
-                sb.AppendLine(@"<HTML><BODY>");
-                sb.AppendLine(@"");
-                sb.AppendLine(@"<img src=""/demo-board"" />");
-                sb.AppendLine(@"");
-                sb.AppendLine(@"</BODY></HTML>");
+                sb.AppendLine($"<HTML><BODY>");
+                sb.AppendLine($"");
+                sb.AppendLine($"{programName}<BR>");
+                sb.AppendLine($"<BR>");
+                sb.AppendLine($"<img src=\"/demo-board\" />");
+                sb.AppendLine($"<BR>");
+                sb.AppendLine($"<BR>");
+
+                sb.AppendLine($"<TABLE>");
+                sb.AppendLine($"<TR><TD>.Net Version</TD><TD>{Environment.Version}</TD></TR>");
+                sb.AppendLine($"<TR><TD>OSVersion</TD><TD>{Environment.OSVersion}</TD></TR>");
+                sb.AppendLine($"<TR><TD>CurrentDirectory</TD><TD>{Environment.CurrentDirectory}</TD></TR>");
+                sb.AppendLine($"<TR><TD>ProcessPath</TD><TD>{Environment.ProcessPath}</TD></TR>");
+                sb.AppendLine($"<TR><TD>MachineName</TD><TD>{Environment.MachineName}</TD></TR>");
+                sb.AppendLine($"<TR><TD>UserName</TD><TD>{Environment.UserName}</TD></TR>");
+                sb.AppendLine($"<TR><TD>ProcessorCount</TD><TD>{Environment.ProcessorCount}</TD></TR>");
+                sb.AppendLine($"<TR><TD>ProcessId</TD><TD>{Environment.ProcessId}</TD></TR>");
+                sb.AppendLine($"<TR><TD>WorkingSet</TD><TD>{Environment.WorkingSet}</TD></TR>");
+                sb.AppendLine($"</TABLE>"); 
+                sb.AppendLine($"");
+                sb.AppendLine($"</BODY></HTML>");
 
                 return sb.ToString();
             }
