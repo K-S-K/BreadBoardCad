@@ -35,16 +35,18 @@ namespace BBCAD.API
                 await context.Response.WriteAsync(Favicon);
             });
 
+            app.MapGet("/test.htm", async context =>
+            {
+                context.Response.ContentType = "text/html; charset=UTF-8";
+                await context.Response.WriteAsync(TestPage);
+            });
+
+
             app.Map("/demo-board", CreateDemoBoard);
 
             app.Run();
         }
 
-        private static async void GetFavIcon(HttpContext context)
-        {
-            context.Response.ContentType = "image/svg+xml";
-            await context.Response.WriteAsync(Favicon);
-        }
 
         private static IResult CreateDemoBoard(HttpContext context)
         {
@@ -73,6 +75,22 @@ namespace BBCAD.API
                 sb.AppendLine(@"<circle cx=""8"" cy=""8"" r=""5"" fill=""yellow"" />");
                 sb.AppendLine(@"<circle cx=""8"" cy=""8"" r=""3"" fill=""black"" />");
                 sb.AppendLine(@"</svg>");
+
+                return sb.ToString();
+            }
+        }
+
+        private static string TestPage
+        {
+            get
+            {
+                StringBuilder sb = new();
+
+                sb.AppendLine(@"<HTML><BODY>");
+                sb.AppendLine(@"");
+                sb.AppendLine(@"<img src=""/demo-board"" />");
+                sb.AppendLine(@"");
+                sb.AppendLine(@"</BODY></HTML>");
 
                 return sb.ToString();
             }
