@@ -5,19 +5,18 @@ using BBCAD.Itself.SVGElements;
 
 namespace BBCAD.Itself.BoardElements
 {
-    public class Row
+    public class Row : ISvgElement
     {
         public List<Point> Points { get; set; } = new List<Point>();
 
-        public XElement XE
+        public IEnumerable<XElement> SVG
         {
             get
             {
                 int scale = 20;
 
-                return new SvgPLine(Points.Select(p =>
-                    new Point((p.X + 1) * scale, (p.Y + 1) * scale)
-                    )).XML;
+                return new SvgPLine(Points.Select(
+                    p => new Point((p.X + 1) * scale, (p.Y + 1) * scale))).SVG;
             }
         }
 
