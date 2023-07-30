@@ -53,7 +53,7 @@ namespace BBCAD.API
         {
             string content;
 
-            content = new Board().XML
+            content = Board.Sample.SVG
                 .ToString().Replace("xmlns=\"\" ", "");
 
             context.Response.Headers.CacheControl = "no-cache";
@@ -105,7 +105,7 @@ namespace BBCAD.API
                 sb.AppendLine($"<TR><TD>ProcessorCount</TD><TD>{Environment.ProcessorCount}</TD></TR>");
                 sb.AppendLine($"<TR><TD>ProcessId</TD><TD>{Environment.ProcessId}</TD></TR>");
                 sb.AppendLine($"<TR><TD>WorkingSet</TD><TD>{Environment.WorkingSet}</TD></TR>");
-                sb.AppendLine($"</TABLE>"); 
+                sb.AppendLine($"</TABLE>");
                 sb.AppendLine($"");
                 sb.AppendLine($"</BODY></HTML>");
 

@@ -14,7 +14,7 @@ namespace BBCAD.Itself
 
         public List<Row> Rows { get; set; } = new List<Row>();
 
-        public XElement XML
+        public XElement SVG
         {
             get
             {
@@ -29,17 +29,17 @@ namespace BBCAD.Itself
                     );
 
                 // Fill the board color
-                xe.Add(new SvgFill().XML);
+                xe.Add(new SvgFill().SVG);
 
                 // Draw the rows
-                xe.Add(Rows.Select(x => x.XE));
+                xe.Add(Rows.Select(x => x.SVG));
 
                 // Draw the board hole grid
                 for (int x = 0; x < SizeX; x++)
                 {
                     for (int y = 0; y < SizeY; y++)
                     {
-                        xe.Add(new Hole(x, y).XE);
+                        xe.Add(new Hole(x, y).SVG);
                     }
                 }
 
@@ -49,17 +49,29 @@ namespace BBCAD.Itself
 
         public Board()
         {
-            SizeX = 13;
-            SizeY = 8;
+        }
 
-            Rows.Add(new Row() { Points = new List<Common.Point> { new Point(1, 7), new Point(1, 5) } });
-            Rows.Add(new Row() { Points = new List<Common.Point> { new Point(2, 7), new Point(2, 5) } });
-            Rows.Add(new Row() { Points = new List<Common.Point> { new Point(3, 7), new Point(5, 7), new Point(5, 4), new Point(11, 4), new Point(11, 1) } });
-            Rows.Add(new Row() { Points = new List<Common.Point> { new Point(5, 0), new Point(2, 0), new Point(2, 1), new Point(2, 0), new Point(0, 0), new Point(0, 3), new Point(10, 3), new Point(10, 1) } });
-            Rows.Add(new Row() { Points = new List<Common.Point> { new Point(1, 1), new Point(1, 2), new Point(7, 2), new Point(7, 0), new Point(12, 0), new Point(12, 1) } });
-            Rows.Add(new Row() { Points = new List<Common.Point> { new Point(3, 1), new Point(6, 1), new Point(6, 0) } });
-            Rows.Add(new Row() { Points = new List<Common.Point> { new Point(7, 7), new Point(7, 6), new Point(9, 6) } });
-            Rows.Add(new Row() { Points = new List<Common.Point> { new Point(8, 7), new Point(10, 7), new Point(10, 5), new Point(12, 5) } });
+        public static Board Sample
+        {
+            get
+            {
+                Board board = new()
+                {
+                    SizeX = 13,
+                    SizeY = 8
+                };
+
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(1, 7), new Point(1, 5) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(2, 7), new Point(2, 5) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(3, 7), new Point(5, 7), new Point(5, 4), new Point(11, 4), new Point(11, 1) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(5, 0), new Point(2, 0), new Point(2, 1), new Point(2, 0), new Point(0, 0), new Point(0, 3), new Point(10, 3), new Point(10, 1) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(1, 1), new Point(1, 2), new Point(7, 2), new Point(7, 0), new Point(12, 0), new Point(12, 1) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(3, 1), new Point(6, 1), new Point(6, 0) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(7, 7), new Point(7, 6), new Point(9, 6) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(8, 7), new Point(10, 7), new Point(10, 5), new Point(12, 5) } });
+
+                return board;
+            }
         }
     }
 }

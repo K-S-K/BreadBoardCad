@@ -1,8 +1,9 @@
 ﻿using System.Xml.Linq;
+using BBCAD.Itself.Common;
 
 namespace BBCAD.Itself.SVGElements
 {
-    internal class SvgCircle
+    internal class SvgCircle : ISvgElement
     {
         public int X { get; set; }
         public int Y { get; set; }
@@ -13,7 +14,7 @@ namespace BBCAD.Itself.SVGElements
 
         public bool Tagged => Id != Guid.Empty;
 
-        public XElement XML
+        public IEnumerable<XElement> SVG
         {
             get
             {
@@ -31,7 +32,7 @@ namespace BBCAD.Itself.SVGElements
                 }
 
                 // xe.Attributes("xmlns").Remove();
-                return xe;
+                return new XElement[] { xe };
             }
         }
 
