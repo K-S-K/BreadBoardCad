@@ -1,5 +1,6 @@
 using System.Text;
 using BBCAD.Itself;
+using Microsoft.Extensions.Configuration.Json;
 
 namespace BBCAD.API
 {
@@ -9,6 +10,25 @@ namespace BBCAD.API
 
         public static void Main(string[] args)
         {
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+            builder.Configuration.Sources.Clear();
+            builder.Configuration
+            .AddJsonFile("appsettings.json", optional: false)
+            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true);
+
+            DisplaySettings(args, builder);
+
+            var app = builder.Build();
+
+            CreateMapping(app);
+
+            app.Run();
+        }
+
+        #region -> Diagnostics
+        private static void DisplaySettings(string[] args, WebApplicationBuilder builder)
+        {
             var directoryName = Directory.GetCurrentDirectory();
             Console.WriteLine(programName);
             Console.WriteLine();
@@ -17,33 +37,67 @@ namespace BBCAD.API
             Console.WriteLine($"at {directoryName}");
             Console.WriteLine();
 
-            WebApplicationOptions options = new()
+            Console.WriteLine($"Env={builder.Environment.EnvironmentName}");
+            Console.WriteLine($"Configuration.Sources[{builder.Configuration.Sources.Count}]");
+            Console.WriteLine($"{{");
+            foreach (var cfg in builder.Configuration.Sources)
             {
-                Args = args,
-                WebRootPath = directoryName
-            };
+                if (cfg is JsonConfigurationSource j)
+                {
+                    Console.WriteLine($" {j.Path}, {(j.Optional ? "Optional" : "Mandatory")}");
+                }
+            }
+            Console.WriteLine($"}}");
 
-            var app = WebApplication.CreateBuilder(options).Build();
+            Console.WriteLine($"");
 
-            CreateMapping(app);
-
-            app.Run();
+            IEnumerable<IConfigurationSection> parameters = builder.Configuration.GetChildren();
+            Console.WriteLine($"Parameters[{parameters.Count()}]:");
+            Console.WriteLine($"{{");
+            DisplayParameters(parameters);
+            Console.WriteLine($"}}");
         }
+
+        private static void DisplayParameters(IEnumerable<IConfigurationSection> parameters, string prefix = "")
+        {
+            foreach (IConfigurationSection cfg in parameters)
+            {
+                IEnumerable<IConfigurationSection> children = null;
+                if (cfg is ConfigurationSection sect)
+                {
+                    children = sect.GetChildren();
+                }
+
+                Console.WriteLine($" {prefix}{cfg.Key}: {cfg.Value}");
+                // Console.WriteLine($" {prefix}{cfg.Key} ({cfg.Path}): {cfg.Value}");
+
+                if (children != null && children.Count() > 0)
+                {
+                    DisplayParameters(children, prefix + " ");
+                }
+            }
+        }
+        #endregion
 
         private static void CreateMapping(WebApplication app)
         {
-            app.MapGet("/", () => $"{programName} on .Net v.{Environment.Version}, Os: {Environment.OSVersion}, PID: {Environment.ProcessId}");
-
-            app.MapGet("/favicon.ico", async context =>
+            // app.MapGet("/", () => $"{programName} on .Net v.{Environment.Version}, Os: {Environment.OSVersion}, PID: {Environment.ProcessId}");
+            app.MapGet("/", async context =>
             {
-                context.Response.ContentType = "image/svg+xml";
-                await context.Response.WriteAsync(Favicon);
+                context.Response.ContentType = "text/html; charset=UTF-8";
+                await context.Response.WriteAsync(TestPage);
             });
 
             app.MapGet("/test.htm", async context =>
             {
                 context.Response.ContentType = "text/html; charset=UTF-8";
                 await context.Response.WriteAsync(TestPage);
+            });
+
+            app.MapGet("/favicon.ico", async context =>
+            {
+                context.Response.ContentType = "image/svg+xml";
+                await context.Response.WriteAsync(Favicon);
             });
 
             app.Map("/demo-board", CreateDemoBoard);
