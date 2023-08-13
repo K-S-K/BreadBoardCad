@@ -8,7 +8,7 @@ jobs:
     name: CI part
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -29,7 +29,7 @@ jobs:
         deploy-group: ['develop']
     needs: build
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # set up .net core
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
