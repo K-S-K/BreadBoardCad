@@ -62,7 +62,7 @@ namespace BBCAD.API
         {
             foreach (IConfigurationSection cfg in parameters)
             {
-                IEnumerable<IConfigurationSection> children = null;
+                IEnumerable<IConfigurationSection>? children = null;
                 if (cfg is ConfigurationSection sect)
                 {
                     children = sect.GetChildren();
