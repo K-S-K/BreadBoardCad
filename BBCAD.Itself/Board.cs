@@ -8,9 +8,10 @@ namespace BBCAD.Itself
 {
     public class Board
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public int SizeX { get; set; } = 13;
         public int SizeY { get; set; } = 8;
+        public string Name { get; set; } = string.Empty;
 
         public List<Row> Rows { get; set; } = new List<Row>();
 
@@ -51,12 +52,16 @@ namespace BBCAD.Itself
         {
         }
 
+        public override string ToString() => $"[{SizeX}x{SizeY}] \"{Name}\" {{{Id.ToString().ToUpper()}}}";
+
         public static Board Sample
         {
             get
             {
                 Board board = new()
                 {
+                    Id = Guid.Empty,
+                    Name = "Demo",
                     SizeX = 13,
                     SizeY = 8
                 };

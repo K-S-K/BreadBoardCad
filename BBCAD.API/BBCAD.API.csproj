@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BBCAD.Core\BBCAD.Core.csproj" />
+    <ProjectReference Include="..\BBCAD.Data\BBCAD.Data.csproj" />
     <ProjectReference Include="..\BBCAD.Itself\BBCAD.Itself.csproj" />
   </ItemGroup>
 

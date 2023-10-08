@@ -1,6 +1,9 @@
 using System.Text;
-using BBCAD.Itself;
 using Microsoft.Extensions.Configuration.Json;
+
+using BBCAD.Core;
+using BBCAD.Data;
+using BBCAD.Itself;
 
 namespace BBCAD.API
 {
@@ -16,6 +19,10 @@ namespace BBCAD.API
             builder.Configuration
             .AddJsonFile("appsettings.json", optional: false)
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true);
+
+            builder.Services.AddSingleton<IBoardStorage, BoardStorage>();
+            builder.Services.AddSingleton<IBehavior, CadCoreBehavior>();
+
 
             DisplaySettings(args, builder);
 
@@ -103,11 +110,13 @@ namespace BBCAD.API
             app.Map("/demo-board", CreateDemoBoard);
         }
 
-        private static IResult CreateDemoBoard(HttpContext context)
+        private static IResult CreateDemoBoard(HttpContext context, IBehavior _behavior)
         {
             string content;
 
-            content = Board.Sample.SVG
+            Board board = _behavior.GetDemoBoard();
+
+            content = board.SVG
                 .ToString().Replace("xmlns=\"\" ", "");
 
             context.Response.Headers.CacheControl = "no-cache";
