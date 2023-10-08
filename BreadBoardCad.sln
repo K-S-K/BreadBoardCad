@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		appspec.yml = appspec.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBCAD.Data", "BBCAD.Data\BBCAD.Data.csproj", "{93A138F1-9AC6-4A3C-BE8A-62C27AC43014}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBCAD.Core", "BBCAD.Core\BBCAD.Core.csproj", "{56104D10-C9BA-4BF3-B907-9064B01E4074}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,14 @@ Global
 		{5791C3F3-4E1B-42C3-8B0D-EAA361D6FE74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5791C3F3-4E1B-42C3-8B0D-EAA361D6FE74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5791C3F3-4E1B-42C3-8B0D-EAA361D6FE74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93A138F1-9AC6-4A3C-BE8A-62C27AC43014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93A138F1-9AC6-4A3C-BE8A-62C27AC43014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93A138F1-9AC6-4A3C-BE8A-62C27AC43014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93A138F1-9AC6-4A3C-BE8A-62C27AC43014}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56104D10-C9BA-4BF3-B907-9064B01E4074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56104D10-C9BA-4BF3-B907-9064B01E4074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56104D10-C9BA-4BF3-B907-9064B01E4074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56104D10-C9BA-4BF3-B907-9064B01E4074}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
