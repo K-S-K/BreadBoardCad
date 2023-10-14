@@ -50,6 +50,10 @@ namespace BBCAD.API
                 sb.AppendLine($"<TR><TD>ProcessId</TD><TD>{Environment.ProcessId}</TD></TR>");
                 sb.AppendLine($"<TR><TD>WorkingSet</TD><TD>{Environment.WorkingSet}</TD></TR>");
                 sb.AppendLine($"</TABLE>");
+                sb.AppendLine($"<BR>");
+                sb.AppendLine($"<BR>");
+
+                sb.AppendLine($"<A href = \"/swagger\" target = \"_blank\">Swagger</A>");
                 sb.AppendLine($"");
                 sb.AppendLine($"</BODY></HTML>");
 
