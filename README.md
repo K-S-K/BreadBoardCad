@@ -17,3 +17,5 @@ How to add: https://github.com/marketplace/actions/net-code-coverage-badge
 ### Add Git Tag
 - **git tag -a M1 e3afd034 -m "Tag Message"** - tag the commit with this command
 - **git push origin M1** - specify the tag in the git push command
+
+dotnet --list-sdks
