@@ -1,0 +1,58 @@
+﻿@page "/board"
+@using BBCAD.Site.Settings;
+@using Microsoft.Extensions.Options
+@inject IOptions<BoardAPIOptions> _boardAPIOptions
+<PageTitle>Board</PageTitle>
+
+<img src="@previewImg" />
+
+<br />
+<br />
+
+<p>BoardAPI:{"@_boardAPIOptions.Value.Connection"}</p>
+<br />
+<br />
+
+<button class="btn btn-primary" @onclick="ReloadImage" disabled="@SearchDisabled">@this.SearchBtnName</button>
+
+@code {
+    protected bool SearchDisabled = false;
+    protected string SearchBtnName = default!;
+    protected string SearchBtnConstantName = default!;
+
+    private string previewImgPrefix = default!;
+    private string previewImg = default!;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        SearchBtnName =
+        SearchBtnConstantName = "Rebuid Image";
+
+        previewImg =
+        previewImgPrefix = _boardAPIOptions.Value.Connection + "/demo-board";
+    }
+
+    private async Task ReloadImage()
+    {
+        SearchDisabled = true;
+        SearchBtnName = "Rendering ...";
+
+        await Task.Yield();
+        await this.DoWork();
+
+        previewImg = previewImgPrefix + "?DummyId=" + DateTime.Now.Ticks;
+
+        SearchBtnName = SearchBtnConstantName;
+        SearchDisabled = false;
+
+        StateHasChanged();
+    }
+
+    /// <summary>
+    /// Emulate real async work
+    /// </summary>
+    /// <returns></returns>
+    private async Task DoWork() => await Task.Delay(500);
+}
