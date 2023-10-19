@@ -1,10 +1,8 @@
 using BBCAD.Site.Areas.Identity;
 using BBCAD.Site.Data;
-using Microsoft.AspNetCore.Components;
+using BBCAD.Site.Settings;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 
 namespace BBCAD.Site
@@ -16,6 +14,7 @@ namespace BBCAD.Site
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.Configure<BoardAPIOptions>(builder.Configuration.GetSection(BoardAPIOptions.BoardAPI));
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));

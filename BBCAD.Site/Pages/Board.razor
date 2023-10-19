@@ -1,5 +1,7 @@
 ﻿@page "/board"
-
+@using BBCAD.Site.Settings;
+@using Microsoft.Extensions.Options
+@inject IOptions<BoardAPIOptions> _boardAPIOptions
 <PageTitle>Board</PageTitle>
 
 <img src="@previewImg" />
@@ -7,15 +9,30 @@
 <br />
 <br />
 
+<p>BoardAPI:{"@_boardAPIOptions.Value.Connection"}</p>
+<br />
+<br />
+
 <button class="btn btn-primary" @onclick="ReloadImage" disabled="@SearchDisabled">@this.SearchBtnName</button>
 
 @code {
     protected bool SearchDisabled = false;
-    protected string SearchBtnName = "Rebuid Image";
-    protected string SearchBtnConstantName = "Rebuid Image";
+    protected string SearchBtnName = default!;
+    protected string SearchBtnConstantName = default!;
 
-    private string previewImgPrefix = "https://localhost:7015/demo-board";
-    private string previewImg = "https://localhost:7015/demo-board";
+    private string previewImgPrefix = default!;
+    private string previewImg = default!;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        SearchBtnName =
+        SearchBtnConstantName = "Rebuid Image";
+
+        previewImg =
+        previewImgPrefix = _boardAPIOptions.Value.Connection + "/demo-board";
+    }
 
     private async Task ReloadImage()
     {
