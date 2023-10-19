@@ -2,8 +2,40 @@
 
 <PageTitle>Board</PageTitle>
 
-<img src="https://localhost:7015/demo-board" />
+<img src="@previewImg" />
+
+<br />
+<br />
+
+<button class="btn btn-primary" @onclick="ReloadImage" disabled="@SearchDisabled">@this.SearchBtnName</button>
 
 @code {
+    protected bool SearchDisabled = false;
+    protected string SearchBtnName = "Rebuid Image";
+    protected string SearchBtnConstantName = "Rebuid Image";
 
+    private string previewImgPrefix = "https://localhost:7015/demo-board";
+    private string previewImg = "https://localhost:7015/demo-board";
+
+    private async Task ReloadImage()
+    {
+        SearchDisabled = true;
+        SearchBtnName = "Rendering ...";
+
+        await Task.Yield();
+        await this.DoWork();
+
+        previewImg = previewImgPrefix + "?DummyId=" + DateTime.Now.Ticks;
+
+        SearchBtnName = SearchBtnConstantName;
+        SearchDisabled = false;
+
+        StateHasChanged();
+    }
+
+    /// <summary>
+    /// Emulate real async work
+    /// </summary>
+    /// <returns></returns>
+    private async Task DoWork() => await Task.Delay(500);
 }
