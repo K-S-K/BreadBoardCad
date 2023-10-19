@@ -18,4 +18,8 @@ Apply JavaScript image control as described [here](https://learn.microsoft.com/e
 - **git tag -a M1 e3afd034 -m "Tag Message"** - tag the commit with this command
 - **git push origin M1** - specify the tag in the git push command
 
+### List Git History
+- **git log --oneline --graph -10**
+
+
 dotnet --list-sdks
