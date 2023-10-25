@@ -1,0 +1,114 @@
+﻿@page "/boardcs"
+@using BBCAD.Site.Settings;
+@using Microsoft.Extensions.Options
+@inject IHttpClientFactory ClientFactory
+@inject IOptions<BoardAPIOptions> _boardAPIOptions
+<PageTitle>BoardCS</PageTitle>
+
+@if (getBoardSucceed)
+{
+    if (!string.IsNullOrEmpty(content))
+    {
+        <img src="@content" />
+    }
+}
+else
+{
+    <p style="Color:red">Error: @getBoardError</p>
+}
+
+<br />
+<br />
+
+<button class="btn btn-primary" @onclick="ReloadBoard" disabled="@BtnDisabled">@this.BtnName</button>
+
+<br />
+<br />
+
+<p>BoardAPI:{"@boardAPIImageUri"}</p>
+
+@code {
+    private string content = string.Empty;
+    private string boardAPIImageUri = string.Empty;
+
+    protected bool BtnDisabled = false;
+    protected string BtnName = default!;
+    protected string BtnConstantName = default!;
+
+    private bool getBoardSucceed = true;
+    private string getBoardError = string.Empty;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        boardAPIImageUri = _boardAPIOptions.Value.Connection + "/demo-board";
+
+        BtnName =
+        BtnConstantName = "Reload Image";
+
+        await ReloadBoard();
+
+        StateHasChanged();
+    }
+
+    private async Task ReloadBoard()
+    {
+        BtnDisabled = true;
+        BtnName = "Rendering ...";
+
+        // Emulate hard async work
+        await Task.Yield();
+        await Task.Delay(string.IsNullOrEmpty(content) ? 0 : 500);
+
+        await GetBoardContent();
+
+        BtnName = BtnConstantName;
+        BtnDisabled = false;
+
+        StateHasChanged();
+    }
+
+    private async Task GetBoardContent()
+    {
+        var client = ClientFactory.CreateClient();
+        var request = new HttpRequestMessage(HttpMethod.Get, boardAPIImageUri);
+
+        try
+        {
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                using var responseStream = await response.Content.ReadAsStreamAsync();
+                var rawContent = await response.Content.ReadAsStringAsync();
+                content = "data:image/svg+xml;base64, " + Base64Encode(rawContent);
+
+                getBoardSucceed = true;
+                getBoardError = string.Empty;
+            }
+            else
+            {
+                getBoardSucceed = false;
+                getBoardError = $"{response.StatusCode}: {response.ReasonPhrase}";
+            }
+        }
+        catch (Exception ex)
+        {
+            getBoardSucceed = false;
+            getBoardError = $"{ex}: ex.Message";
+        }
+    }
+
+
+    private static string Base64Encode(string plainText)
+    {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+        return System.Convert.ToBase64String(plainTextBytes);
+    }
+
+    public static string Base64Decode(string base64EncodedData)
+    {
+        var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+        return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+    }
+}
