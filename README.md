@@ -21,5 +21,10 @@ Apply JavaScript image control as described [here](https://learn.microsoft.com/e
 ### List Git History
 - **git log --oneline --graph -10**
 
+### oi oi-icons
+- https://www.appstudio.dev/app/OpenIconic.html
+- https://learn.microsoft.com/en-us/answers/questions/1001680/oi-oi-blazor
+- https://jonhilton.net/conditional-blazor-css/
+- https://github.com/iconic/open-iconic
 
 dotnet --list-sdks
