@@ -1,5 +1,7 @@
 # BreadBoardCad
 
+## The web service for creating versionable breadboard projects.
+
 ![Demo Board](BBCAD.Doc/board-1.svg)
 
 ![GitHub Pages](https://github.com/K-S-K/BusTable/actions/workflows/dotnet.yml/badge.svg)
