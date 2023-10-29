@@ -5,7 +5,7 @@ namespace BBCAD.Cmnd.Commands
     /// <summary>
     /// Board design command
     /// </summary>
-    public abstract class CommandBase
+    public abstract class CommandBase : ICommand
     {
         /// <summary>
         /// The type of the command

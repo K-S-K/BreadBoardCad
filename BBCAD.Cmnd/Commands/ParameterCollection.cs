@@ -1,21 +1,23 @@
-﻿namespace BBCAD.Cmnd.Common
+﻿using BBCAD.Cmnd.Common;
+
+namespace BBCAD.Cmnd.Commands
 {
     /// <summary>
     /// The collection of the parameters of the command
     /// </summary>
     public class ParameterCollection
     {
-        private readonly Dictionary<string, CommandParameter> commands = new();
+        private readonly Dictionary<string, CommandParameter> _parameters = new();
 
         /// <summary>
         /// List of the parameters of the command
         /// </summary>
-        public IEnumerable<CommandParameter> Items => commands.Values.ToArray();
+        public IEnumerable<CommandParameter> Items => _parameters.Values.ToArray();
 
         /// <summary>
         /// Checks if we have all mandatory parameters defined
         /// </summary>
-        public bool Consistent => commands.Values
+        public bool Consistent => _parameters.Values
             .Where(x => x.Obligation == ObligationType.Mandatoty && !x.Defined).Any();
 
         /// <summary>
@@ -34,14 +36,14 @@
         {
             string name = NormalizedName(prm.Name);
 
-            lock (commands)
+            lock (_parameters)
             {
-                if (commands.ContainsKey(name))
+                if (_parameters.ContainsKey(name))
                 {
                     throw new Exception($"The command \"{prm}\" is already registered in the {nameof(ParameterCollection)}");
                 }
 
-                commands.Add(name, prm);
+                _parameters.Add(name, prm);
             }
         }
 
@@ -49,19 +51,19 @@
         /// Tty to get the parameter by it's name
         /// </summary>
         /// <param name="name">A parameter's name</param>
-        /// <param name="cmnd">The parameter with given name</param>
+        /// <param name="prm">The parameter with given name</param>
         /// <returns>The result of the parameter find attempt</returns>
-        public bool TryGetValue(string name, out CommandParameter? cmnd)
+        public bool TryGetValue(string name, out CommandParameter? prm)
         {
-            lock (commands)
+            lock (_parameters)
             {
-                if (commands.TryGetValue(NormalizedName(name), out cmnd))
+                if (_parameters.TryGetValue(NormalizedName(name), out prm))
                 {
                     return true;
                 }
                 else
                 {
-                    cmnd = null;
+                    prm = null;
                     return false;
                 }
             }
