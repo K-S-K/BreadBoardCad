@@ -37,5 +37,8 @@ Apply JavaScript image control as described [here](https://learn.microsoft.com/e
 - https://gkama.medium.com/dependency-injection-di-in-net-core-and-net-5-c-unit-tests-935651a99a2d
 - https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-7.0
 
+### Something about tests
+- [Unit testing C# with NUnit and .NET Core](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-nunit)
+
 
 dotnet --list-sdks
