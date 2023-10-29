@@ -35,6 +35,7 @@ Apply JavaScript image control as described [here](https://learn.microsoft.com/e
 - https://stackoverflow.com/questions/67735019/how-to-use-dependency-injection-in-a-class-library
 - https://stackoverflow.com/questions/62733836/how-to-use-dependency-injection-in-net-standard-project
 - https://gkama.medium.com/dependency-injection-di-in-net-core-and-net-5-c-unit-tests-935651a99a2d
+- https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-7.0
 
 
 dotnet --list-sdks
