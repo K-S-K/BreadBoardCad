@@ -34,6 +34,7 @@ Apply JavaScript image control as described [here](https://learn.microsoft.com/e
 ### Useful about DI
 - https://stackoverflow.com/questions/67735019/how-to-use-dependency-injection-in-a-class-library
 - https://stackoverflow.com/questions/62733836/how-to-use-dependency-injection-in-net-standard-project
+- https://gkama.medium.com/dependency-injection-di-in-net-core-and-net-5-c-unit-tests-935651a99a2d
 
 
 dotnet --list-sdks
