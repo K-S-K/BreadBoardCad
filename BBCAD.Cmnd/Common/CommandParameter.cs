@@ -35,7 +35,7 @@
         /// </summary>
         public bool Defined => !string.IsNullOrEmpty(Value);
 
-        public override string ToString() => Name;
+        public override string ToString() => Type.MustBeQuoted() ? $"{Name} = \"{Value}\"" : $"{Name} = {Value}";
 
         /// <summary>
         /// The parameter of the command

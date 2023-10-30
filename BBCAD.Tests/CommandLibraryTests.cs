@@ -16,7 +16,7 @@ namespace BBCAD.Tests
 
             foreach (CommandType type in Enum.GetValues(typeof(CommandType)))
             {
-                Assert.IsTrue(commandLibrary.TryGetValue(type, out ICommand? cmnd));
+                Assert.IsTrue(commandLibrary.TryGetValue(type, out _));
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using BBCAD.Cmnd.Common;
+﻿using System.Xml.Linq;
+using BBCAD.Cmnd.Common;
 
 namespace BBCAD.Cmnd.Commands
 {
@@ -7,6 +8,7 @@ namespace BBCAD.Cmnd.Commands
     /// </summary>
     public abstract class CommandBase : ICommand
     {
+        private const string XMLNodeName = "Command";
         /// <summary>
         /// The type of the command
         /// </summary>
@@ -22,6 +24,45 @@ namespace BBCAD.Cmnd.Commands
         /// </summary>
         public ParameterCollection Parameters { get; private set; }
 
+        /// <summary>
+        /// The XML representation of the command
+        /// </summary>
+        public XElement XML
+        {
+            get
+            {
+                if (!Parameters.Consistent)
+                {
+                    throw new InvalidOperationException("The command is not consistent");
+                }
+
+                return new XElement(XMLNodeName,
+                    new XAttribute("type", Type), Parameters.XMLAttributes);
+            }
+            set
+            {
+                if (value.Name != XMLNodeName)
+                {
+                    throw CommandDeserializationException.WrongXmlElementName(value, XMLNodeName);
+                }
+
+                XAttribute? xaType = value.Attribute("type");
+                if (xaType == null)
+                {
+                    throw CommandDeserializationException.CommandTypeIsNotDefinedInXML(value);
+
+                }
+
+                if (xaType.Value != Type.ToString())
+                {
+                    throw CommandDeserializationException.WrongTypeFromXml(xaType.Value, Type.ToString());
+                }
+
+                Parameters.XMLAttributes = value.Attributes();
+            }
+        }
+
+        public override string ToString() => $"{Name} {string.Join(" ", Parameters.Items)}";
 
         /// <summary>
         /// Board design command
