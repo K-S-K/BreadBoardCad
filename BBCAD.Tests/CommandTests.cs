@@ -30,22 +30,24 @@ namespace BBCAD.Tests
             Assert.AreEqual(xmlExpected, xmlActual, "XML serialization result is different from the expected one");
         }
 
-        [TestCase(CommandType.CreateBoard, "board name", 8, 12, null, @"<Command type=""CreateBoard"" Name=""board name"" X=""8"" Y=""12"" />")]
+        // [TestCase(CommandType.CreateBoard, @"CREATE BOARD Name = ""board name"" X = 8 Y = 12 Description = ""Board Descriptio"" User = ""0xB800""", @"CREATE BOARD Name = ""board name"" X = 8 Y = 12 Description = """" User = """"")]
         public void CommandFromTextCommandTest(
-            CommandType type, string name, int x, int y,
-            string? descr, string xmlExpected)
+            CommandType type, string txtInput, string txtExpected)
         {
-            CreateBoardCommand cmnd = new();
-            cmnd.Parameters["name"].Value = name;
-            cmnd.Parameters["x"].Value = x.ToString();
-            cmnd.Parameters["y"].Value = y.ToString();
-            if (descr != null)
+            ICommand? cmnd =
+                type == CommandType.CreateBoard ? new CreateBoardCommand() :
+                type == CommandType.ResizeBoard ? new ResizeBoardCommand() :
+                type == CommandType.CloneBoard ? new CloneBoardCommand() : null;
+
+            if(cmnd==null)
             {
-                cmnd.Parameters["Description"].Value = name;
+                throw new NotImplementedException($"{type.GetType().Name}.{type}");
             }
 
-            string xmlActual = cmnd.XML.ToString();
-            Assert.AreEqual(xmlExpected, xmlActual);
+            cmnd.Parse(txtInput);
+
+            string txtActual = cmnd.ToString();
+            Assert.AreEqual(txtExpected, txtActual, "TXT parsing result is different from the expected one");
         }
     }
 }
