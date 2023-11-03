@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
-
-using BBCAD.Cmnd;
+﻿using BBCAD.Cmnd;
 using BBCAD.Cmnd.Scripts;
 using BBCAD.Cmnd.Commands;
 

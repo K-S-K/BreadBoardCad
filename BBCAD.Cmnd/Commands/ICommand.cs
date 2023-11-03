@@ -7,7 +7,5 @@ namespace BBCAD.Cmnd.Commands
         string Name { get; }
         CommandType Type { get; }
         ParameterCollection Parameters { get; }
-
-        void Parse(string statement);
     }
 }

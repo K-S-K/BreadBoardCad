@@ -1,36 +1,25 @@
 ﻿using BBCAD.Cmnd;
-using BBCAD.Cmnd.Scripts;
 using BBCAD.Cmnd.Commands;
-
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace BBCAD.Tests
 {
-    [TestClass]
-    public class DependencyInjectionTests
+    public static class TestExtensions
     {
-        [TestMethod]
-        public void CommandLibraryDITest_From_ScriptProcessor()
+        public static ICommandLibrary CreateCommandLibrary()
         {
             var services = new ServiceCollection();
-            services.AddBBCadScriptProcessor();
+            services.AddBBCadCommandLibraryOnly();
 
             ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(services);
 
             var provider = services.BuildServiceProvider();
 
-            ICommandFactory commandFactory = provider.GetRequiredService<ICommandFactory>();
-            Assert.IsNotNull(commandFactory);
-
             ICommandLibrary commandLibrary = provider.GetRequiredService<ICommandLibrary>();
-            Assert.IsNotNull(commandLibrary);
 
-            IScriptProcessor scriptProcessor = provider.GetRequiredService<IScriptProcessor>();
-            Assert.IsNotNull(scriptProcessor);
+            return commandLibrary;
         }
 
-        [TestMethod]
-        public void CommandLibraryDITest_Only()
+        public static ICommandFactory CreateCommandFactory()
         {
             var services = new ServiceCollection();
             services.AddBBCadCommandLibraryOnly();
@@ -40,10 +29,9 @@ namespace BBCAD.Tests
             var provider = services.BuildServiceProvider();
 
             ICommandFactory commandFactory = provider.GetRequiredService<ICommandFactory>();
-            Assert.IsNotNull(commandFactory);
-
             ICommandLibrary commandLibrary = provider.GetRequiredService<ICommandLibrary>();
-            Assert.IsNotNull(commandLibrary);
+
+            return commandFactory;
         }
     }
 }

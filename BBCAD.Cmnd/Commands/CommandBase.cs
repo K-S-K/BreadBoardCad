@@ -1,5 +1,4 @@
 ﻿using System.Xml.Linq;
-using System.Text.RegularExpressions;
 
 using BBCAD.Cmnd.Common;
 
@@ -61,39 +60,6 @@ namespace BBCAD.Cmnd.Commands
                 }
 
                 Parameters.XMLAttributes = value.Attributes();
-            }
-        }
-
-        public void Parse(string statement)
-        {
-            int ixTrim = 0;
-            string patternCmnd = @"([\w\s]+)\s+\w+\s*=.*$";
-            string patternArgs = "(\\b\\w*\\s)\\s*=\\s*((\\b\\w*)|(\"(\\b\\w*\\s*)*\"))";
-
-            MatchCollection collectionCmnd = Regex.Matches(statement, patternCmnd);
-            foreach (Match match in collectionCmnd)
-            {
-                var v = match.Groups[1].Value;
-            }
-            if (collectionCmnd.Count == 1)
-            {
-                if (collectionCmnd[0].Groups.Count == 2)
-                {
-                    string cmndLine = collectionCmnd[0].Groups[1].Value.Trim().ToUpper();
-                    ixTrim = collectionCmnd[0].Groups[1].Length;
-                    if (cmndLine != Name)
-                    {
-                        throw new Exception($"The command line \"{cmndLine}\" instead of \"{Name}\"");
-                    }
-                }
-            }
-
-            string statementArgs = statement.Substring(ixTrim);
-
-            MatchCollection collectionArgs = Regex.Matches(statementArgs, patternArgs);
-            foreach (Match match in collectionArgs)
-            {
-                var v = match.Groups[1].Value;
             }
         }
 

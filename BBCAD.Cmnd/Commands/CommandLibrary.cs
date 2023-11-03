@@ -4,6 +4,7 @@ namespace BBCAD.Cmnd.Commands
 {
     public class CommandLibrary : ICommandLibrary
     {
+        private readonly ICommandFactory _commandFactory;
         private readonly Dictionary<CommandType, ICommand> _commands = new();
 
         public IEnumerable<ICommand> Commands => _commands.Values.ToList();
@@ -11,6 +12,8 @@ namespace BBCAD.Cmnd.Commands
 
         private void AddCommand(ICommand cmnd)
         {
+            _commandFactory.AddCommand(cmnd);
+
             if (_commands.ContainsKey(cmnd.Type))
             {
                 throw new Exception($"The command \"{cmnd}\" is already registered in the {nameof(CommandLibrary)}");
@@ -32,9 +35,10 @@ namespace BBCAD.Cmnd.Commands
             }
         }
 
-
-        public CommandLibrary()
+        public CommandLibrary(ICommandFactory commandFactory)
         {
+            _commandFactory = commandFactory;
+
             AddCommand(new CreateBoardCommand());
             AddCommand(new CloneBoardCommand());
             AddCommand(new ResizeBoardCommand());
