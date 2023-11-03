@@ -1,10 +1,11 @@
-﻿using BBCAD.Cmnd.Common;
+﻿using BBCAD.Cmnd.Commands;
+using BBCAD.Cmnd.Common;
 
-namespace BBCAD.Cmnd.Commands
+namespace BBCAD.Cmnd.Impl.Commands
 {
     public class CommandLibrary : ICommandLibrary
     {
-        private readonly ICommandFactory _commandFactory;
+        private readonly CommandFactory _commandFactory;
         private readonly Dictionary<CommandType, ICommand> _commands = new();
 
         public IEnumerable<ICommand> Commands => _commands.Values.ToList();
@@ -37,7 +38,7 @@ namespace BBCAD.Cmnd.Commands
 
         public CommandLibrary(ICommandFactory commandFactory)
         {
-            _commandFactory = commandFactory;
+            _commandFactory = (CommandFactory)commandFactory;
 
             AddCommand(new CreateBoardCommand());
             AddCommand(new CloneBoardCommand());

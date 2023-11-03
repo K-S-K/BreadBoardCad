@@ -1,4 +1,5 @@
 ﻿using BBCAD.Cmnd.Common;
+using BBCAD.Cmnd.Impl.Commands;
 using System.Text.RegularExpressions;
 
 namespace BBCAD.Cmnd.Commands
@@ -58,7 +59,7 @@ namespace BBCAD.Cmnd.Commands
             return cmnd;
         }
 
-        public void AddCommand(ICommand cmnd)
+        internal void AddCommand(ICommand cmnd)
         {
             if (_typeData.ContainsKey(cmnd.Name))
             {

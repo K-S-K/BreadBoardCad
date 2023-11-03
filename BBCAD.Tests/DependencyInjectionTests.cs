@@ -1,8 +1,5 @@
-﻿using BBCAD.Cmnd;
-using BBCAD.Cmnd.Scripts;
-using BBCAD.Cmnd.Commands;
-
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+﻿using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+using BBCAD.Cmnd;
 
 namespace BBCAD.Tests
 {

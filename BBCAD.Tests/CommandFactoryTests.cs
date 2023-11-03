@@ -1,5 +1,5 @@
-﻿using BBCAD.Cmnd.Common;
-using BBCAD.Cmnd.Commands;
+﻿using BBCAD.Cmnd;
+using BBCAD.Cmnd.Common;
 
 using Assert = NUnit.Framework.Assert;
 

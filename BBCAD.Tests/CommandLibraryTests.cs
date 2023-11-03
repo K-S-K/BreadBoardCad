@@ -1,5 +1,5 @@
+using BBCAD.Cmnd;
 using BBCAD.Cmnd.Common;
-using BBCAD.Cmnd.Commands;
 
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
