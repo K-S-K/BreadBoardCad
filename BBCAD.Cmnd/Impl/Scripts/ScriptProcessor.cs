@@ -1,6 +1,4 @@
-﻿using BBCAD.Cmnd.Commands;
-
-namespace BBCAD.Cmnd.Scripts
+﻿namespace BBCAD.Cmnd.Impl.Scripts
 {
     public class ScriptProcessor : IScriptProcessor
     {

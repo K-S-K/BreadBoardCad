@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace BBCAD.Cmnd.Commands
+namespace BBCAD.Cmnd.Impl.Commands
 {
     public class CommandDeserializationException : Exception
     {

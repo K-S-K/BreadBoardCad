@@ -1,4 +1,4 @@
-﻿namespace BBCAD.Cmnd.Scripts
+﻿namespace BBCAD.Cmnd.Impl.Scripts
 {
     internal class ScriptLine
     {

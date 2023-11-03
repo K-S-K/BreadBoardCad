@@ -1,8 +1,7 @@
-﻿namespace BBCAD.Cmnd.Commands
+﻿namespace BBCAD.Cmnd
 {
     public interface ICommandFactory
     {
-        void AddCommand(ICommand cmnd);
         ICommand ParseStatement(string statement);
     }
 }

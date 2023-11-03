@@ -1,6 +1,6 @@
 ﻿using BBCAD.Cmnd.Common;
 
-namespace BBCAD.Cmnd.Commands
+namespace BBCAD.Cmnd
 {
     public interface ICommandLibrary
     {

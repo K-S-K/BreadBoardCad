@@ -2,7 +2,8 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using BBCAD.Cmnd.Commands;
-using BBCAD.Cmnd.Scripts;
+using BBCAD.Cmnd.Impl.Scripts;
+using BBCAD.Cmnd.Impl.Commands;
 
 namespace BBCAD.Cmnd
 {

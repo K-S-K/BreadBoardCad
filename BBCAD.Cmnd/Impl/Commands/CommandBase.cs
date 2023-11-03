@@ -1,8 +1,7 @@
 ﻿using System.Xml.Linq;
-
 using BBCAD.Cmnd.Common;
 
-namespace BBCAD.Cmnd.Commands
+namespace BBCAD.Cmnd.Impl.Commands
 {
     /// <summary>
     /// Board design command
