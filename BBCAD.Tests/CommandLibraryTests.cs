@@ -18,6 +18,11 @@ namespace BBCAD.Tests
 
             foreach (CommandType type in Enum.GetValues(typeof(CommandType)))
             {
+                if (type == default)
+                {
+                    continue;
+                }
+
                 Assert.IsTrue(commandLibrary.TryGetValue(type, out _));
             }
         }

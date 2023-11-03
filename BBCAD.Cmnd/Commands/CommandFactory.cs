@@ -30,7 +30,7 @@ namespace BBCAD.Cmnd.Commands
             string cmndLine = RxNormalization().Replace(cmndGroup.Value, " ").Trim();
             string cmndArgs = argsGroup.Value;
 
-            if (!_typeData.TryGetValue(cmndLine, out var cmndType))
+            if (!_typeData.TryGetValue(cmndLine, out var cmndType) || cmndType == default)
             {
                 throw new Exception($"There is no command which can be associated with the statement: {statement}");
             }
@@ -44,24 +44,14 @@ namespace BBCAD.Cmnd.Commands
                 inputValues[groups["prm"].Value.ToUpper()] = groups["val"].Value.Trim('\"');
             }
 
-            ICommand cmnd;
-            switch (cmndType)
+            ICommand cmnd = cmndType switch
             {
-                case CommandType.CreateBoard:
-                    cmnd = new CreateBoardCommand();
-                    break;
-
-                case CommandType.ResizeBoard:
-                    cmnd = new ResizeBoardCommand();
-                    break;
-
-                case CommandType.CloneBoard:
-                    cmnd = new CloneBoardCommand();
-                    break;
-
-                default:
-                    throw new NotImplementedException($"{cmndType.GetType().Name}.{cmndType}");
-            }
+                CommandType.CreateBoard => new CreateBoardCommand(),
+                CommandType.ResizeBoard => new ResizeBoardCommand(),
+                CommandType.CloneBoard => new CloneBoardCommand(),
+                _ => throw new NotImplementedException(
+                    $"{cmndType.GetType().Name}.{cmndType}"),
+            };
 
             cmnd.Parameters.SetValues(inputValues);
 
