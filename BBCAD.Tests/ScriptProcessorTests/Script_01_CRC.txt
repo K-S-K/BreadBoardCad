@@ -1,0 +1,9 @@
+﻿// Prototyping Board Sample Project
+
+CREATE BOARD Name = "Amazing Project" X = 8 Y = 13 Description = "Experiment One"
+
+RESIZE BOARD X = 8  Y = 8
+
+/*
+ADD LINE X1 = 2 Y1 = 2 X2 = 5
+*/

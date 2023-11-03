@@ -38,6 +38,7 @@ namespace BBCAD.Cmnd
         this IServiceCollection services
     )
         {
+            services.TryAddSingleton<ICommandFactory, CommandFactory>();
             services.TryAddSingleton<ICommandLibrary, CommandLibrary>();
             return services;
         }

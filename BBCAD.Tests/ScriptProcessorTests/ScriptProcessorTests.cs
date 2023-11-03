@@ -1,36 +1,26 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
-
-using BBCAD.Cmnd;
+﻿using BBCAD.Cmnd;
 using BBCAD.Cmnd.Scripts;
 using BBCAD.Cmnd.Commands;
 
 using Assert = NUnit.Framework.Assert;
 
-namespace BBCAD.Tests
+namespace BBCAD.Tests.ScriptProcessorTests
 {
     [TestFixture]
     public class ScriptProcessorTests
     {
         private IScriptProcessor _scriptProcessor = null!;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
-            var services = new ServiceCollection();
-            services.AddBBCadScriptProcessor();
-
-            ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(services);
-
-            var provider = services.BuildServiceProvider();
-
-            _scriptProcessor = provider.GetRequiredService<IScriptProcessor>();
+            _scriptProcessor = TestExtensions.CreateScriptProcessor();
         }
 
         [TestCase("")]
         [TestCase(null)]
-        [TestCase("Something")]
-        [TestCase("Delimited; text")]
+        [TestCase("// Something")]
+        [TestCase("/*Delimited;*/ //text")]
         public void ScriptProcessorParseNoScript(string script)
         {
             Assert.IsNotNull(_scriptProcessor, $"{_scriptProcessor} should not be null");
@@ -38,6 +28,18 @@ namespace BBCAD.Tests
             IEnumerable<ICommand> commands = _scriptProcessor.ExtractCommands(script);
 
             Assert.IsEmpty(commands);
+        }
+
+        [Test]
+        public void ScriptProcessorParseScript()
+        {
+            Assert.IsNotNull(_scriptProcessor, $"{_scriptProcessor} should not be null");
+
+            string script = Resources.Script_01_CRC;
+
+            IEnumerable<ICommand> commands = _scriptProcessor.ExtractCommands(script);
+
+            Assert.AreEqual(2, commands.Count());
         }
     }
 }

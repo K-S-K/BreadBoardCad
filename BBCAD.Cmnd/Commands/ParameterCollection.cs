@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+
 using BBCAD.Cmnd.Common;
 
 namespace BBCAD.Cmnd.Commands
@@ -40,6 +41,15 @@ namespace BBCAD.Cmnd.Commands
                     prm = null;
                     return false;
                 }
+            }
+        }
+
+        internal void SetValues(Dictionary<string, string> inputValues)
+        {
+            foreach (CommandParameter parameter in Items)
+            {
+                parameter.Value = inputValues.TryGetValue(
+                    parameter.Name.ToUpper(), out string? value) ? value : null;
             }
         }
 

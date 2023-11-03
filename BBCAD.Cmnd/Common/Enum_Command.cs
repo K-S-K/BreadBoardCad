@@ -2,6 +2,7 @@
 {
     public enum CommandType
     {
+        Unknown = 0,
         CloneBoard,
         CreateBoard,
         ResizeBoard,
