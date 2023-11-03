@@ -25,13 +25,18 @@ namespace BBCAD.Cmnd.Impl.Commands
         public ParameterCollection Parameters { get; private set; }
 
         /// <summary>
+        /// Checks if we have all mandatory parameters defined
+        /// </summary>
+        public virtual bool Consistent => Parameters.Consistent;
+
+        /// <summary>
         /// The XML representation of the command
         /// </summary>
         public XElement XML
         {
             get
             {
-                if (!Parameters.Consistent)
+                if (!Consistent)
                 {
                     throw new InvalidOperationException("The command is not consistent");
                 }
