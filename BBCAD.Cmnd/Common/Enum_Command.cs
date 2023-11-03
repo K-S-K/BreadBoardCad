@@ -6,5 +6,6 @@
         CloneBoard,
         CreateBoard,
         ResizeBoard,
+        AddLine,
     }
 }

@@ -43,6 +43,8 @@ namespace BBCAD.Cmnd.Impl.Commands
             AddCommand(new CreateBoardCommand());
             AddCommand(new CloneBoardCommand());
             AddCommand(new ResizeBoardCommand());
+
+            AddCommand(new AddLineCommand());
         }
     }
 }
