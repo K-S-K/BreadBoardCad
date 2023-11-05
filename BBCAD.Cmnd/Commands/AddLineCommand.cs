@@ -1,4 +1,6 @@
-﻿using BBCAD.Cmnd.Common;
+﻿using System.Xml.Linq;
+
+using BBCAD.Cmnd.Common;
 using BBCAD.Cmnd.Impl.Commands;
 
 namespace BBCAD.Cmnd.Commands
@@ -12,6 +14,8 @@ namespace BBCAD.Cmnd.Commands
             Parameters.Add(new CommandParameter("X2", ParameterType.Integer, ObligationType.ContextBased));
             Parameters.Add(new CommandParameter("Y2", ParameterType.Integer, ObligationType.ContextBased));
         }
+
+        public AddLineCommand(XElement xe) : this() { this.XML = xe; }
 
         public override bool Consistent
         {

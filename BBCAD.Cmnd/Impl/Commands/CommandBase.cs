@@ -8,7 +8,8 @@ namespace BBCAD.Cmnd.Impl.Commands
     /// </summary>
     public abstract class CommandBase : ICommand
     {
-        private const string XMLNodeName = "Command";
+        internal const string XMLNodeName = "Command";
+        internal const string XMLAttrTypeName = "type";
         /// <summary>
         /// The type of the command
         /// </summary>
@@ -42,7 +43,7 @@ namespace BBCAD.Cmnd.Impl.Commands
                 }
 
                 return new XElement(XMLNodeName,
-                    new XAttribute("type", Type), Parameters.XMLAttributes);
+                    new XAttribute(XMLAttrTypeName, Type), Parameters.XMLAttributes);
             }
             set
             {
@@ -51,7 +52,7 @@ namespace BBCAD.Cmnd.Impl.Commands
                     throw CommandDeserializationException.WrongXmlElementName(value, XMLNodeName);
                 }
 
-                XAttribute? xaType = value.Attribute("type");
+                XAttribute? xaType = value.Attribute(XMLAttrTypeName);
                 if (xaType == null)
                 {
                     throw CommandDeserializationException.CommandTypeIsNotDefinedInXML(value);
