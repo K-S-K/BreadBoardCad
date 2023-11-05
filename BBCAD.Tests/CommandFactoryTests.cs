@@ -1,6 +1,7 @@
-﻿using BBCAD.Cmnd;
-using BBCAD.Cmnd.Common;
+﻿using System.Xml.Linq;
 
+using BBCAD.Cmnd;
+using BBCAD.Cmnd.Common;
 using Assert = NUnit.Framework.Assert;
 
 namespace BBCAD.Tests
@@ -27,6 +28,16 @@ namespace BBCAD.Tests
 
             string txtActual = cmnd.ToString();
             Assert.AreEqual(txtExpected, txtActual, "TXT parsing result is different from the expected one");
+        }
+
+        [TestCase(@"<Command type=""CreateBoard"" Name=""board name"" X=""8"" Y=""12"" />")]
+        public void CommandFromXmlCommandTest(string txtExpectd)
+        {
+            XElement xe = XElement.Parse(txtExpectd);
+            ICommand? cmnd = commandFactory.DeserializeStatement(xe);
+
+            string txtActual = cmnd.XML.ToString();
+            Assert.AreEqual(txtExpectd, txtActual, "XML deserialization result is different from the expected one");
         }
     }
 }

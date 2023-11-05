@@ -1,4 +1,6 @@
-﻿using BBCAD.Cmnd.Common;
+﻿using System.Xml.Linq;
+
+using BBCAD.Cmnd.Common;
 using BBCAD.Cmnd.Impl.Commands;
 using System.Text.RegularExpressions;
 
@@ -17,6 +19,37 @@ namespace BBCAD.Cmnd.Commands
         [GeneratedRegex("(?<prm>\\b\\w*)\\s*=\\s*(?<val>(\\b\\w*)|(\"(\\b\\w*\\s*)*\"))")]
         private static partial Regex RxExtractArgs();
 
+        public ICommand DeserializeStatement(XElement xe)
+        {
+            if (xe == null)
+            {
+                throw new ArgumentNullException("Nothing to deserialize");
+            }
+
+            if (xe.Name != CommandBase.XMLNodeName)
+            {
+                throw new ArgumentException($"Wrong {nameof(XElement)} name \"{xe.Name}\" instead of \"{CommandBase.XMLNodeName}\"");
+            }
+
+            string cmndName = xe.Attribute(CommandBase.XMLAttrTypeName)?.Value ?? throw new ArgumentException($"Command does not contain \"{CommandBase.XMLAttrTypeName}\" attribute: {xe}");
+
+            if (!Enum.TryParse(cmndName, out CommandType cmndType) || cmndType == default)
+            {
+                throw new Exception($"There is no command which can be associated with the type name \"{cmndName}\"");
+            }
+
+            ICommand cmnd = cmndType switch
+            {
+                CommandType.CreateBoard => new CreateBoardCommand(xe),
+                CommandType.ResizeBoard => new ResizeBoardCommand(xe),
+                CommandType.CloneBoard => new CloneBoardCommand(xe),
+                CommandType.AddLine => new AddLineCommand(xe),
+                _ => throw new NotImplementedException(
+                    $"{cmndType.GetType().Name}.{cmndType}"),
+            };
+
+            return cmnd;
+        }
 
         public ICommand ParseStatement(string statement)
         {
@@ -50,6 +83,7 @@ namespace BBCAD.Cmnd.Commands
                 CommandType.CreateBoard => new CreateBoardCommand(),
                 CommandType.ResizeBoard => new ResizeBoardCommand(),
                 CommandType.CloneBoard => new CloneBoardCommand(),
+                CommandType.AddLine => new AddLineCommand(),
                 _ => throw new NotImplementedException(
                     $"{cmndType.GetType().Name}.{cmndType}"),
             };

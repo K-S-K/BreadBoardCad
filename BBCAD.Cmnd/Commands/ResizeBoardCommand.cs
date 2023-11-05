@@ -1,4 +1,6 @@
-﻿using BBCAD.Cmnd.Common;
+﻿using System.Xml.Linq;
+
+using BBCAD.Cmnd.Common;
 using BBCAD.Cmnd.Impl.Commands;
 
 namespace BBCAD.Cmnd.Commands
@@ -12,5 +14,7 @@ namespace BBCAD.Cmnd.Commands
             Parameters.Add(new CommandParameter("Y", ParameterType.Integer, ObligationType.Mandatoty));
             Parameters.Add(new CommandParameter("Direction", ParameterType.Direction, ObligationType.Optional));
         }
+
+        public ResizeBoardCommand(XElement xe) : this() { this.XML = xe; }
     }
 }
