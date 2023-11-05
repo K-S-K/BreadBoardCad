@@ -25,6 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="BehaviorTests\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="ScriptProcessorTests\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -33,6 +38,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="BehaviorTests\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="ScriptProcessorTests\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

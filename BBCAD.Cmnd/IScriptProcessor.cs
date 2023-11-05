@@ -2,6 +2,6 @@
 {
     public interface IScriptProcessor
     {
-        IEnumerable<ICommand> ExtractCommands(string script);
+        ICommandBatch ExtractCommands(string script);
     }
 }

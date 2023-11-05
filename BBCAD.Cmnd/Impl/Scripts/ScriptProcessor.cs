@@ -1,14 +1,16 @@
-﻿namespace BBCAD.Cmnd.Impl.Scripts
+﻿using BBCAD.Cmnd.Impl.Commands;
+
+namespace BBCAD.Cmnd.Impl.Scripts
 {
     public class ScriptProcessor : IScriptProcessor
     {
         private readonly ICommandFactory _commandFactory;
 
-        public IEnumerable<ICommand> ExtractCommands(string script)
+        public ICommandBatch ExtractCommands(string script)
         {
             if (string.IsNullOrEmpty(script))
             {
-                return Enumerable.Empty<ICommand>();
+                return new CommandBatch(Enumerable.Empty<ICommand>());
             }
 
             IEnumerable<ScriptLine> inputLines =
@@ -52,7 +54,7 @@
             IEnumerable<ICommand> commands =
                 outputLines.Select(x => _commandFactory.ParseStatement(x));
 
-            return commands;
+            return new CommandBatch(commands);
         }
 
         public ScriptProcessor(ICommandFactory commandFactory)
