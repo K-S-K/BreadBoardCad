@@ -23,9 +23,21 @@ namespace BBCAD.Tests.ScriptProcessorTests
         {
             Assert.IsNotNull(_scriptProcessor, $"{_scriptProcessor} should not be null");
 
-            IEnumerable<ICommand> commands = _scriptProcessor.ExtractCommands(script);
+            ICommandBatch batch = _scriptProcessor.ExtractCommands(script);
 
-            Assert.IsEmpty(commands);
+            Assert.IsEmpty(batch.Commands);
+        }
+
+        [Test]
+        public void ScriptBatchingTest()
+        {
+            // TODO: Input - script, output - serialized batch
+        }
+
+        [Test]
+        public void BatchSerializationTest()
+        {
+            // TODO: Input - script, output - serialized batch
         }
 
         [Test]
@@ -35,9 +47,9 @@ namespace BBCAD.Tests.ScriptProcessorTests
 
             string script = Resources.Script_01_CRC;
 
-            IEnumerable<ICommand> commands = _scriptProcessor.ExtractCommands(script);
+            ICommandBatch batch = _scriptProcessor.ExtractCommands(script);
 
-            Assert.AreEqual(2, commands.Count());
+            Assert.AreEqual(2, batch.Length);
         }
     }
 }
