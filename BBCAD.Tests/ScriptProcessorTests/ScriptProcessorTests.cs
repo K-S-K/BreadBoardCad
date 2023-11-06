@@ -1,4 +1,6 @@
-﻿using BBCAD.Cmnd;
+﻿using System.Xml.Linq;
+
+using BBCAD.Cmnd;
 
 using Assert = NUnit.Framework.Assert;
 
@@ -32,12 +34,31 @@ namespace BBCAD.Tests.ScriptProcessorTests
         public void ScriptBatchingTest()
         {
             // TODO: Input - script, output - serialized batch
+            Assert.IsNotNull(_scriptProcessor, $"{_scriptProcessor} should not be null");
+
+            string strExpected = Resources.Batch_01_CRC;
+            XElement xeBatch = XElement.Parse(strExpected);
+            strExpected = xeBatch.ToString();
+
+            string script = Resources.Script_01_CRC;
+
+            ICommandBatch batch = _scriptProcessor.ExtractCommands(script);
+
+            string txtActual = batch.XML.ToString();
+            Assert.AreEqual(strExpected, txtActual, "XML deserialization result is different from the expected one");
         }
 
         [Test]
         public void BatchSerializationTest()
         {
-            // TODO: Input - script, output - serialized batch
+            string strExpected = Resources.Batch_01_CRC;
+            XElement xeBatch = XElement.Parse(strExpected);
+            strExpected = xeBatch.ToString();
+
+            ICommandBatch batch = _scriptProcessor.RestoreBatch(xeBatch);
+
+            string txtActual = batch.XML.ToString();
+            Assert.AreEqual(strExpected, txtActual, "XML deserialization result is different from the expected one");
         }
 
         [Test]

@@ -1,4 +1,6 @@
-﻿using BBCAD.Cmnd.Common;
+﻿using System.Xml.Linq;
+
+using BBCAD.Cmnd.Common;
 
 namespace BBCAD.Cmnd
 {
@@ -9,6 +11,8 @@ namespace BBCAD.Cmnd
         BatchContentBits BatchContent { get; }
         int Length { get; }
         IEnumerable<ICommand> Commands { get; }
+
+        XElement XML { get; }
 
         Guid GetExternalBoardGuid();
 

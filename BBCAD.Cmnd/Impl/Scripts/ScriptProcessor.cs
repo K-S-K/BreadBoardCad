@@ -1,4 +1,6 @@
-﻿using BBCAD.Cmnd.Impl.Commands;
+﻿using System.Xml.Linq;
+
+using BBCAD.Cmnd.Impl.Commands;
 
 namespace BBCAD.Cmnd.Impl.Scripts
 {
@@ -53,6 +55,23 @@ namespace BBCAD.Cmnd.Impl.Scripts
 
             IEnumerable<ICommand> commands =
                 outputLines.Select(x => _commandFactory.ParseStatement(x));
+
+            return new CommandBatch(commands);
+        }
+
+        public ICommandBatch RestoreBatch(XElement xe)
+        {
+            if (xe.Name != CommandBatch.XMLNodeName)
+            {
+                throw CommandDeserializationException.WrongXmlElementName(xe, CommandBatch.XMLNodeName);
+            }
+
+            XElement xeCommands = xe.Element(CommandBatch.XMLCommandsCollectionName) ??
+                throw new ArgumentException($"The XML does not contain element \"{CommandBatch.XMLCommandsCollectionName}\"");
+
+            IEnumerable<ICommand> commands =
+            xeCommands.Elements(CommandBase.XMLNodeName)
+                .Select(xe => _commandFactory.DeserializeStatement(xe)).ToList();
 
             return new CommandBatch(commands);
         }
