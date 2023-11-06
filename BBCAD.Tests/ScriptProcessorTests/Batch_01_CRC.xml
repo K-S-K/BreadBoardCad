@@ -1,0 +1,6 @@
+﻿<Batch content-type="CreateLocalBoard">
+  <Commands>
+    <Command type="CreateBoard" Name="Amazing Project" X="8" Y="13" Description="Experiment One" />
+    <Command type="ResizeBoard" X="8" Y="8" />
+  </Commands>
+</Batch>

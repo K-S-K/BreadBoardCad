@@ -1,9 +1,15 @@
-﻿using BBCAD.Cmnd.Common;
+﻿using System.Xml.Linq;
+
+using BBCAD.Cmnd.Common;
 
 namespace BBCAD.Cmnd.Impl.Commands
 {
     public class CommandBatch : ICommandBatch
     {
+        internal const string XMLNodeName = "Batch";
+        internal const string XMLAttrContentTypeName = "content-type";
+        internal const string XMLCommandsCollectionName = "Commands";
+
         #region -> Data
         private readonly Dictionary<int, ICommand> _items = new();
         #endregion
@@ -30,12 +36,20 @@ namespace BBCAD.Cmnd.Impl.Commands
                 }
             }
         }
+
+        public XElement XML
+        {
+            get
+            {
+                return new XElement(XMLNodeName
+                    , new XAttribute(XMLAttrContentTypeName, BatchContent)
+                    , new XElement(XMLCommandsCollectionName, Commands.Select(x => x.XML)));
+            }
+        }
         #endregion
 
 
         #region -> Methods
-        public override string ToString() => $"[{Length}], {BatchContent}";
-
         public Guid GetExternalBoardGuid()
         {
             if (!BatchContent.HasFlag(BatchContentBits.DealWithExternalBoard))
@@ -46,6 +60,8 @@ namespace BBCAD.Cmnd.Impl.Commands
             // TODO: Find the External Board Id in the parameters. In must be one one.
             return Guid.Empty;
         }
+
+        public override string ToString() => $"[{Length}], {BatchContent}";
         #endregion
 
 

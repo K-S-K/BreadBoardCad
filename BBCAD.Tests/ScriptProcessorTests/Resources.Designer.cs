@@ -61,6 +61,21 @@ namespace BBCAD.Tests.ScriptProcessorTests {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;Batch content-type=&quot;CreateLocalBoard&quot;&gt;
+        ///  &lt;Commands&gt;
+        ///    &lt;Command type=&quot;CreateBoard&quot; Name=&quot;Amazing Project&quot; X=&quot;8&quot; Y=&quot;13&quot; Description=&quot;Experiment One&quot; /&gt;
+        ///    &lt;Command type=&quot;ResizeBoard&quot; X=&quot;8&quot; Y=&quot;8&quot; /&gt;
+        ///  &lt;/Commands&gt;
+        ///&lt;/Batch&gt;
+        ///.
+        /// </summary>
+        internal static string Batch_01_CRC {
+            get {
+                return ResourceManager.GetString("Batch_01_CRC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to // Prototyping Board Sample Project
         ///
         ///CREATE BOARD Name = &quot;Amazing Project&quot; X = 8 Y = 13 Description = &quot;Experiment One&quot;
