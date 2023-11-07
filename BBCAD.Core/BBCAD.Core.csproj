@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BBCAD.Cmnd\BBCAD.Cmnd.csproj" />
     <ProjectReference Include="..\BBCAD.Data\BBCAD.Data.csproj" />
   </ItemGroup>
 

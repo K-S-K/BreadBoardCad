@@ -33,7 +33,6 @@ namespace BBCAD.Tests.ScriptProcessorTests
         [Test]
         public void ScriptBatchingTest()
         {
-            // TODO: Input - script, output - serialized batch
             Assert.IsNotNull(_scriptProcessor, $"{_scriptProcessor} should not be null");
 
             string strExpected = Resources.Batch_01_CRC;
