@@ -29,6 +29,27 @@ namespace BBCAD.Data
         }
 
         /// <summary>
+        /// Update the board in the database
+        /// </summary>
+        /// <param name="board">Board to be updated</param>
+        /// <exception cref="BoardNotFoundException"></exception>
+        public void UpdateBoard(Board board)
+        {
+            lock (_boards)
+            {
+                if (_boards.ContainsKey(board.Id))
+                {
+                    // It is nothing to to actually in this implementation.
+                    // But if we have some dtorage, board must be updated there.
+                }
+                else
+                {
+                    throw new BoardNotFoundException(board.Id);
+                }
+            }
+        }
+
+        /// <summary>
         /// Remove a board from the database by the given id
         /// </summary>
         /// <param name="id">Board id</param>
