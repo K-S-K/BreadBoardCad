@@ -32,8 +32,7 @@ namespace BBCAD.API
                 .AddJsonFile("appsettings.json", optional: false)
                 .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true);
 
-                builder.Services.AddSingleton<IBoardStorage, BoardStorage>();
-                builder.Services.AddSingleton<IBehavior, CadCoreBehavior>();
+                builder.Services.AddBBCadCore();
             }
             #endregion
 
