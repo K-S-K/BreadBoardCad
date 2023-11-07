@@ -1,0 +1,7 @@
+﻿<Board>
+  <Id>61EC2505-3D9C-45DC-A887-4403B16C47B1</Id>
+  <Name>Amazing Project</Name>
+  <SizeX>8</SizeX>
+  <SizeY>8</SizeY>
+  <Lines />
+</Board>
