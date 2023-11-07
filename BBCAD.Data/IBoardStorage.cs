@@ -12,6 +12,13 @@ namespace BBCAD.Data
         void RegisterBoard(Board board);
 
         /// <summary>
+        /// Update the board in the database
+        /// </summary>
+        /// <param name="board">Board to be updated</param>
+        /// <exception cref="BoardNotFoundException"></exception>
+        void UpdateBoard(Board board);
+
+        /// <summary>
         /// Remove a board from the database by the given id
         /// </summary>
         /// <param name="id">Board id</param>
