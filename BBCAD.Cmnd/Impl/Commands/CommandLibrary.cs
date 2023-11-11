@@ -15,12 +15,12 @@ namespace BBCAD.Cmnd.Impl.Commands
         {
             _commandFactory.AddCommand(cmnd);
 
-            if (_commands.ContainsKey(cmnd.Type))
+            if (_commands.ContainsKey(cmnd.CmndType))
             {
                 throw new Exception($"The command \"{cmnd}\" is already registered in the {nameof(CommandLibrary)}");
             }
 
-            _commands.Add(cmnd.Type, cmnd);
+            _commands.Add(cmnd.CmndType, cmnd);
         }
 
         public bool TryGetValue(CommandType type, out ICommand? cmnd)

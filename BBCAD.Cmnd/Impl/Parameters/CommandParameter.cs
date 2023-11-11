@@ -1,4 +1,6 @@
-﻿namespace BBCAD.Cmnd.Common
+﻿using BBCAD.Cmnd.Common;
+
+namespace BBCAD.Cmnd.Impl.Parameters
 {
     /// <summary>
     /// The parameters of the command

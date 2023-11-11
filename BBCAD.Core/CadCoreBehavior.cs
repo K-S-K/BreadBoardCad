@@ -1,6 +1,8 @@
 ﻿using BBCAD.Cmnd;
 using BBCAD.Data;
 using BBCAD.Itself;
+using BBCAD.Cmnd.Common;
+using BBCAD.Cmnd.Commands;
 using BBCAD.Data.Exceptions;
 
 namespace BBCAD.Core
@@ -38,7 +40,12 @@ namespace BBCAD.Core
 
             if (batch.BatchContent == Cmnd.Common.BatchContentBits.CreateLocalBoard)
             {
-                board = CreateBoard(batch[0]);
+                if(batch[0] is not CreateBoardCommand cmnd)
+                {
+                    throw new Exception($"The first command must be {CommandType.CreateBoard}");
+                }
+                
+                board = CreateBoard(cmnd);
 
                 for (int i = 1; i < batch.Length; i++)
                 {
@@ -72,48 +79,42 @@ namespace BBCAD.Core
 
         private void ProcessBoardCommand(Board board, ICommand command)
         {
-            switch (command.Type)
+            switch (command)
             {
-                case Cmnd.Common.CommandType.ResizeBoard:
-                    ResizeBoard(board, command); break;
+                case ResizeBoardCommand resizeBoardCommand:
+                    ResizeBoard(board, resizeBoardCommand);
+                    break;
+
 
                 default:
-                    throw new NotImplementedException($"The \"{command.Type}\" command is not implemented yet");
+                    throw new NotImplementedException($"The \"{command.CmndType}\" command is not implemented yet");
             }
         }
 
-        private void ResizeBoard(Board board, ICommand command)
+        private void ResizeBoard(Board board, ResizeBoardCommand command)
         {
-            if (
-                !int.TryParse(command.Parameters["X"].Value, out int x)
-                ||
-                !int.TryParse(command.Parameters["Y"].Value, out int y)
-                )
+            if (!command.Consistent)
             {
-                throw new Exception($"Can't parse parameter from the command {command}");
+                throw new Exception($"The command {command} is not consistent");
             }
 
-            board.SizeX = x;
-            board.SizeY = y;
+            board.SizeX = command.X.Value;
+            board.SizeY = command.Y.Value;
         }
 
-        private static Board CreateBoard(ICommand command)
+        private static Board CreateBoard(CreateBoardCommand command)
         {
-            if (
-                !int.TryParse(command.Parameters["X"].Value, out int x)
-                ||
-                !int.TryParse(command.Parameters["Y"].Value, out int y)
-                )
+            if (!command.Consistent)
             {
-                throw new Exception($"Can't parse parameter from the command {command}");
+                throw new Exception($"The command {command} is not consistent");
             }
 
             Board board = new()
             {
                 Id = Guid.NewGuid(),
-                Name = command.Parameters["Name"].Value,
-                SizeX = x,
-                SizeY = y,
+                Name = command.Name.Value,
+                SizeX = command.X.Value,
+                SizeY = command.Y.Value,
             };
 
             return board;

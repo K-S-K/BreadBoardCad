@@ -88,19 +88,19 @@ namespace BBCAD.Cmnd.Commands
                     $"{cmndType.GetType().Name}.{cmndType}"),
             };
 
-            cmnd.Parameters.SetValues(inputValues);
+            (cmnd as CommandBase)?.Parameters.SetValues(inputValues);
 
             return cmnd;
         }
 
         internal void AddCommand(ICommand cmnd)
         {
-            if (_typeData.ContainsKey(cmnd.Name))
+            if (_typeData.ContainsKey(cmnd.CmndName))
             {
-                throw new Exception($"The command name\"{cmnd.Name}\" is already registered in the {nameof(CommandLibrary)}");
+                throw new Exception($"The command name\"{cmnd.CmndName}\" is already registered in the {nameof(CommandLibrary)}");
             }
 
-            _typeData.Add(cmnd.Name, cmnd.Type);
+            _typeData.Add(cmnd.CmndName, cmnd.CmndType);
         }
     }
 }

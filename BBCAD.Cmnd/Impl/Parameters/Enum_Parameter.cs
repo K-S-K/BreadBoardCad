@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BBCAD.Cmnd.Common
+namespace BBCAD.Cmnd.Impl.Parameters
 {
     /// <summary>
     /// Type of the commands parameter

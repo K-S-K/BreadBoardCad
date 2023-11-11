@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using BBCAD.Cmnd.Common;
+using BBCAD.Cmnd.Impl.Parameters;
 
 namespace BBCAD.Cmnd.Impl.Commands
 {
@@ -13,17 +14,17 @@ namespace BBCAD.Cmnd.Impl.Commands
         /// <summary>
         /// The type of the command
         /// </summary>
-        public CommandType Type { get; private set; }
+        public CommandType CmndType { get; private set; }
 
         /// <summary>
         /// The name of the command used in the CLI
         /// </summary>
-        public string Name { get; private set; }
+        public string CmndName { get; private set; }
 
         /// <summary>
         /// The list of the parameters of the command
         /// </summary>
-        public ParameterCollection Parameters { get; private set; }
+        internal ParameterCollection Parameters { get; private set; }
 
         /// <summary>
         /// Checks if we have all mandatory parameters defined
@@ -43,7 +44,7 @@ namespace BBCAD.Cmnd.Impl.Commands
                 }
 
                 return new XElement(XMLNodeName,
-                    new XAttribute(XMLAttrTypeName, Type), Parameters.XMLAttributes);
+                    new XAttribute(XMLAttrTypeName, CmndType), Parameters.XMLAttributes);
             }
             set
             {
@@ -59,16 +60,22 @@ namespace BBCAD.Cmnd.Impl.Commands
 
                 }
 
-                if (xaType.Value != Type.ToString())
+                if (xaType.Value != CmndType.ToString())
                 {
-                    throw CommandDeserializationException.WrongTypeFromXml(xaType.Value, Type.ToString());
+                    throw CommandDeserializationException.WrongTypeFromXml(xaType.Value, CmndType.ToString());
                 }
 
                 Parameters.XMLAttributes = value.Attributes();
             }
         }
 
-        public override string ToString() => $"{Name} {string.Join(" ", Parameters.Items)}";
+        protected void AddParameter(CommandParameter parameter, ParamBase pb)
+        {
+            Parameters.Add(parameter);
+            pb.Init(parameter);
+        }
+
+        public override string ToString() => $"{CmndName} {string.Join(" ", Parameters.Items)}";
 
         /// <summary>
         /// Board design command
@@ -77,8 +84,8 @@ namespace BBCAD.Cmnd.Impl.Commands
         /// <param name="name">The name of the command used in the CLI</param>
         protected CommandBase(CommandType type, string name)
         {
-            Type = type;
-            Name = name;
+            CmndType = type;
+            CmndName = name;
             Parameters = new();
         }
     }
