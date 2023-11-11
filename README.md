@@ -40,5 +40,8 @@ Apply JavaScript image control as described [here](https://learn.microsoft.com/e
 ### Something about tests
 - [Unit testing C# with NUnit and .NET Core](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-nunit)
 
+### AppSettings Kestrel customization
+- https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/endpoints?view=aspnetcore-7.0
+
 
 dotnet --list-sdks
