@@ -2,17 +2,23 @@
 
 using BBCAD.Cmnd.Common;
 using BBCAD.Cmnd.Impl.Commands;
+using BBCAD.Cmnd.Impl.Parameters;
 
 namespace BBCAD.Cmnd.Commands
 {
     public class AddLineCommand : CommandBase
     {
+        public ParamInt X1 { get; private set; } = new();
+        public ParamInt Y1 { get; private set; } = new();
+        public ParamInt X2 { get; private set; } = new();
+        public ParamInt Y2 { get; private set; } = new();
+
         public AddLineCommand() : base(CommandType.AddLine, "ADD LINE")
         {
-            Parameters.Add(new CommandParameter("X1", ParameterType.Integer, ObligationType.Mandatoty));
-            Parameters.Add(new CommandParameter("Y1", ParameterType.Integer, ObligationType.Mandatoty));
-            Parameters.Add(new CommandParameter("X2", ParameterType.Integer, ObligationType.ContextBased));
-            Parameters.Add(new CommandParameter("Y2", ParameterType.Integer, ObligationType.ContextBased));
+            AddParameter(new("X1", ParameterType.Integer, ObligationType.Mandatoty), X1);
+            AddParameter(new("Y1", ParameterType.Integer, ObligationType.Mandatoty), Y1);
+            AddParameter(new("X2", ParameterType.Integer, ObligationType.ContextBased), X2);
+            AddParameter(new("Y2", ParameterType.Integer, ObligationType.ContextBased), Y2);
         }
 
         public AddLineCommand(XElement xe) : this() { this.XML = xe; }

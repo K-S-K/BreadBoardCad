@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 
 using BBCAD.Cmnd.Common;
+using BBCAD.Cmnd.Impl.Parameters;
 
 namespace BBCAD.Cmnd.Impl.Commands
 {

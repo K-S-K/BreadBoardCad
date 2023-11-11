@@ -73,19 +73,19 @@ namespace BBCAD.Cmnd.Impl.Commands
                 return;
             }
 
-            if (Commands.Where(x => x.Type == CommandType.CloneBoard).Any())
+            if (Commands.Where(x => x.CmndType == CommandType.CloneBoard).Any())
             {
                 throw ScenarioIsNotSupportedYetException.CloneBoard();
             }
 
-            if (Commands.Where(x => x.Type == CommandType.CreateBoard).Any())
+            if (Commands.Where(x => x.CmndType == CommandType.CreateBoard).Any())
             {
-                if (Commands.Where(x => x.Type == CommandType.CreateBoard).Count() > 1)
+                if (Commands.Where(x => x.CmndType == CommandType.CreateBoard).Count() > 1)
                 {
                     throw ScenarioIsNotSupportedYetException.SeveralNewBoards();
                 }
 
-                if (this[0].Type != CommandType.CreateBoard)
+                if (this[0].CmndType != CommandType.CreateBoard)
                 {
                     throw ImpossibleScenarioIsException.CreateBoardFirst();
                 }
