@@ -39,5 +39,28 @@ namespace BBCAD.Tests
             string txtActual = cmnd.XML.ToString();
             Assert.AreEqual(txtExpectd, txtActual, "XML deserialization result is different from the expected one");
         }
+
+
+        [TestCase(CommandType.CreateBoard, @"CREATE BOARD Name = ""board name"" X = 8 Y = 12 Description = ""Board Description"" User = ""0xB800""")]
+        public void CommandTransferObjectTest(CommandType type, string txtInput)
+        {
+            ICommand? cmnd = commandFactory.ParseStatement(txtInput);
+            Assert.IsNotNull(cmnd, $"{type.GetType().Name}.{type}");
+
+            XElement xeCmd = cmnd.XML;
+            CommandTransferObject? o1 = CommandTransferObject.FromXml(xeCmd);
+            Assert.IsNotNull(o1);
+
+            XElement xeO1 = o1.ToXml();
+            CommandTransferObject? o2 = CommandTransferObject.FromXml(xeO1);
+            Assert.IsNotNull(o1);
+            XElement xeO2 = o2.ToXml();
+
+            ICommand? cmnd2 = commandFactory.DeserializeStatement(xeO2);
+            Assert.IsNotNull(cmnd2);
+
+            string txtActual = cmnd2.ToString();
+            Assert.AreEqual(txtInput, txtActual);
+        }
     }
 }
