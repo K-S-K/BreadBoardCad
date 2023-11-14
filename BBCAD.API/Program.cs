@@ -3,8 +3,9 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 
 using BBCAD.Core;
-using BBCAD.Data;
+using BBCAD.Cmnd;
 using BBCAD.Itself;
+using BBCAD.API.DTO;
 
 namespace BBCAD.API
 {
@@ -78,7 +79,43 @@ namespace BBCAD.API
                 await context.Response.WriteAsync(StaticData.Favicon);
             });
 
+            app.MapPost("/CreateBoard", async (CommandTransferObject cto, HttpContext context, ICommandFactory _commandFactory, IBehavior _behavior) =>
+            {
+                context.Response.Headers.CacheControl = "no-cache";
+                context.Response.ContentType = "application/json";
+
+                ICommand command;
+
+                try
+                {
+                    command = cto.ToCommand(_commandFactory);
+                }
+                catch (Exception ex)
+                {
+                    BatchProcessingResponce responceObj = new(ex.Message);
+
+                    string responceStr = System.Text.Json.JsonSerializer.Serialize(responceObj);
+
+                    await context.Response.WriteAsync(responceStr);
+
+                    return;
+                }
+
+                await CreateBoard(command, context, _behavior);
+            });
+
             app.MapGet("/demo-board", CreateDemoBoard);
+        }
+
+        private static async Task CreateBoard(ICommand command, HttpContext context, IBehavior _behavior)
+        {
+            Board board = _behavior.ExecuteComand(command);
+
+            BatchProcessingResponce responceObj = new(new Board[] { board });
+
+            string responceStr = System.Text.Json.JsonSerializer.Serialize(responceObj);
+
+            await context.Response.WriteAsync(responceStr);
         }
 
         private static IResult CreateDemoBoard(HttpResponse responce, HttpContext context, IBehavior _behavior)
