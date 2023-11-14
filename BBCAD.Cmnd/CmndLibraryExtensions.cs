@@ -36,8 +36,8 @@ namespace BBCAD.Cmnd
         /// <param name="services">DI Service Collection</param>
         /// <returns>DI Service Collection</returns>
         public static IServiceCollection AddBBCadCommandLibraryOnly(
-        this IServiceCollection services
-    )
+            this IServiceCollection services
+            )
         {
             services.TryAddSingleton<ICommandFactory, CommandFactory>();
             services.TryAddSingleton<ICommandLibrary, CommandLibrary>();

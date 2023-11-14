@@ -10,6 +10,7 @@ namespace BBCAD.Core
     public class CadCoreBehavior : IBehavior
     {
         private readonly IBoardStorage _boardStorage;
+        private readonly ICommandFactory _commandFactory;
 
         public Board GetDemoBoard()
         {
@@ -40,11 +41,11 @@ namespace BBCAD.Core
 
             if (batch.BatchContent == Cmnd.Common.BatchContentBits.CreateLocalBoard)
             {
-                if(batch[0] is not CreateBoardCommand cmnd)
+                if (batch[0] is not CreateBoardCommand cmnd)
                 {
                     throw new Exception($"The first command must be {CommandType.CreateBoard}");
                 }
-                
+
                 board = CreateBoard(cmnd);
 
                 for (int i = 1; i < batch.Length; i++)
@@ -77,6 +78,20 @@ namespace BBCAD.Core
             return board;
         }
 
+        public Board ExecuteComand(ICommand command)
+        {
+            switch (command)
+            {
+                case CreateBoardCommand createBoardCommand:
+                    return CreateBoard(createBoardCommand);
+
+                    // case CloneBoardCommand cloneBoardCommand:
+                    //     return CloneBoard(cloneBoardCommand);
+            }
+
+            throw new NotImplementedException($"{command.CmndType}");
+        }
+
         private void ProcessBoardCommand(Board board, ICommand command)
         {
             switch (command)
@@ -95,7 +110,7 @@ namespace BBCAD.Core
         {
             if (!command.Consistent)
             {
-                throw new Exception($"The command {command} is not consistent");
+                throw new Exception($"The command is not consistent: {command}");
             }
 
             board.SizeX = command.X.Value;
@@ -106,7 +121,7 @@ namespace BBCAD.Core
         {
             if (!command.Consistent)
             {
-                throw new Exception($"The command {command} is not consistent");
+                throw new Exception($"The command is not consistent: {command}");
             }
 
             Board board = new()
@@ -120,9 +135,10 @@ namespace BBCAD.Core
             return board;
         }
 
-        public CadCoreBehavior(IBoardStorage boardStorage)
+        public CadCoreBehavior(IBoardStorage boardStorage, ICommandFactory commandFactory)
         {
             _boardStorage = boardStorage;
+            _commandFactory = commandFactory;
         }
     }
 }
