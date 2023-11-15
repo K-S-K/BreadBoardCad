@@ -8,7 +8,7 @@
 
 How to add: https://github.com/marketplace/actions/net-code-coverage-badge
 
-![GitHub Pages](https://github.com/K-S-K/BreadBoardCad/actions/workflows/dotnet.yml/badge.svg)
+![GitHub Pages](https://github.com/K-S-K/BreadBoardCad/actions/workflows/develop.yml/badge.svg)
 
 
 ### Open the deployed API from the browser
