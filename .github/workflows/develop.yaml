@@ -18,7 +18,7 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: .Net Core Tests
-        run: dotnet test --verbosity normal BBCAD.Tests/
+        run: dotnet test -p CollectCoverage=true -p CoverletOutput=TestResults/ -p CoverletOutputFormat=opencover --verbosity normal BBCAD.Tests/
   
   deploy:
     name: CD part
