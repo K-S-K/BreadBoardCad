@@ -5,6 +5,10 @@
 @inject IOptions<BoardAPIOptions> _boardAPIOptions
 <PageTitle>BoardCS</PageTitle>
 
+<p>BoardAPI: "@_boardAPIOptions.Value.Connection"</p>
+<br />
+<br />
+
 @if (getBoardSucceed)
 {
     if (!string.IsNullOrEmpty(content))
@@ -22,10 +26,6 @@ else
 
 <button class="btn btn-primary" @onclick="ReloadBoard" disabled="@BtnDisabled">@this.BtnName</button>
 
-<br />
-<br />
-
-<p>BoardAPI:{"@boardAPIImageUri"}</p>
 
 @code {
     private string content = string.Empty;

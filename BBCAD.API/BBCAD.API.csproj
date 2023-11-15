@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>a38a397e-e6a1-4417-8ea5-2540ea88ddca</UserSecretsId>
     <StartupObject>BBCAD.API.Program</StartupObject>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
