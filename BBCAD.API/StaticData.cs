@@ -3,7 +3,7 @@ using System.Text;
 
 namespace BBCAD.API
 {
-    public static class StaticData
+    internal static class StaticData
     {
         public const string programName = "Bread Board CAD V.0.0.1";
 
