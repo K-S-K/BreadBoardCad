@@ -10,7 +10,7 @@ How to add: https://github.com/marketplace/actions/net-code-coverage-badge
 
 ![GitHub Pages](https://github.com/K-S-K/BreadBoardCad/actions/workflows/develop.yml/badge.svg)
 
-![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/K-S-K/1234567890abcdef1234567890abcdef/raw/code-coverage.json)
+![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/K-S-K/BBCAPI/raw/code-coverage.json)
 
 
 ### Open the deployed API from the browser
