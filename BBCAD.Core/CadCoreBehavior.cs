@@ -4,6 +4,7 @@ using BBCAD.Itself;
 using BBCAD.Cmnd.Common;
 using BBCAD.Cmnd.Commands;
 using BBCAD.Data.Exceptions;
+using BBCAD.Cmnd.Impl.Parameters;
 
 namespace BBCAD.Core
 {
@@ -39,7 +40,7 @@ namespace BBCAD.Core
                 throw new Exception($"The {nameof(batch)} was not provided to {nameof(ExecuteComandBatch)} method");
             }
 
-            if (batch.BatchContent == Cmnd.Common.BatchContentBits.CreateLocalBoard)
+            if (batch.BatchContent == BatchContentBits.CreateLocalBoard)
             {
                 if (batch[0] is not CreateBoardCommand cmnd)
                 {
@@ -50,7 +51,7 @@ namespace BBCAD.Core
 
                 for (int i = 1; i < batch.Length; i++)
                 {
-                    ProcessBoardCommand(board, batch[i]);
+                    ProcessExistingBoardCommand(board, batch[i]);
                 }
 
                 if (commit)
@@ -58,7 +59,7 @@ namespace BBCAD.Core
                     _boardStorage.UpdateBoard(board);
                 }
             }
-            else if (batch.BatchContent == Cmnd.Common.BatchContentBits.DealWithExternalBoard)
+            else if (batch.BatchContent == BatchContentBits.DealWithExternalBoard)
             {
                 try
                 {
@@ -80,19 +81,34 @@ namespace BBCAD.Core
 
         public Board ExecuteComand(ICommand command)
         {
-            switch (command)
+            if (!command.Consistent)
             {
-                case CreateBoardCommand createBoardCommand:
-                    return CreateBoard(createBoardCommand);
-
-                    // case CloneBoardCommand cloneBoardCommand:
-                    //     return CloneBoard(cloneBoardCommand);
+                throw new Exception($"The command is not consistent: {command}");
             }
 
-            throw new NotImplementedException($"{command.CmndType}");
+            return command switch
+            {
+                CreateBoardCommand createBoardCommand => CreateBoard(createBoardCommand),
+                ResizeBoardCommand resizeBoardCommand => FindBoardAndProcessCommand(resizeBoardCommand.Id, resizeBoardCommand),
+                _ => throw new NotImplementedException($"{command.CmndType}"),
+            };
         }
 
-        private void ProcessBoardCommand(Board board, ICommand command)
+        private Board FindBoardAndProcessCommand(ParamGuid id, ICommand command)
+        {
+            if (!id.IsConfigured)
+            {
+                throw new Exception($"This command must have a board ID: {command}");
+            }
+
+            Board board = _boardStorage.GetBoard(id.Value);
+
+            ProcessExistingBoardCommand(board, command);
+
+            return board;
+        }
+
+        private void ProcessExistingBoardCommand(Board board, ICommand command)
         {
             switch (command)
             {

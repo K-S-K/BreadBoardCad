@@ -6,6 +6,9 @@
 
         public string Name => Parameter.Name ?? string.Empty;
 
+        public bool IsConfigured =>
+            Parameter != null && Parameter.Value != null;
+
         internal void Init(CommandParameter parameter)
         {
             this.Parameter = parameter;

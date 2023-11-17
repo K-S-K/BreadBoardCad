@@ -30,7 +30,7 @@ namespace BBCAD.API
                 builder.Services.AddEndpointsApiExplorer();
                 builder.Services.AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "BreadBoard CAD API", Description = "Make your board development documentable", Version = "v1" });
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "BreadBoard CAD API", Description = "Make your prototyping board development documentable", Version = "v1" });
                     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
                 });
             }
@@ -74,6 +74,7 @@ namespace BBCAD.API
             app.MapGet("/", ServiceStatusPage);
             app.MapGet("/favicon.ico", FavIcon);
             app.MapPost("/CreateBoard", CreateBoard);
+            app.MapPost("/ModifyBoard", ModifyBoard);
             app.MapGet("/demo-board", CreateDemoBoard);
         }
 
@@ -137,10 +138,43 @@ namespace BBCAD.API
         /// </remarks>
         /// <returns></returns>
         private static async Task CreateBoard(CommandTransferObject cto, HttpContext context, ICommandFactory _commandFactory, IBehavior _behavior)
-        {
-            context.Response.Headers.CacheControl = "no-cache";
-            context.Response.ContentType = "application/json";
+            => await ExecuteComand(cto, context, _commandFactory, _behavior);
 
+        /// <summary>
+        /// Modify an existing Board
+        /// </summary>
+        /// <param name="cto" cref="CommandTransferObject">Input data example: { "Type": "CommandName", "Parameters": { "BoardID": "6637eeec-cab5-44c0-9a79-41661acbfe94" ... } }</param>
+        /// <param name="context"></param>
+        /// <param name="_commandFactory"></param>
+        /// <param name="_behavior"></param>
+        /// <example>
+        /// </example>
+        /// <remarks>
+        /// The normal response example:
+        /// {
+        ///     "Boards": {
+        ///         "6637eeec-cab5-44c0-9a79-41661acbfe94": {
+        ///             "Name": "Amazing device",
+        ///             "SixeX": 8,
+        ///             "SixeY": 13,
+        ///             "svg": "&lt;svg version="1.1" width="180" height="280" ... &gt;"
+        ///         }
+        ///     },
+        ///     "Error": null
+        /// }
+        /// 
+        /// The abnormal response example:
+        /// {
+        ///     "Boards": {},
+        ///     "Error": "The command is not consistent: CREATE BOARD Name = \"Amazing device\" X =  Y = 13 Description = \"An exciting hardware project\" User = \"\""
+        /// }
+        /// </remarks>
+        /// <returns></returns>
+        private static async Task ModifyBoard(CommandTransferObject cto, HttpContext context, ICommandFactory _commandFactory, IBehavior _behavior)
+            => await ExecuteComand(cto, context, _commandFactory, _behavior);
+
+        private static async Task ExecuteComand(CommandTransferObject cto, HttpContext context, ICommandFactory _commandFactory, IBehavior _behavior)
+        {
             ICommand command;
 
             try
@@ -160,6 +194,9 @@ namespace BBCAD.API
 
         private static async Task PublishResponce(HttpContext context, BatchProcessingResponce responceObj)
         {
+            context.Response.Headers.CacheControl = "no-cache";
+            context.Response.ContentType = "application/json";
+
             string responceStr = System.Text.Json.JsonSerializer.Serialize(responceObj);
 
             await context.Response.WriteAsync(responceStr);
