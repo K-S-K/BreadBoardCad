@@ -16,8 +16,8 @@ How to add: https://github.com/marketplace/actions/net-code-coverage-badge
 ### Open the deployed API from the browser
 - **cd opt/projectBBCAD/** - go to the project's deployment directory
 - **dotnet BBCAD.API.dll** - start the application manually
-- [http://3.79.24.12:4800](http://3.79.24.12:4800)
-- [https://3.79.24.12:4801/aw320-ee241](https://3.79.24.12:4801)
+- [http://18.195.169.254:4800](http://18.195.169.254:4800)
+- [https://18.195.169.254:4801/aw320-ee241](https://18.195.169.254:4801)
 
 ### Virtual Machine Access
 - [Instances](https://eu-central-1.console.aws.amazon.com/ec2/home?region=eu-central-1#Instances:)<br>
