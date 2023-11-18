@@ -146,9 +146,11 @@ namespace BBCAD.Core
             Board board = new()
             {
                 Id = Guid.NewGuid(),
-                Name = command.Name.Value,
+                User=Guid.Empty,
                 SizeX = command.X.Value,
                 SizeY = command.Y.Value,
+                Name = command.Name.Value,
+                Description=command.Description.Value,
             };
 
             _boardStorage.RegisterBoard(board);

@@ -16,9 +16,11 @@ namespace BBCAD.Itself
 
         #region -> Properties
         public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid User { get; set; } = Guid.NewGuid();
         public int SizeX { get; set; } = 13;
         public int SizeY { get; set; } = 8;
         public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
 
         public List<Row> Rows { get; set; } = new List<Row>();
 
@@ -31,6 +33,7 @@ namespace BBCAD.Itself
                     , new XElement(nameof(Name), Name)
                     , new XElement(nameof(SizeX), SizeX)
                     , new XElement(nameof(SizeY), SizeY)
+                    , new XElement(nameof(Description), Description)
                     , new XElement(XMLLinesName, Rows.Select(r => r.XML))
                     );
             }
@@ -44,10 +47,11 @@ namespace BBCAD.Itself
 
                 #region -> Metadata
                 {
+                    Name = value.Element(nameof(Name))?.Value ?? string.Empty;
+                    Description = value.Element(nameof(Description))?.Value ?? string.Empty;
                     if (int.TryParse(value.Element(nameof(SizeX))?.Value, out int x)) SizeX = x; else { throw new InvalidDataException($"Can't parse {nameof(SizeX)} from {{{value.ToString()[..32]}}}"); }
                     if (int.TryParse(value.Element(nameof(SizeY))?.Value, out int y)) SizeY = y; else { throw new InvalidDataException($"Can't parse {nameof(SizeY)} from {{{value.ToString()[..32]}}}"); }
                     if (Guid.TryParse(value.Element(nameof(Id))?.Value, out Guid id)) Id = id; else { throw new InvalidDataException($"Can't parse {nameof(Id)} from {{{value.ToString()[..32]}}}"); }
-                    Name = value.Element(nameof(Name))?.Value ?? string.Empty;
                 }
                 #endregion
 

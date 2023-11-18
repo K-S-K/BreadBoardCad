@@ -15,7 +15,7 @@ namespace BBCAD.Tests.BehaviorTests
     public class E2EBehaviorTests
     {
         private ServiceProvider _serviceProvider = null!;
-
+         
         [OneTimeSetUp]
         public void SetUp()
         {
@@ -75,6 +75,7 @@ namespace BBCAD.Tests.BehaviorTests
             Board board1 = behavior.ExecuteComand(cmndCrt);
             Assert.IsNotNull(board1);
             Assert.AreEqual(board1.Name, cmndCrt.Name.Value);
+            Assert.AreEqual(board1.Description, cmndCrt.Description.Value);
             Assert.AreEqual(board1.SizeX, cmndCrt.X.Value);
             Assert.AreEqual(board1.SizeY, cmndCrt.Y.Value);
 
