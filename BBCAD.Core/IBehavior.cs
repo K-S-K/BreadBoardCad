@@ -7,7 +7,7 @@ namespace BBCAD.Core
     {
         Board GetDemoBoard();
 
-        Board ExecuteComandBatch(ICommandBatch batch, bool commit = false);
+        Board ExecuteComandBatch(ICommandBatch batch);
         Board ExecuteComand(ICommand command);
     }
 }

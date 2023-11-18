@@ -10,9 +10,13 @@ namespace BBCAD.Core
 {
     public class CadCoreBehavior : IBehavior
     {
+        #region -> Data
         private readonly IBoardStorage _boardStorage;
         private readonly ICommandFactory _commandFactory;
+        #endregion
 
+
+        #region -> Methods
         public Board GetDemoBoard()
         {
             try
@@ -31,7 +35,7 @@ namespace BBCAD.Core
             }
         }
 
-        public Board ExecuteComandBatch(ICommandBatch batch, bool commit = false)
+        public Board ExecuteComandBatch(ICommandBatch batch)
         {
             Board board;
 
@@ -48,16 +52,6 @@ namespace BBCAD.Core
                 }
 
                 board = CreateBoard(cmnd);
-
-                for (int i = 1; i < batch.Length; i++)
-                {
-                    ProcessExistingBoardCommand(board, batch[i]);
-                }
-
-                if (commit)
-                {
-                    _boardStorage.UpdateBoard(board);
-                }
             }
             else if (batch.BatchContent == BatchContentBits.DealWithExternalBoard)
             {
@@ -70,11 +64,17 @@ namespace BBCAD.Core
                     throw new Exception($"Can't found the board {{{batch.GetExternalBoardGuid().ToString().ToUpper()}}}.");
                 }
             }
-
             else
             {
                 throw new Exception("Inconsistent batch: it mist be local or external deal");
             }
+
+            for (int i = 1; i < batch.Length; i++)
+            {
+                ProcessExistingBoardCommand(board, batch[i]);
+            }
+
+            _boardStorage.UpdateBoard(board);
 
             return board;
         }
@@ -93,7 +93,10 @@ namespace BBCAD.Core
                 _ => throw new NotImplementedException($"{command.CmndType}"),
             };
         }
+        #endregion
 
+
+        #region -> Implementation
         private Board FindBoardAndProcessCommand(ParamGuid id, ICommand command)
         {
             if (!id.IsConfigured)
@@ -133,7 +136,7 @@ namespace BBCAD.Core
             board.SizeY = command.Y.Value;
         }
 
-        private static Board CreateBoard(CreateBoardCommand command)
+        private Board CreateBoard(CreateBoardCommand command)
         {
             if (!command.Consistent)
             {
@@ -148,13 +151,19 @@ namespace BBCAD.Core
                 SizeY = command.Y.Value,
             };
 
+            _boardStorage.RegisterBoard(board);
+
             return board;
         }
+        #endregion
 
+
+        #region -> Ctor
         public CadCoreBehavior(IBoardStorage boardStorage, ICommandFactory commandFactory)
         {
             _boardStorage = boardStorage;
             _commandFactory = commandFactory;
         }
+        #endregion
     }
 }
