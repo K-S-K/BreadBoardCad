@@ -32,13 +32,15 @@ namespace BBCAD.API.DTO
         /// The batch responce structure
         /// </summary>
         /// <param name="board">The only board returning by API methods</param>
-        public BatchProcessingResponce(Board board) : this(new Board[] { board }) { }
+        /// <param name="condition">The responce content specifier</param>
+        public BatchProcessingResponce(Board board, Condition condition) : this(new Board[] { board }, condition) { }
 
         /// <summary>
         /// The batch responce structure
         /// </summary>
         /// <param name="boards">The list of boards returning by API methods</param>
-        public BatchProcessingResponce(IEnumerable<Board> boards) : this()
+        /// <param name="condition">The responce content specifier</param>
+        public BatchProcessingResponce(IEnumerable<Board> boards, Condition condition) : this()
         {
             foreach (Board board in boards)
             {
@@ -47,8 +49,10 @@ namespace BBCAD.API.DTO
                     Name = board.Name,
                     SixeX = board.SizeX,
                     SixeY = board.SizeY,
-                    Svg = board.SVG.ToString().Replace("xmlns=\"\" ", ""),
-                    // Description=board.
+                    Description = board.Description,
+                    User = board.User,
+                    Svg = condition == Condition.Complete ?
+                    board.SVG.ToString().Replace("xmlns=\"\" ", "") : null,
                 }
                 );
             }
@@ -64,8 +68,6 @@ namespace BBCAD.API.DTO
             /// </summary>
             public string Name { get; set; } = null!;
 
-            // public string Description { get; set; }
-
             /// <summary>
             /// The amount of X holes in the row
             /// </summary>
@@ -77,9 +79,36 @@ namespace BBCAD.API.DTO
             public int SixeY { get; set; }
 
             /// <summary>
+            /// The Id of the User who the board belongs to
+            /// </summary>
+            public Guid User { get; set; } = Guid.Empty;
+
+            /// <summary>
+            /// The description of the board
+            /// </summary>
+            public string? Description { get; set; }
+
+            /// <summary>
             /// The SVG image of the board
             /// </summary>
-            public string Svg { get; set; } = null!;
+            public string? Svg { get; set; }
+        }
+
+        /// <summary>
+        /// The responce content specifier
+        /// </summary>
+        [Flags]
+        public enum Condition
+        {
+            /// <summary>
+            /// Whole board content
+            /// </summary>
+            Complete = 0b11,
+
+            /// <summary>
+            /// Only metadata without content
+            /// </summary>
+            Metadata = 0b01,
         }
     }
 }

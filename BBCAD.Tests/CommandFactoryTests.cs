@@ -26,7 +26,7 @@ namespace BBCAD.Tests
             ICommand? cmnd = commandFactory.ParseStatement(txtInput);
             Assert.IsNotNull(cmnd, $"{type.GetType().Name}.{type}");
 
-            string txtActual = cmnd.ToString();
+            string? txtActual = cmnd?.ToString();
             Assert.AreEqual(txtExpected, txtActual, "TXT parsing result is different from the expected one");
         }
 
@@ -51,15 +51,15 @@ namespace BBCAD.Tests
             CommandTransferObject? o1 = CommandTransferObject.FromXml(xeCmd);
             Assert.IsNotNull(o1);
 
-            XElement xeO1 = o1.ToXml();
+            XElement? xeO1 = o1?.ToXml();
             CommandTransferObject? o2 = CommandTransferObject.FromXml(xeO1);
             Assert.IsNotNull(o1);
-            XElement xeO2 = o2.ToXml();
+            XElement? xeO2 = o2?.ToXml();
 
             ICommand? cmnd2 = commandFactory.DeserializeStatement(xeO2);
             Assert.IsNotNull(cmnd2);
 
-            string txtActual = cmnd2.ToString();
+            string? txtActual = cmnd2?.ToString();
             Assert.AreEqual(txtInput, txtActual);
         }
     }

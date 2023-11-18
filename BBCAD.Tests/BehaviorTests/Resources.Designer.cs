@@ -62,13 +62,13 @@ namespace BBCAD.Tests.BehaviorTests {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;Board&gt;
-        ///  &lt;Id&gt;61EC2505-3D9C-45DC-A887-4403B16C47B1&lt;/Id&gt;
+        ///  &lt;Id&gt;8344FA9A-763F-4074-A893-58CC56E3805B&lt;/Id&gt;
         ///  &lt;Name&gt;Amazing Project&lt;/Name&gt;
         ///  &lt;SizeX&gt;8&lt;/SizeX&gt;
         ///  &lt;SizeY&gt;8&lt;/SizeY&gt;
+        ///  &lt;Description&gt;Experiment One&lt;/Description&gt;
         ///  &lt;Lines /&gt;
-        ///&lt;/Board&gt;
-        ///.
+        ///&lt;/Board&gt;.
         /// </summary>
         internal static string Board_01_CRC {
             get {

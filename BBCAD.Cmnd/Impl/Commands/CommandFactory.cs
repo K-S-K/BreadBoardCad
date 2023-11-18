@@ -13,10 +13,10 @@ namespace BBCAD.Cmnd.Commands
         [GeneratedRegex("\\s+")]
         private static partial Regex RxNormalization();
 
-        [GeneratedRegex(@"(?<cmnd>[\w\s]+)\s*(?<args>\s+\w+\s*=.*)$")]
+        [GeneratedRegex(@"(?<cmnd>[\w\s]+)\s*(?<args>\s+\w+\s*-*=.*)$")]
         private static partial Regex RxExtractCmnd();
 
-        [GeneratedRegex("(?<prm>\\b\\w*)\\s*=\\s*(?<val>(\\b\\w*)|(\"(\\b\\w*\\s*)*\"))")]
+        [GeneratedRegex("(?<prm>\\b\\w*)\\s*=\\s*(?<val>(\\b\\w*)|(\"(\\b\\w*\\s*-*)*\"))")]
         private static partial Regex RxExtractArgs();
 
         public ICommand DeserializeStatement(XElement xe)
@@ -53,6 +53,11 @@ namespace BBCAD.Cmnd.Commands
 
         public ICommand ParseStatement(string statement)
         {
+            if (!_typeData.Any())
+            {
+                throw new Exception($"The {this.GetType().Name} is not ready");
+            }
+
             MatchCollection statementGroups = RxExtractCmnd().Matches(statement);
 
             var cmndGroup = statementGroups.Select(x => x.Groups["cmnd"]).FirstOrDefault() ??

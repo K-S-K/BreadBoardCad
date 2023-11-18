@@ -25,11 +25,19 @@ namespace BBCAD.Data
         void RemoveBoard(Guid id);
 
         /// <summary>
-        /// Get board by id
+        /// Get board by Board Id
         /// </summary>
-        /// <param name="id">Board id</param>
-        /// <returns></returns>
+        /// <param name="BoardId">Board Id</param>
+        /// <returns>Board with specified Id</returns>
         /// <exception cref="BoardNotFoundException"></exception>
-        Board GetBoard(Guid id);
+        Board GetBoard(Guid BoardId);
+
+        /// <summary>
+        /// Get board list by User Id
+        /// </summary>
+        /// <param name="UserId">User Id</param>
+        /// <returns>Board belongs to user with specified Id</returns>
+        /// <exception cref="BoardNotFoundException"></exception>
+        IEnumerable<Board> GetBoards(Guid UserId);
     }
 }

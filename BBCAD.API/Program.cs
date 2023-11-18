@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 
 using BBCAD.Core;
 using BBCAD.Cmnd;
+using BBCAD.Data;
 using BBCAD.Itself;
 using BBCAD.API.DTO;
 
@@ -73,8 +74,10 @@ namespace BBCAD.API
         {
             app.MapGet("/", ServiceStatusPage);
             app.MapGet("/favicon.ico", FavIcon);
-            app.MapPost("/CreateBoard", CreateBoard);
-            app.MapPost("/ModifyBoard", ModifyBoard);
+            app.MapPost("/create-board", CreateBoardFromText);
+            app.MapPost("/modify-board", ModifyBoardFromText);
+            app.MapGet("/particular-board", ParticularBoard);
+            app.MapGet("/user-boards-list", UserBoardsList);
             app.MapGet("/demo-board", CreateDemoBoard);
         }
 
@@ -108,14 +111,102 @@ namespace BBCAD.API
         }
 
         /// <summary>
+        /// Get the particular board
+        /// specified by it's identifier
+        /// </summary>
+        /// <param name="boardId">The board Id</param>
+        /// <param name="context"></param>
+        /// <param name="_boardStorage"></param>
+        /// <remarks>
+        /// The normal response example:
+        /// {
+        ///     "Boards": {
+        ///         "6637eeec-cab5-44c0-9a79-41661acbfe94": {
+        ///             "Name": "Amazing device",
+        ///             "SixeX": 8,
+        ///             "SixeY": 13,
+        ///             "svg": "&lt;svg version="1.1" width="180" height="280" ... &gt;"
+        ///         }
+        ///     },
+        ///     "Error": null
+        /// }
+        /// 
+        /// The abnormal response example:
+        /// {
+        ///     "Boards": {},
+        ///     "Error": "The board not found"
+        /// }
+        /// </remarks>
+        /// <returns>The Board</returns>
+        private static async Task ParticularBoard(Guid boardId, HttpContext context, IBoardStorage _boardStorage)
+        {
+            Board board;
+
+            try
+            {
+                board = _boardStorage.GetBoard(boardId);
+            }
+            catch (Exception ex)
+            {
+                await PublishResponce(context, new(ex.Message));
+                return;
+            }
+
+            await PublishResponce(context, new(new Board[] { board }, BatchProcessingResponce.Condition.Complete));
+        }
+
+        /// <summary>
+        /// Get the list of boards, associated 
+        /// with a user, specified by Id
+        /// </summary>
+        /// <param name="userId">Board owner  user id</param>
+        /// <param name="context"></param>
+        /// <param name="_boardStorage"></param>
+        /// <remarks>
+        /// The normal response example:
+        /// {
+        ///     "Boards": {
+        ///         "6637eeec-cab5-44c0-9a79-41661acbfe94": {
+        ///             "Name": "Amazing device",
+        ///             "SixeX": 8,
+        ///             "SixeY": 13,
+        ///             "svg": null
+        ///         }
+        ///     },
+        ///     "Error": null
+        /// }
+        /// 
+        /// The abnormal response example:
+        /// {
+        ///     "Boards": {},
+        ///     "Error": "The board not found"
+        /// }
+        /// </remarks>
+        /// <returns>The Board List</returns>
+        private static async Task UserBoardsList(Guid userId, HttpContext context, IBoardStorage _boardStorage)
+        {
+            IEnumerable<Board> boards;
+
+            try
+            {
+                boards = _boardStorage.GetBoards(userId);
+            }
+            catch (Exception ex)
+            {
+                await PublishResponce(context, new(ex.Message));
+                return;
+            }
+
+            await PublishResponce(context, new(boards, BatchProcessingResponce.Condition.Metadata));
+        }
+
+        /// <summary>
         /// Create a New Board
         /// </summary>
         /// <param name="cto" cref="CommandTransferObject">Input data example: { "Type": "CreateBoard", "Parameters": { "X": "8", "Y": "13", "Name": "Amazing device", "Description": "An exciting hardware project" } }</param>
         /// <param name="context"></param>
         /// <param name="_commandFactory"></param>
         /// <param name="_behavior"></param>
-        /// <example>
-        /// </example>
         /// <remarks>
         /// The normal response example:
         /// {
@@ -137,8 +228,39 @@ namespace BBCAD.API
         /// }
         /// </remarks>
         /// <returns></returns>
-        private static async Task CreateBoard(CommandTransferObject cto, HttpContext context, ICommandFactory _commandFactory, IBehavior _behavior)
+        private static async Task CreateBoardFromJson(CommandTransferObject cto, HttpContext context, ICommandFactory _commandFactory, IBehavior _behavior)
             => await ExecuteComand(cto, context, _commandFactory, _behavior);
+
+        /// <summary>
+        /// Create a New Board
+        /// </summary>
+        /// <param name="script">Input data example: CREATE BOARD Name = "Module One" X = 8 Y = 13 Description = "Amazing Project" User = "0001cccc-cab5-44c0-9a79-41661acbfe94"</param>
+        /// <param name="context"></param>
+        /// <param name="_scriptProcessor"></param>
+        /// <param name="_behavior"></param>
+        /// <remarks>
+        /// The normal response example:
+        /// {
+        ///     "Boards": {
+        ///         "6637eeec-cab5-44c0-9a79-41661acbfe94": {
+        ///             "Name": "Amazing device",
+        ///             "SixeX": 8,
+        ///             "SixeY": 13,
+        ///             "svg": "&lt;svg version="1.1" width="180" height="280" ... &gt;"
+        ///         }
+        ///     },
+        ///     "Error": null
+        /// }
+        /// 
+        /// The abnormal response example:
+        /// {
+        ///     "Boards": {},
+        ///     "Error": "The command is not consistent: CREATE BOARD Name = \"Amazing device\" X =  Y = 13 Description = \"An exciting hardware project\" User = \"\""
+        /// }
+        /// </remarks>
+        /// <returns></returns>
+        private static async Task CreateBoardFromText(string script, HttpContext context, IScriptProcessor _scriptProcessor, IBehavior _behavior)
+            => await ExecuteComand(script, context, _scriptProcessor, _behavior);
 
         /// <summary>
         /// Modify an existing Board
@@ -147,8 +269,6 @@ namespace BBCAD.API
         /// <param name="context"></param>
         /// <param name="_commandFactory"></param>
         /// <param name="_behavior"></param>
-        /// <example>
-        /// </example>
         /// <remarks>
         /// The normal response example:
         /// {
@@ -169,9 +289,40 @@ namespace BBCAD.API
         ///     "Error": "The command is not consistent: CREATE BOARD Name = \"Amazing device\" X =  Y = 13 Description = \"An exciting hardware project\" User = \"\""
         /// }
         /// </remarks>
-        /// <returns></returns>
-        private static async Task ModifyBoard(CommandTransferObject cto, HttpContext context, ICommandFactory _commandFactory, IBehavior _behavior)
+        /// <returns>Modified board(s)</returns>
+        private static async Task ModifyBoardFromJson(CommandTransferObject cto, HttpContext context, ICommandFactory _commandFactory, IBehavior _behavior)
             => await ExecuteComand(cto, context, _commandFactory, _behavior);
+
+        /// <summary>
+        /// Modify an existing Board
+        /// </summary>
+        /// <param name="script">Input data example: RESIZE BOARD X = 8  Y = 8 Id = "6f50f744-d9f6-4ff9-9c45-ee48c741ebb7"</param>
+        /// <param name="context"></param>
+        /// <param name="_scriptProcessor"></param>
+        /// <param name="_behavior"></param>
+        /// <remarks>
+        /// The normal response example:
+        /// {
+        ///     "Boards": {
+        ///         "6f50f744-d9f6-4ff9-9c45-ee48c741ebb7": {
+        ///             "Name": "Amazing device",
+        ///             "SixeX": 8,
+        ///             "SixeY": 8,
+        ///             "svg": "&lt;svg version="1.1" width="180" height="280" ... &gt;"
+        ///         }
+        ///     },
+        ///     "Error": null
+        /// }
+        /// 
+        /// The abnormal response example:
+        /// {
+        ///     "Boards": {},
+        ///     "Error": "The command is not consistent: CREATE BOARD Name = \"Amazing device\" X =  Y = 13 Description = \"An exciting hardware project\" User = \"\""
+        /// }
+        /// </remarks>
+        /// <returns>Modified board(s)</returns>
+        private static async Task ModifyBoardFromText(string script, HttpContext context, IScriptProcessor _scriptProcessor, IBehavior _behavior)
+            => await ExecuteComand(script, context, _scriptProcessor, _behavior);
 
         private static async Task ExecuteComand(CommandTransferObject cto, HttpContext context, ICommandFactory _commandFactory, IBehavior _behavior)
         {
@@ -189,7 +340,27 @@ namespace BBCAD.API
 
             Board board = _behavior.ExecuteComand(command);
 
-            await PublishResponce(context, new(new Board[] { board }));
+            await PublishResponce(context, new(new Board[] { board }, BatchProcessingResponce.Condition.Complete));
+        }
+
+        private static async Task ExecuteComand(string script, HttpContext context, IScriptProcessor _scriptProcessor, IBehavior _behavior)
+        {
+            Board board;
+
+            try
+            {
+                ICommandBatch batch;
+
+                batch = _scriptProcessor.ExtractCommands(script);
+                board = _behavior.ExecuteComandBatch(batch);
+            }
+            catch (Exception ex)
+            {
+                await PublishResponce(context, new(ex.Message));
+                return;
+            }
+
+            await PublishResponce(context, new(new Board[] { board }, BatchProcessingResponce.Condition.Complete));
         }
 
         private static async Task PublishResponce(HttpContext context, BatchProcessingResponce responceObj)
