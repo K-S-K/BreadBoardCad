@@ -6,6 +6,7 @@ namespace BBCAD.Cmnd.Impl.Scripts
 {
     public class ScriptProcessor : IScriptProcessor
     {
+        private readonly ICommandLibrary _commandLibrary;
         private readonly ICommandFactory _commandFactory;
 
         public ICommandBatch ExtractCommands(string script)
@@ -76,10 +77,13 @@ namespace BBCAD.Cmnd.Impl.Scripts
             return new CommandBatch(commands);
         }
 
-        public ScriptProcessor(ICommandFactory commandFactory)
+        public ScriptProcessor(ICommandFactory commandFactory, ICommandLibrary commandLibrary)
         {
             _commandFactory = commandFactory ??
                 throw new ArgumentNullException(nameof(commandFactory));
+
+            _commandLibrary = commandLibrary ??
+                throw new ArgumentNullException(nameof(commandLibrary));
         }
     }
 }

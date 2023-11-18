@@ -11,6 +11,11 @@ namespace BBCAD.Data
         private readonly Dictionary<Guid, Board> _boards = new();
 
         /// <summary>
+        /// The index of the boards ownership
+        /// </summary>
+        private readonly Dictionary<Guid, List<Guid>> _index = new();
+
+        /// <summary>
         /// Add the given board to the database
         /// </summary>
         /// <param name="board">Board itself</param>
@@ -25,6 +30,18 @@ namespace BBCAD.Data
                 }
 
                 _boards.Add(board.Id, board);
+
+                #region -> Ownership
+                {
+                    if (!_index.TryGetValue(board.User, out List<Guid>? index))
+                    {
+                        index = new List<Guid>();
+                        _index.Add(board.User, index);
+                    }
+
+                    index.Add(board.Id);
+                }
+                #endregion
             }
         }
 
@@ -37,10 +54,14 @@ namespace BBCAD.Data
         {
             lock (_boards)
             {
-                if (_boards.ContainsKey(board.Id))
+                if (_boards.TryGetValue(board.Id, out Board? storedBoard))
                 {
-                    // It is nothing to to actually in this implementation.
-                    // But if we have some dtorage, board must be updated there.
+                    /// Ib a board ever can be transferred 
+                    /// to another user, it must be done here.
+                    /// 
+
+                    // Update the board in the storage
+                    storedBoard.XML = board.XML;
                 }
                 else
                 {
@@ -57,27 +78,65 @@ namespace BBCAD.Data
         {
             lock (_boards)
             {
-                _boards.Remove(id);
+                if (_boards.TryGetValue(id, out Board? board))
+                {
+
+                    #region -> Ownership
+                    {
+                        if (_index.TryGetValue(board.User, out List<Guid>? index))
+                        {
+                            index.Remove(board.Id);
+
+                            if (!index.Any())
+                            {
+                                _index.Remove(board.User);
+                            }
+                        }
+                    }
+                    #endregion
+
+                    _boards.Remove(id);
+                }
             }
         }
 
         /// <summary>
-        /// Get board by id
+        /// Get board by Board Id
         /// </summary>
-        /// <param name="id">Board id</param>
-        /// <returns></returns>
+        /// <param name="BoardId">Board Id</param>
+        /// <returns>Board with specified Id</returns>
         /// <exception cref="BoardNotFoundException"></exception>
-        public Board GetBoard(Guid id)
+        public Board GetBoard(Guid BoardId)
         {
             lock (_boards)
             {
-                if (_boards.TryGetValue(id, out Board? board))
+                if (_boards.TryGetValue(BoardId, out Board? board))
                 {
                     return board;
                 }
                 else
                 {
-                    throw new BoardNotFoundException(id);
+                    throw new BoardNotFoundException(BoardId);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get board list by User Id
+        /// </summary>
+        /// <param name="UserId">User Id</param>
+        /// <returns>Board belongs to user with specified Id</returns>
+        /// <exception cref="BoardNotFoundException"></exception>
+        public IEnumerable<Board> GetBoards(Guid UserId)
+        {
+            if (_index.TryGetValue(UserId, out List<Guid>? index))
+            {
+                foreach (Guid boardId in index)
+                {
+                    if (_boards.TryGetValue(boardId, out Board? board))
+                    {
+                        yield return board;
+                    }
                 }
             }
         }

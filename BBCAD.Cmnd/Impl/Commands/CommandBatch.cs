@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
 
 using BBCAD.Cmnd.Common;
+using BBCAD.Cmnd.Commands;
 
 namespace BBCAD.Cmnd.Impl.Commands
 {
@@ -57,8 +58,53 @@ namespace BBCAD.Cmnd.Impl.Commands
                 throw new Exception($"The batch does not contain an External Board Id");
             }
 
-            // TODO: Find the External Board Id in the parameters. In must be one one.
-            return Guid.Empty;
+            List<Guid> ids = new();
+            foreach (ICommand command in Commands)
+            {
+                switch (command)
+                {
+                    case CreateBoardCommand _:
+                        break;
+
+                    case ResizeBoardCommand resizeBoardCommand:
+                        if (resizeBoardCommand.Id.IsConfigured)
+                        {
+                            ids.Add(resizeBoardCommand.Id.Value);
+                        }
+                        break;
+
+                    // case CloneBoardCommand cloneBoardCommand:
+                    //     if (cloneBoardCommand.Id.Value.IsConfigured)
+                    //     {
+                    //         ids.Add(cloneBoardCommand.Id.Value);
+                    //     }
+                    //     break;
+
+                    // case AddLineCommand addLineCommand:
+                    //     if (addLineCommand.Id.Value.IsConfigured)
+                    //     {
+                    //         ids.Add(addLineCommand.Id.Value);
+                    //     }
+                    //     break;
+
+                    default:
+                        throw new NotImplementedException($"{command.GetType().Name}");
+                }
+            }
+
+            ids = ids.Distinct().ToList();
+
+            if (ids.Count == 0)
+            {
+                return Guid.Empty;
+            }
+
+            if (ids.Count == 1)
+            {
+                return ids.Single();
+            }
+
+            throw new Exception($"There are {ids.Count} Board Ids in the batch. This functionality is not supported yet. In must be only one board Id.");
         }
 
         public override string ToString() => $"[{Length}], {BatchContent}";

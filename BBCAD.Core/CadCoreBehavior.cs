@@ -38,6 +38,7 @@ namespace BBCAD.Core
         public Board ExecuteComandBatch(ICommandBatch batch)
         {
             Board board;
+            bool skipFirstCmnd = false;
 
             if (batch == null)
             {
@@ -50,6 +51,8 @@ namespace BBCAD.Core
                 {
                     throw new Exception($"The first command must be {CommandType.CreateBoard}");
                 }
+
+                skipFirstCmnd = true;
 
                 board = CreateBoard(cmnd);
             }
@@ -69,7 +72,7 @@ namespace BBCAD.Core
                 throw new Exception("Inconsistent batch: it mist be local or external deal");
             }
 
-            for (int i = 1; i < batch.Length; i++)
+            for (int i = skipFirstCmnd ? 1 : 0; i < batch.Length; i++)
             {
                 ProcessExistingBoardCommand(board, batch[i]);
             }
@@ -146,11 +149,11 @@ namespace BBCAD.Core
             Board board = new()
             {
                 Id = Guid.NewGuid(),
-                User=Guid.Empty,
                 SizeX = command.X.Value,
                 SizeY = command.Y.Value,
                 Name = command.Name.Value,
-                Description=command.Description.Value,
+                Description = command.Description.Value,
+                User = command.User.IsConfigured ? command.User.Value : Guid.Empty,
             };
 
             _boardStorage.RegisterBoard(board);
