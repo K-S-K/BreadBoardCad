@@ -1,0 +1,110 @@
+﻿@page "/boardlist"
+
+@using System.Text.Json
+@using Microsoft.Extensions.Options
+
+@using BBCAD.Data
+@using BBCAD.API.DTO
+@using BBCAD.Site.Settings;
+
+@inject IHttpClientFactory ClientFactory
+@inject IOptions<BoardAPIOptions> BoardAPIOptions
+
+<PageTitle>Board List</PageTitle>
+
+<h1>Board List</h1>
+
+@if (!getBoardSucceed)
+{
+    <p style="Color:red">Error: @getBoardError</p>
+}
+else if (boards == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!boards.Any())
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Size</th>
+                <th>Name</th>
+                <th>Descr</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var board in boards)
+            {
+                <tr>
+                    <td width="1" style="white-space:nowrap">@board.Value.SixeX x @board.Value.SixeY</td>
+                    <td width="1" style="white-space:nowrap">@board.Value.Name</td>
+                    <td>@board.Value.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private string boardAPIImageUri = string.Empty;
+    private Dictionary<Guid, BatchProcessingResponce.BoardInfo>? boards;
+
+    private bool getBoardSucceed = true;
+    private string getBoardError = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        boardAPIImageUri = BoardAPIOptions.Value.Connection + $"/user-boards-list/?userId={Guid.Empty}";
+
+        await ReloadBoardList();
+
+        StateHasChanged();
+    }
+
+    private async Task ReloadBoardList()
+    {
+        boards = null;
+
+        await GetBoardContent();
+
+        StateHasChanged();
+    }
+
+    private async Task GetBoardContent()
+    {
+        var client = ClientFactory.CreateClient();
+        var request = new HttpRequestMessage(HttpMethod.Get, boardAPIImageUri);
+
+        try
+        {
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                using var responseStream = await response.Content.ReadAsStreamAsync();
+                var rawContent = await response.Content.ReadAsStringAsync();
+
+                var tmp = JsonSerializer.Deserialize<BatchProcessingResponce>(rawContent);
+                boards = tmp?.Boards;
+
+                getBoardSucceed = true;
+                getBoardError = string.Empty;
+            }
+            else
+            {
+                getBoardSucceed = false;
+                getBoardError = $"{response.StatusCode}: {response.ReasonPhrase}";
+            }
+        }
+        catch (Exception ex)
+        {
+            getBoardSucceed = false;
+            getBoardError = $"{ex}: ex.Message";
+        }
+    }
+}

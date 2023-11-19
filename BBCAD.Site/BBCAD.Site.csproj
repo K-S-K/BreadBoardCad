@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BBCAD.API\BBCAD.API.csproj" />
+    <ProjectReference Include="..\BBCAD.Data\BBCAD.Data.csproj" />
+  </ItemGroup>
+
 </Project>
