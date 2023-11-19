@@ -1,11 +1,23 @@
-﻿@page "/boardcs"
-@using BBCAD.Site.Settings;
+﻿@page "/boardcs/{Id}"
+
+@using System.Text.Json
+@using Microsoft.AspNetCore.Mvc
 @using Microsoft.Extensions.Options
+
+@using BBCAD.API.DTO
+@using BBCAD.Site.Settings;
+
 @inject IHttpClientFactory ClientFactory
 @inject IOptions<BoardAPIOptions> _boardAPIOptions
+
 <PageTitle>BoardCS</PageTitle>
 
-<p>BoardAPI: "@_boardAPIOptions.Value.Connection"</p>
+@if (Board != null)
+{
+    <h1>@Board?.Name</h1>
+}
+
+<a href="@_boardAPIOptions.Value.Connection/swagger" target="_blank">@_boardAPIOptions.Value.Connection/swagger</a>
 <br />
 <br />
 
@@ -38,10 +50,14 @@ else
     private bool getBoardSucceed = true;
     private string getBoardError = string.Empty;
 
+    [Parameter]
+    public string Id { get; set; } = Guid.Empty.ToString();
+
+    public BatchProcessingResponce.BoardInfo? Board { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        boardAPIImageUri = _boardAPIOptions.Value.Connection + "/demo-board";
+        boardAPIImageUri = _boardAPIOptions.Value.Connection + $"/particular-board/?boardId={Id}";
 
         BtnName =
         BtnConstantName = "Reload Image";
@@ -49,6 +65,14 @@ else
         await ReloadBoard();
 
         StateHasChanged();
+    }
+
+    public async Task OnGetAsync(Guid? id)
+    {
+
+        // Emulate hard async work
+        await Task.Yield();
+        await Task.Delay(string.IsNullOrEmpty(content) ? 0 : 500);
     }
 
     private async Task ReloadBoard()
@@ -81,7 +105,21 @@ else
             {
                 using var responseStream = await response.Content.ReadAsStreamAsync();
                 var rawContent = await response.Content.ReadAsStringAsync();
-                content = "data:image/svg+xml;base64, " + Base64Encode(rawContent);
+                var responce = JsonSerializer.Deserialize<BatchProcessingResponce>(rawContent);
+
+                if (!string.IsNullOrWhiteSpace(responce?.Error))
+                {
+                    throw new Exception(responce?.Error);
+                }
+
+                Board = responce?.Boards?.First().Value;
+
+                if (Board == null)
+                {
+                    throw new Exception($"The answer does not contain any board");
+                }
+
+                content = "data:image/svg+xml;base64, " + Base64Encode(Board?.Svg);
 
                 getBoardSucceed = true;
                 getBoardError = string.Empty;

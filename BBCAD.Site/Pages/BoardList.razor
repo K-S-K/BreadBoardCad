@@ -40,8 +40,8 @@ else
             @foreach (var board in boards)
             {
                 <tr>
-                    <td width="1" style="white-space:nowrap">@board.Value.SixeX x @board.Value.SixeY</td>
-                    <td width="1" style="white-space:nowrap">@board.Value.Name</td>
+                    <td width="1" style="white-space:nowrap"><a href="./boardcs/@board.Key">@board.Value.SixeX x @board.Value.SixeY</a></td>
+                    <td width="1" style="white-space:nowrap"><a href="./boardcs/@board.Key">@board.Value.Name</a></td>
                     <td>@board.Value.Description</td>
                 </tr>
             }
@@ -89,8 +89,8 @@ else
                 using var responseStream = await response.Content.ReadAsStreamAsync();
                 var rawContent = await response.Content.ReadAsStringAsync();
 
-                var tmp = JsonSerializer.Deserialize<BatchProcessingResponce>(rawContent);
-                boards = tmp?.Boards;
+                var responce = JsonSerializer.Deserialize<BatchProcessingResponce>(rawContent);
+                boards = responce?.Boards;
 
                 getBoardSucceed = true;
                 getBoardError = string.Empty;
