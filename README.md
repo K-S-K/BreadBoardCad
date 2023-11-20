@@ -57,5 +57,7 @@ Apply JavaScript image control as described [here](https://learn.microsoft.com/e
 ### AppSettings Kestrel customization
 - https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/endpoints?view=aspnetcore-7.0
 
+### Goot to read:
+[Blazor University](https://blazor-university.com/overview/what-is-webassembly/)https://blazor-university.com/overview/what-is-webassembly/
 
 dotnet --list-sdks
