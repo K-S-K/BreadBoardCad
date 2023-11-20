@@ -1,4 +1,4 @@
-﻿@page "/boardcs/{Id}"
+﻿@page "/boardscheme/{Id}"
 
 @using System.Text.Json
 @using Microsoft.AspNetCore.Mvc
@@ -10,16 +10,15 @@
 @inject IHttpClientFactory ClientFactory
 @inject IOptions<BoardAPIOptions> _boardAPIOptions
 
-<PageTitle>BoardCS</PageTitle>
-
-@if (Board != null)
+@if (Board == null)
 {
-    <h1>@Board?.Name</h1>
+    <PageTitle>Board Scheme</PageTitle>
 }
-
-<a href="@_boardAPIOptions.Value.Connection/swagger" target="_blank">@_boardAPIOptions.Value.Connection/swagger</a>
-<br />
-<br />
+else
+{
+    <PageTitle>@Board?.Name</PageTitle>
+    <h1><font color="gray">Edit</font> @Board?.Name <font color="gray">Scheme</font></h1>
+}
 
 @if (getBoardSucceed)
 {

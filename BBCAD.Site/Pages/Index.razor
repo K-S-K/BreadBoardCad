@@ -1,13 +1,24 @@
 ﻿@page "/"
+@using Microsoft.Extensions.Options
+
+@using BBCAD.Site.Settings
+
+@inject IOptions<BoardAPIOptions> BoardAPIOptions
 
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
-
 <br />
 <br />
-@* <BoardCS  Id="00000000-0000-0000-0000-000000000000" /> *@
+
+<a href="@BoardAPIOptions.Value.Connection/swagger" target="_blank">@BoardAPIOptions.Value.Connection/swagger</a>
+<br />
+<br />
+
+@* <BoardScheme  Id="00000000-0000-0000-0000-000000000000" /> *@
+
+@code {
+
+}

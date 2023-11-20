@@ -40,8 +40,8 @@ else
             @foreach (var board in boards)
             {
                 <tr>
-                    <td width="1" style="white-space:nowrap"><a href="./boardcs/@board.Key">@board.Value.SixeX x @board.Value.SixeY</a></td>
-                    <td width="1" style="white-space:nowrap"><a href="./boardcs/@board.Key">@board.Value.Name</a></td>
+                    <td width="1" style="white-space:nowrap"><a href="./boardscheme/@board.Key">@board.Value.SixeX x @board.Value.SixeY</a></td>
+                    <td width="1" style="white-space:nowrap"><a href="./boardscheme/@board.Key">@board.Value.Name</a></td>
                     <td>@board.Value.Description</td>
                 </tr>
             }
@@ -51,7 +51,7 @@ else
 
 
 @code {
-    private string boardAPIImageUri = string.Empty;
+    private string boardAPIBoardListUri = string.Empty;
     private Dictionary<Guid, BatchProcessingResponce.BoardInfo>? boards;
 
     private bool getBoardSucceed = true;
@@ -59,7 +59,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        boardAPIImageUri = BoardAPIOptions.Value.Connection + $"/user-boards-list/?userId={Guid.Empty}";
+        boardAPIBoardListUri = BoardAPIOptions.Value.Connection + $"/user-boards-list/?userId={Guid.Empty}";
 
         await ReloadBoardList();
 
@@ -78,7 +78,7 @@ else
     private async Task GetBoardContent()
     {
         var client = ClientFactory.CreateClient();
-        var request = new HttpRequestMessage(HttpMethod.Get, boardAPIImageUri);
+        var request = new HttpRequestMessage(HttpMethod.Get, boardAPIBoardListUri);
 
         try
         {
