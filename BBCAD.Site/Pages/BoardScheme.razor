@@ -37,6 +37,10 @@ else
 
 <button class="btn btn-primary" @onclick="ReloadBoard" disabled="@BtnDisabled">@this.BtnName</button>
 
+<a href="boardmetadata/00000000-0000-0000-0000-000000000000">
+    <input class="btn btn-primary" type="button" value="Modify Metadata" disabled="@BtnDisabled" />
+</a>
+
 
 @code {
     private string content = string.Empty;
