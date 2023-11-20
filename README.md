@@ -61,3 +61,7 @@ Apply JavaScript image control as described [here](https://learn.microsoft.com/e
 [Blazor University](https://blazor-university.com/overview/what-is-webassembly/)https://blazor-university.com/overview/what-is-webassembly/
 
 dotnet --list-sdks
+
+Command to filter processes by name
+- ps -ef | grep namepart
+
