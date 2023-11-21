@@ -40,8 +40,8 @@ else
             @foreach (var board in boards)
             {
                 <tr>
-                    <td width="1" style="white-space:nowrap"><a href="./boardscheme/@board.Key">@board.Value.SixeX x @board.Value.SixeY</a></td>
-                    <td width="1" style="white-space:nowrap"><a href="./boardscheme/@board.Key">@board.Value.Name</a></td>
+                    <td width="1" style="white-space:nowrap"><a href="./board/@board.Key/scheme">@board.Value.SixeX x @board.Value.SixeY</a></td>
+                    <td width="1" style="white-space:nowrap"><a href="./board/@board.Key/scheme">@board.Value.Name</a></td>
                     <td>@board.Value.Description</td>
                 </tr>
             }
