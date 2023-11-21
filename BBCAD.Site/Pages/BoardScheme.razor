@@ -1,14 +1,14 @@
 ﻿@page "/board/{Id}/scheme"
 
 @using System.Text.Json
+@using BBCAD.Site.Services
 @using Microsoft.AspNetCore.Mvc
 @using Microsoft.Extensions.Options
 
 @using BBCAD.API.DTO
 @using BBCAD.Site.Settings;
 
-@inject IHttpClientFactory ClientFactory
-@inject IOptions<BoardAPIOptions> _boardAPIOptions
+@inject IBatchProcessingService BatchProcessingService
 
 @if (Board == null)
 {
@@ -44,7 +44,6 @@ else
 
 @code {
     private string content = string.Empty;
-    private string boardAPIImageUri = string.Empty;
 
     protected bool BtnDisabled = false;
     protected string BtnName = default!;
@@ -60,22 +59,12 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        boardAPIImageUri = _boardAPIOptions.Value.Connection + $"/particular-board/?boardId={Id}";
-
         BtnName =
         BtnConstantName = "Reload Image";
 
         await ReloadBoard();
 
         StateHasChanged();
-    }
-
-    public async Task OnGetAsync(Guid? id)
-    {
-
-        // Emulate hard async work
-        await Task.Yield();
-        await Task.Delay(string.IsNullOrEmpty(content) ? 0 : 500);
     }
 
     private async Task ReloadBoard()
@@ -97,46 +86,26 @@ else
 
     private async Task GetBoardContent()
     {
-        var client = ClientFactory.CreateClient();
-        var request = new HttpRequestMessage(HttpMethod.Get, boardAPIImageUri);
-
         try
         {
-            var response = await client.SendAsync(request);
+            var responce = await BatchProcessingService.CallBoardAPI(HttpMethod.Get, $"particular-board/?boardId={Id}");
 
-            if (response.IsSuccessStatusCode)
+            Board = responce?.Boards?.First().Value;
+
+            if (Board == null)
             {
-                using var responseStream = await response.Content.ReadAsStreamAsync();
-                var rawContent = await response.Content.ReadAsStringAsync();
-                var responce = JsonSerializer.Deserialize<BatchProcessingResponce>(rawContent);
-
-                if (!string.IsNullOrWhiteSpace(responce?.Error))
-                {
-                    throw new Exception(responce?.Error);
-                }
-
-                Board = responce?.Boards?.First().Value;
-
-                if (Board == null)
-                {
-                    throw new Exception($"The answer does not contain any board");
-                }
-
-                content = "data:image/svg+xml;base64, " + Base64Encode(Board?.Svg);
-
-                getBoardSucceed = true;
-                getBoardError = string.Empty;
+                throw new Exception($"The answer does not contain any board");
             }
-            else
-            {
-                getBoardSucceed = false;
-                getBoardError = $"{response.StatusCode}: {response.ReasonPhrase}";
-            }
+
+            content = "data:image/svg+xml;base64, " + Base64Encode(Board?.Svg);
+
+            getBoardSucceed = true;
+            getBoardError = string.Empty;
         }
         catch (Exception ex)
         {
             getBoardSucceed = false;
-            getBoardError = $"{ex}: ex.Message";
+            getBoardError = ex.Message;
         }
     }
 

@@ -1,5 +1,6 @@
 using BBCAD.Site.Areas.Identity;
 using BBCAD.Site.Data;
+using BBCAD.Site.Services;
 using BBCAD.Site.Settings;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +25,7 @@ namespace BBCAD.Site
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+            builder.Services.AddSingleton<IBatchProcessingService, BatchProcessingService>();
 
             builder.Services.AddHttpClient();
 

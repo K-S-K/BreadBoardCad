@@ -1,5 +1,10 @@
 ﻿@page "/board/{Id}/metadata"
 
+@using BBCAD.API.DTO
+@using BBCAD.Site.Services
+
+@inject IBatchProcessingService BatchProcessingService
+
 <h3>Board Metadata</h3>
 
 
@@ -15,7 +20,7 @@
     Description: <textarea @bind="Description" @bind:event="oninput" style="width:100%; max-width:100%; height:50px; word-wrap:break-word;" />
 </p>
 
-<table>
+@* <table>
     <tbody>
         <tr>
             <td><code>Size X</code></td>
@@ -39,7 +44,7 @@
         </tr>
     </tbody>
 </table>
-
+ *@
 <br />
 <br />
 
@@ -63,6 +68,28 @@
 
     [Parameter]
     public string Id { get; set; } = Guid.Empty.ToString();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadState();
+    }
+
+    private async Task LoadState()
+    {
+        var responce = await BatchProcessingService.CallBoardAPI(HttpMethod.Get, $"particular-board/?boardId={Id}");
+
+        BatchProcessingResponce.BoardInfo? board = responce?.Boards?.First().Value;
+
+        if (board == null)
+        {
+            throw new Exception($"The answer does not contain any board");
+        }
+
+        BoardName = board?.Name;
+        Description = board?.Description;
+        SizeX = board == null ? SizeMin : board.SizeX;
+        SizeY = board == null ? SizeMin : board.SizeY;
+    }
 
     private async Task ApplyChanges()
     {

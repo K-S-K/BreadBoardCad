@@ -118,20 +118,20 @@ namespace BBCAD.Itself
             {
                 Board board = new()
                 {
-                    Id = Guid.Empty,
+                    Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
                     Name = "Demo",
                     SizeX = 13,
                     SizeY = 8
                 };
 
-                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(1, 7), new Point(1, 5) } });
-                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(2, 7), new Point(2, 5) } });
-                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(3, 7), new Point(5, 7), new Point(5, 4), new Point(11, 4), new Point(11, 1) } });
-                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(5, 0), new Point(2, 0), new Point(2, 1), new Point(2, 0), new Point(0, 0), new Point(0, 3), new Point(10, 3), new Point(10, 1) } });
-                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(1, 1), new Point(1, 2), new Point(7, 2), new Point(7, 0), new Point(12, 0), new Point(12, 1) } });
-                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(3, 1), new Point(6, 1), new Point(6, 0) } });
-                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(7, 7), new Point(7, 6), new Point(9, 6) } });
-                board.Rows.Add(new Row() { Points = new List<Common.Point> { new Point(8, 7), new Point(10, 7), new Point(10, 5), new Point(12, 5) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new(1, 7), new(1, 5) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new(2, 7), new(2, 5) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new(3, 7), new(5, 7), new(5, 4), new(11, 4), new(11, 1) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new(5, 0), new(2, 0), new(2, 1), new(2, 0), new(0, 0), new(0, 3), new(10, 3), new(10, 1) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new(1, 1), new(1, 2), new(7, 2), new(7, 0), new(12, 0), new(12, 1) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new(3, 1), new(6, 1), new(6, 0) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new(7, 7), new(7, 6), new(9, 6) } });
+                board.Rows.Add(new Row() { Points = new List<Common.Point> { new(8, 7), new(10, 7), new(10, 5), new(12, 5) } });
 
                 return board;
             }

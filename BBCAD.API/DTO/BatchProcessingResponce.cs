@@ -47,8 +47,8 @@ namespace BBCAD.API.DTO
                 Boards.Add(board.Id, new()
                 {
                     Name = board.Name,
-                    SixeX = board.SizeX,
-                    SixeY = board.SizeY,
+                    SizeX = board.SizeX,
+                    SizeY = board.SizeY,
                     Description = board.Description,
                     User = board.User,
                     Svg = condition == Condition.Complete ?
@@ -71,12 +71,12 @@ namespace BBCAD.API.DTO
             /// <summary>
             /// The amount of X holes in the row
             /// </summary>
-            public int SixeX { get; set; }
+            public int SizeX { get; set; }
 
             /// <summary>
             /// The amount of X holes in the column
             /// </summary>
-            public int SixeY { get; set; }
+            public int SizeY { get; set; }
 
             /// <summary>
             /// The Id of the User who the board belongs to

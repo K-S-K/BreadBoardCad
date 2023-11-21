@@ -5,10 +5,10 @@
 
 @using BBCAD.Data
 @using BBCAD.API.DTO
-@using BBCAD.Site.Settings;
+@using BBCAD.Site.Services
+@using BBCAD.Site.Settings
 
-@inject IHttpClientFactory ClientFactory
-@inject IOptions<BoardAPIOptions> BoardAPIOptions
+@inject IBatchProcessingService BatchProcessingService
 
 <PageTitle>Board List</PageTitle>
 
@@ -40,7 +40,7 @@ else
             @foreach (var board in boards)
             {
                 <tr>
-                    <td width="1" style="white-space:nowrap"><a href="./board/@board.Key/scheme">@board.Value.SixeX x @board.Value.SixeY</a></td>
+                    <td width="1" style="white-space:nowrap"><a href="./board/@board.Key/scheme">@board.Value.SizeX x @board.Value.SizeY</a></td>
                     <td width="1" style="white-space:nowrap"><a href="./board/@board.Key/scheme">@board.Value.Name</a></td>
                     <td>@board.Value.Description</td>
                 </tr>
@@ -51,7 +51,6 @@ else
 
 
 @code {
-    private string boardAPIBoardListUri = string.Empty;
     private Dictionary<Guid, BatchProcessingResponce.BoardInfo>? boards;
 
     private bool getBoardSucceed = true;
@@ -59,8 +58,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        boardAPIBoardListUri = BoardAPIOptions.Value.Connection + $"/user-boards-list/?userId={Guid.Empty}";
-
         await ReloadBoardList();
 
         StateHasChanged();
@@ -77,29 +74,14 @@ else
 
     private async Task GetBoardContent()
     {
-        var client = ClientFactory.CreateClient();
-        var request = new HttpRequestMessage(HttpMethod.Get, boardAPIBoardListUri);
-
         try
         {
-            var response = await client.SendAsync(request);
+            var responce = await BatchProcessingService.CallBoardAPI(HttpMethod.Get, $"user-boards-list/?userId={Guid.Empty}");
 
-            if (response.IsSuccessStatusCode)
-            {
-                using var responseStream = await response.Content.ReadAsStreamAsync();
-                var rawContent = await response.Content.ReadAsStringAsync();
+            boards = responce?.Boards;
 
-                var responce = JsonSerializer.Deserialize<BatchProcessingResponce>(rawContent);
-                boards = responce?.Boards;
-
-                getBoardSucceed = true;
-                getBoardError = string.Empty;
-            }
-            else
-            {
-                getBoardSucceed = false;
-                getBoardError = $"{response.StatusCode}: {response.ReasonPhrase}";
-            }
+            getBoardSucceed = true;
+            getBoardError = string.Empty;
         }
         catch (Exception ex)
         {
