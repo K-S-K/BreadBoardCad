@@ -1,11 +1,20 @@
 ﻿@page "/board/{Id}/metadata"
 
 @using BBCAD.API.DTO
+@using BBCAD.Cmnd.Commands
 @using BBCAD.Site.Services
 
 @inject IBatchProcessingService BatchProcessingService
+@inject NavigationManager NavManager
 
-<h3>Board Metadata</h3>
+@if (NewBoard)
+{
+    <h3>New Board</h3>
+}
+else
+{
+    <h3>Board Metadata</h3>
+}
 
 
 <p>
@@ -65,13 +74,17 @@
 
     protected bool BtnDisabled = false;
 
+    public bool NewBoard => Id == Guid.Empty.ToString();
 
     [Parameter]
     public string Id { get; set; } = Guid.Empty.ToString();
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadState();
+        if (!NewBoard)
+        {
+            await LoadState();
+        }
     }
 
     private async Task LoadState()
@@ -93,5 +106,35 @@
 
     private async Task ApplyChanges()
     {
+        if (NewBoard)
+        {
+            CreateBoardCommand cmnd = new();
+            string strCmnd = $"{cmnd.CmndName} X = {SizeX} Y = {SizeY} Name = \"{BoardName}\"";
+
+            if (!string.IsNullOrWhiteSpace(Description))
+            {
+                strCmnd += $" Description = \"{Description}\"";
+            }
+
+            var responce = await BatchProcessingService.CallBoardAPI(HttpMethod.Post, $"create-board", strCmnd);
+
+            var id = responce?.Boards?.First().Key;
+
+            if (id == null)
+            {
+                throw new Exception($"The answer does not contain any board");
+            }
+
+            NavManager.NavigateTo($"./board/{id}/scheme");
+        }
+        else
+        {
+            ResizeBoardCommand cmnd = new();
+            string strCmnd = $"{cmnd.CmndName} ID = \"{Id}\" X = {SizeX} Y = {SizeY}";
+
+            var responce = await BatchProcessingService.CallBoardAPI(HttpMethod.Post, $"modify-board", strCmnd);
+
+            NavManager.NavigateTo($"./board/{Id}/scheme");
+        }
     }
 }

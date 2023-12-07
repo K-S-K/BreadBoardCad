@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Web;
+using System.Text.Json;
 using Microsoft.Extensions.Options;
 
 using BBCAD.API.DTO;
@@ -18,12 +19,13 @@ namespace BBCAD.Site.Services
             _boardAPIOptions = boardAPIOptions;
         }
 
-        public async Task<BatchProcessingResponce> CallBoardAPI(HttpMethod method, string requestStr)
+        public async Task<BatchProcessingResponce> CallBoardAPI(HttpMethod method, string requestStr, string? script = null)
         {
-            string requestUrl = $"{_boardAPIOptions.Value.Connection}/{requestStr}";
+            string scriptTail = script == null ? string.Empty : $"?script={HttpUtility.UrlEncode(script)}";
+            string requestUrl = $"{_boardAPIOptions.Value.Connection}/{requestStr}{scriptTail}";
 
             var client = _clientFactory.CreateClient();
-            var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
+            var request = new HttpRequestMessage(method, requestUrl);
 
             var response = await client.SendAsync(request) ??
                 throw new Exception("Empty responce");

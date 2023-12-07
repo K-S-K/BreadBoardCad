@@ -14,6 +14,10 @@
 
 <h1>Board List</h1>
 
+<a href="/board/@Guid.Empty/metadata">
+    <input class="btn btn-primary" type="button" value="Create a new board" />
+</a>
+
 @if (!getBoardSucceed)
 {
     <p style="Color:red">Error: @getBoardError</p>
