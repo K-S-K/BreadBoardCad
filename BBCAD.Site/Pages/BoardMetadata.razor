@@ -1,0 +1,140 @@
+﻿@page "/board/{Id}/metadata"
+
+@using BBCAD.API.DTO
+@using BBCAD.Cmnd.Commands
+@using BBCAD.Site.Services
+
+@inject IBatchProcessingService BatchProcessingService
+@inject NavigationManager NavManager
+
+@if (NewBoard)
+{
+    <h3>New Board</h3>
+}
+else
+{
+    <h3>Board Metadata</h3>
+}
+
+
+<p>
+    X, Y: <input @bind="SizeX" @bind:event="oninput" type="number" min="4" max="80" style="width:4em" />, <input @bind="SizeY" @bind:event="oninput" type="number" min="4" max="80" style="width:4em" />
+</p>
+
+<p>
+    BoardName: <input @bind="BoardName" @bind:event="oninput" style="width:100%" />
+</p>
+
+<p>
+    Description: <textarea @bind="Description" @bind:event="oninput" style="width:100%; max-width:100%; height:50px; word-wrap:break-word;" />
+</p>
+
+@* <table>
+    <tbody>
+        <tr>
+            <td><code>Size X</code></td>
+            <td width="10px"></td>
+            <td>@SizeX</td>
+        </tr>
+        <tr>
+            <td><code>Size Y</code></td>
+            <td width="10px"></td>
+            <td>@SizeY</td>
+        </tr>
+        <tr>
+            <td><code>Board Name</code></td>
+            <td width="10px"></td>
+            <td valign="top">@BoardName</td>
+        </tr>
+        <tr>
+            <td><code>Description</code></td>
+            <td width="10px"></td>
+            <td valign="top">@Description</td>
+        </tr>
+    </tbody>
+</table>
+ *@
+<br />
+<br />
+
+<button class="btn btn-primary" @onclick="ApplyChanges" disabled="@BtnDisabled">Apply changes</button>
+
+
+@code {
+    private const int SizeMin = 4;
+    private const int SizeMax = 80;
+
+    private int _sizeX = SizeMin;
+    private int _sizeY = SizeMin;
+
+    private int SizeX { get => _sizeX; set { if (value < SizeMin) { _sizeX = SizeMin; } else if (_sizeX > SizeMax) { _sizeX = SizeMax; } else { _sizeX = value; } } }
+    private int SizeY { get => _sizeY; set { if (value < SizeMin) { _sizeY = SizeMin; } else if (_sizeY > SizeMax) { _sizeY = SizeMax; } else { _sizeY = value; } } }
+    private string? BoardName { get; set; } = "New Board";
+    private string? Description { get; set; } = "";
+
+    protected bool BtnDisabled = false;
+
+    public bool NewBoard => Id == Guid.Empty.ToString();
+
+    [Parameter]
+    public string Id { get; set; } = Guid.Empty.ToString();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!NewBoard)
+        {
+            await LoadState();
+        }
+    }
+
+    private async Task LoadState()
+    {
+        var responce = await BatchProcessingService.CallBoardAPI(HttpMethod.Get, $"particular-board/?boardId={Id}");
+
+        BatchProcessingResponce.BoardInfo? board = responce?.Boards?.First().Value;
+
+        if (board == null)
+        {
+            throw new Exception($"The answer does not contain any board");
+        }
+
+        BoardName = board?.Name;
+        Description = board?.Description;
+        SizeX = board == null ? SizeMin : board.SizeX;
+        SizeY = board == null ? SizeMin : board.SizeY;
+    }
+
+    private async Task ApplyChanges()
+    {
+        if (NewBoard)
+        {
+            CreateBoardCommand cmnd = new();
+            string strCmnd = $"{cmnd.CmndName} X = {SizeX} Y = {SizeY} Name = \"{BoardName}\"";
+
+            if (!string.IsNullOrWhiteSpace(Description))
+            {
+                strCmnd += $" Description = \"{Description}\"";
+            }
+
+            var responce = await BatchProcessingService.CallBoardAPI(HttpMethod.Post, $"create-board", strCmnd);
+
+            var id = responce?.Boards?.First().Key;
+
+            if (id == null)
+            {
+                throw new Exception($"The answer does not contain any board");
+            }
+
+            NavManager.NavigateTo($"./board/{id}/scheme");
+        }
+        else
+        {
+            ResizeBoardCommand cmnd = new();
+            string strCmnd = $"{cmnd.CmndName} ID = \"{Id}\" X = {SizeX} Y = {SizeY}";
+
+            var responce = await BatchProcessingService.CallBoardAPI(HttpMethod.Post, $"modify-board", strCmnd);
+
+            NavManager.NavigateTo($"./board/{Id}/scheme");
+        }
+    }
+}
