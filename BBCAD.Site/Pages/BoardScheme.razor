@@ -20,6 +20,14 @@ else
     <h1><font color="gray">Edit</font> @Board?.Name <font color="gray">Scheme</font></h1>
 }
 
+@* <button class="btn btn-primary" @onclick="ReloadBoard" disabled="@BtnDisabled">@this.BtnName</button>
+
+<a href="/board/@Id/metadata">
+    <input class="btn btn-primary" type="button" value="Modify Metadata" disabled="@BtnDisabled" />
+</a> *@
+
+<CommandControl Id="@Id" OnCommand="@(async (board) => { await ProcessCommandResult(board); })" />
+
 @if (getBoardSucceed)
 {
     if (!string.IsNullOrEmpty(content))
@@ -31,15 +39,6 @@ else
 {
     <p style="Color:red">Error: @getBoardError</p>
 }
-
-<br />
-<br />
-
-<button class="btn btn-primary" @onclick="ReloadBoard" disabled="@BtnDisabled">@this.BtnName</button>
-
-<a href="/board/@Id/metadata">
-    <input class="btn btn-primary" type="button" value="Modify Metadata" disabled="@BtnDisabled" />
-</a>
 
 
 @code {
@@ -84,6 +83,14 @@ else
         StateHasChanged();
     }
 
+    private async Task ProcessCommandResult(BatchProcessingResponce.BoardInfo board)
+    {
+        Board = board;
+        content = "data:image/svg+xml;base64, " + Base64Encode(Board?.Svg);
+
+        await Task.Yield();
+    }
+
     private async Task GetBoardContent()
     {
         try
@@ -108,7 +115,6 @@ else
             getBoardError = ex.Message;
         }
     }
-
 
     private static string Base64Encode(string plainText)
     {
