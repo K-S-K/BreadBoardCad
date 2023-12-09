@@ -1,0 +1,42 @@
+﻿@page "/board/{Id}/command"
+
+@using BBCAD.API.DTO
+@using BBCAD.Cmnd.Commands
+@using BBCAD.Site.Services
+
+@inject IBatchProcessingService BatchProcessingService
+
+
+<div style="width:100%; display:flex; margin-bottom:5px; align-items:center;">
+
+    <div style="width:fit-content; margin:5px;">Command: </div>
+
+    <div style="flex:1; margin:5px;"><input @bind="Command" @bind:event="oninput" style="width:100%; max-width:100%;" /></div>
+
+    <div style="width:fit-content; margin:5px;"><button class="btn btn-primary" @onclick="SendCommand">Apply</button></div>
+
+</div>
+
+
+@code {
+    private string? Command { get; set; } = "";
+
+    [Parameter]
+    public string Id { get; set; } = Guid.Empty.ToString();
+
+    [Parameter]
+    public EventCallback<BatchProcessingResponce.BoardInfo> OnCommand { get; set; }
+
+    private async Task SendCommand()
+    {
+        string command = Command + $" Id = \"{Id}\"";
+        var responce = await BatchProcessingService.CallBoardAPI(HttpMethod.Post, $"modify-board", command);
+        var board = responce?.Boards?.First().Value;
+        Guid? id = responce?.Boards?.First().Key;
+
+        if (id != null && board != null)
+        {
+            await OnCommand.InvokeAsync(board);
+        }
+    }
+}
