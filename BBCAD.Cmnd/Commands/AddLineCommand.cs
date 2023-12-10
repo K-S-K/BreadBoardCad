@@ -12,9 +12,11 @@ namespace BBCAD.Cmnd.Commands
         public ParamInt Y1 { get; private set; } = new();
         public ParamInt X2 { get; private set; } = new();
         public ParamInt Y2 { get; private set; } = new();
+        public ParamGuid Id { get; private set; } = new();
 
         public AddLineCommand() : base(CommandType.AddLine, "ADD LINE")
         {
+            AddParameter(new("ID", ParameterType.GUID, ObligationType.ContextBased), Id);
             AddParameter(new("X1", ParameterType.Integer, ObligationType.Mandatoty), X1);
             AddParameter(new("Y1", ParameterType.Integer, ObligationType.Mandatoty), Y1);
             AddParameter(new("X2", ParameterType.Integer, ObligationType.ContextBased), X2);
@@ -44,9 +46,9 @@ namespace BBCAD.Cmnd.Commands
 
                     case ConsistentState.P2:
                         return
-                            Parameters["X2"] == Parameters["X1"]
+                            Parameters["X2"].Value == Parameters["X1"].Value
                             ||
-                            Parameters["Y2"] == Parameters["Y1"];
+                            Parameters["Y2"].Value == Parameters["Y1"].Value;
 
                     default: throw new NotImplementedException($"{state.GetType().Name}.{state}");
                 }

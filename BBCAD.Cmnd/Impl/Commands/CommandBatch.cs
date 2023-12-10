@@ -80,12 +80,12 @@ namespace BBCAD.Cmnd.Impl.Commands
                     //     }
                     //     break;
 
-                    // case AddLineCommand addLineCommand:
-                    //     if (addLineCommand.Id.Value.IsConfigured)
-                    //     {
-                    //         ids.Add(addLineCommand.Id.Value);
-                    //     }
-                    //     break;
+                    case AddLineCommand addLineCommand:
+                        if (addLineCommand.Id.IsConfigured)
+                        {
+                            ids.Add(addLineCommand.Id.Value);
+                        }
+                        break;
 
                     default:
                         throw new NotImplementedException($"{command.GetType().Name}");

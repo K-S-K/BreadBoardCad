@@ -5,6 +5,7 @@ using BBCAD.Cmnd.Common;
 using BBCAD.Cmnd.Commands;
 using BBCAD.Data.Exceptions;
 using BBCAD.Cmnd.Impl.Parameters;
+using BBCAD.Itself.BoardElements;
 
 namespace BBCAD.Core
 {
@@ -60,7 +61,8 @@ namespace BBCAD.Core
             {
                 try
                 {
-                    board = _boardStorage.GetBoard(batch.GetExternalBoardGuid());
+                    Guid id = batch.GetExternalBoardGuid();
+                    board = _boardStorage.GetBoard(id);
                 }
                 catch (BoardNotFoundException)
                 {
@@ -122,10 +124,30 @@ namespace BBCAD.Core
                     ResizeBoard(board, resizeBoardCommand);
                     break;
 
+                case AddLineCommand addLineCommand:
+                    AddLine(board, addLineCommand);
+                    break;
+
 
                 default:
                     throw new NotImplementedException($"The \"{command.CmndType}\" command is not implemented yet");
             }
+        }
+
+        private void AddLine(Board board, AddLineCommand command)
+        {
+            if (!command.Consistent)
+            {
+                throw new Exception($"The command is not consistent: {command}");
+            }
+
+            board.Rows.Add(new Row()
+            {
+                Points = new List<Itself.Common.Point> {
+                    new(command.X1.Value, command.Y1.Value),
+                    new(command.X2.Value, command.Y2.Value),
+                }
+            });
         }
 
         private void ResizeBoard(Board board, ResizeBoardCommand command)
