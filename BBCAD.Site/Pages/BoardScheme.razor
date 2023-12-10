@@ -10,34 +10,42 @@
 
 @inject IBatchProcessingService BatchProcessingService
 
-@if (Board == null)
+@if (NewBoard)
 {
-    <PageTitle>Board Scheme</PageTitle>
+    <h3>Create a New Board</h3>
 }
 else
 {
-    <PageTitle>@Board?.Name</PageTitle>
-    <h1><font color="gray">Edit</font> @Board?.Name <font color="gray">Scheme</font></h1>
-}
-
-@* <button class="btn btn-primary" @onclick="ReloadBoard" disabled="@BtnDisabled">@this.BtnName</button>
-
-<a href="/board/@Id/metadata">
-    <input class="btn btn-primary" type="button" value="Modify Metadata" disabled="@BtnDisabled" />
-</a> *@
-
-<CommandControl Id="@Id" OnCommand="@(async (board) => { await ProcessCommandResult(board); })" />
-
-@if (getBoardSucceed)
-{
-    if (!string.IsNullOrEmpty(content))
+    @if (Board == null)
     {
-        <img src="@content" />
+        <PageTitle>Board Scheme</PageTitle>
+    }
+    else
+    {
+        <PageTitle>@Board?.Name</PageTitle>
+        <h1>@Board?.Name</h1>
     }
 }
+
+<CommandControl Id="@Id" OnCommand="@(async (data) => { await ProcessCommandResult(data.Item1, data.Item2); })" />
+
+@if (NewBoard)
+{
+    <h1>Create a new board</h1>
+}
 else
 {
-    <p style="Color:red">Error: @getBoardError</p>
+    @if (getBoardSucceed)
+    {
+        if (!string.IsNullOrEmpty(content))
+        {
+            <img src="@content" />
+        }
+    }
+    else
+    {
+        <p style="Color:red">Error: @getBoardError</p>
+    }
 }
 
 
@@ -53,6 +61,7 @@ else
 
     [Parameter]
     public string Id { get; set; } = Guid.Empty.ToString();
+    public bool NewBoard => Id == Guid.Empty.ToString();
 
     public BatchProcessingResponce.BoardInfo? Board { get; set; }
 
@@ -61,19 +70,17 @@ else
         BtnName =
         BtnConstantName = "Reload Image";
 
-        await ReloadBoard();
-
-        StateHasChanged();
+        if (!NewBoard)
+        {
+            await ReloadBoard();
+            StateHasChanged();
+        }
     }
 
     private async Task ReloadBoard()
     {
         BtnDisabled = true;
         BtnName = "Rendering ...";
-
-        // Emulate hard async work
-        await Task.Yield();
-        await Task.Delay(string.IsNullOrEmpty(content) ? 0 : 500);
 
         await GetBoardContent();
 
@@ -83,10 +90,16 @@ else
         StateHasChanged();
     }
 
-    private async Task ProcessCommandResult(BatchProcessingResponce.BoardInfo board)
+    private async Task ProcessCommandResult(Guid id, BatchProcessingResponce.BoardInfo board)
     {
         Board = board;
         content = "data:image/svg+xml;base64, " + Base64Encode(Board?.Svg);
+
+        if (NewBoard)
+        {
+            Id = id.ToString();
+            StateHasChanged();
+        }
 
         await Task.Yield();
     }
