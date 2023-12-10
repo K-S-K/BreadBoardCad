@@ -29,7 +29,11 @@ else
 
 <CommandControl Id="@Id" OnCommand="@(async (data) => { await ProcessCommandResult(data.Item1, data.Item2); })" />
 
-@if (!NewBoard)
+@if (NewBoard)
+{
+    <h1>Create a new board</h1>
+}
+else
 {
     @if (getBoardSucceed)
     {
