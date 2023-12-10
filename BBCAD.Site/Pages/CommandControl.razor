@@ -9,11 +9,9 @@
 
 <div style="width:100%; display:flex; margin-bottom:5px; align-items:center;">
 
-    <div style="width:fit-content; margin:5px;">Command: </div>
+    <div style="width:fit-content; margin:5px;"><button class="btn btn-primary" @onclick="SendCommand" disabled="@CommandIsEmpty">Apply</button></div>
 
     <div style="flex:1; margin:5px;"><input @bind="Command" @bind:event="oninput" style="width:100%; max-width:100%;" /></div>
-
-    <div style="width:fit-content; margin:5px;"><button class="btn btn-primary" @onclick="SendCommand">Apply</button></div>
 
 </div>
 
@@ -23,20 +21,44 @@
 
     [Parameter]
     public string Id { get; set; } = Guid.Empty.ToString();
+    public bool NewBoard => Id == Guid.Empty.ToString();
 
     [Parameter]
-    public EventCallback<BatchProcessingResponce.BoardInfo> OnCommand { get; set; }
+    public EventCallback<Tuple<Guid, BatchProcessingResponce.BoardInfo>> OnCommand { get; set; }
+    public bool CommandIsEmpty => String.IsNullOrWhiteSpace(Command);
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (NewBoard)
+        {
+            Command = @"CREATE BOARD Name = ""NewBoard"" X = 4 Y = 4 Description = ""Board description""";
+        }
+    }
+
 
     private async Task SendCommand()
     {
-        string command = Command + $" Id = \"{Id}\"";
+        if (CommandIsEmpty)
+        {
+            return;
+        }
+
+        string? command = NewBoard ? Command : $"{Command} Id = \"{Id}\"";
         var responce = await BatchProcessingService.CallBoardAPI(HttpMethod.Post, $"modify-board", command);
         var board = responce?.Boards?.First().Value;
         Guid? id = responce?.Boards?.First().Key;
 
+        if (NewBoard)
+        {
+            Id = id.Value.ToString();
+            Command = string.Empty;
+        }
+
         if (id != null && board != null)
         {
-            await OnCommand.InvokeAsync(board);
+            await OnCommand.InvokeAsync(new (id.Value, board));
         }
     }
 }
