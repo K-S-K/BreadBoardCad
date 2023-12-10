@@ -27,13 +27,6 @@ else
     }
 }
 
-
-@* <button class="btn btn-primary" @onclick="ReloadBoard" disabled="@BtnDisabled">@this.BtnName</button>
-
-<a href="/board/@Id/metadata">
-    <input class="btn btn-primary" type="button" value="Modify Metadata" disabled="@BtnDisabled" />
-</a> *@
-
 <CommandControl Id="@Id" OnCommand="@(async (data) => { await ProcessCommandResult(data.Item1, data.Item2); })" />
 
 @if (!NewBoard)
